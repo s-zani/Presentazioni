@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Benvenuti in Selvana</title>
+<meta name="description" content="Percorso di onboarding interattivo per le persone appena entrate in Selvana Caffè: la prima settimana, chi fa cosa, le parole del caffè, i valori e un quiz finale.">
+<script>
+(function(){var h=document.documentElement;
+  if(location.hash==='#thumb'){h.classList.add('is-thumb');}
+  try{if(window.self!==window.top){h.classList.add('is-embedded');}}catch(e){h.classList.add('is-embedded');}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:   #F3F5F0;
+  --surface: #FBFCFA;
+  --ink:     #15201A;
+  --ink-2:   #4A5650;
+  --muted:   #7D8882;
+  --line:    #DDE3DC;
+  --selva:   #1D3B2F;
+  --selva-2: #2A5242;
+  --ciliegia:#C8402A;
+  --crema:   #E2B15B;
+  --on-dark: #F1F4EE;
+  --on-dark-2: rgba(241,244,238,.72);
+  --good: #0E8A3E; --bad: #C0362C;
+
+  /* derivati (solo da questi token) */
+  --line-2: #C7D0C8;
+  --c1: #178A5A;
+  --selva-tint: rgba(29,59,47,.055);
+  --selva-tint-2: rgba(29,59,47,.12);
+  --good-tint: rgba(14,138,62,.09);
+  --bad-tint: rgba(192,54,44,.075);
+  --crema-tint: rgba(226,177,91,.20);
+  --crema-shine: rgba(226,177,91,.30);
+  --on-dark-line: rgba(241,244,238,.18);
+  --shadow-sm: 0 1px 2px rgba(21,32,26,.05);
+  --shadow: 0 1px 2px rgba(21,32,26,.05), 0 12px 32px rgba(21,32,26,.08);
+
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --maxw: 1200px;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+/* ---------- Cromatura demo (identica in ogni file) ---------- */
+.dc-back,.dc-hint{position:fixed;z-index:9000;font:500 13px/1.4 "Hanken Grotesk",system-ui,sans-serif;}
+.dc-back{top:14px;left:14px;padding:7px 12px;border-radius:999px;background:rgba(21,32,26,.82);color:#F1F4EE;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dc-back:hover{background:rgba(21,32,26,.95)}
+.dc-back:focus-visible,.dc-hint summary:focus-visible{outline:2px solid #E2B15B;outline-offset:2px}
+.dc-hint{left:14px;bottom:14px;max-width:320px;background:rgba(21,32,26,.88);color:#F1F4EE;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.dc-hint summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:600;letter-spacing:.02em}
+.dc-hint summary::-webkit-details-marker{display:none}
+.dc-hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:#E2B15B;color:#15201A;font-size:11px;font-weight:800}
+.dc-hint ul{margin:0;padding:0 16px 12px 30px}
+.dc-hint li{margin:4px 0;color:rgba(241,244,238,.86)}
+html.is-embedded .dc-back,html.is-thumb .dc-back,html.is-thumb .dc-hint{display:none}
+@media print{.dc-back,.dc-hint{display:none}}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--selva);outline-offset:2px}
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{max-width:calc(var(--maxw) + 2 * var(--gutter));margin:0 auto;padding:0 var(--gutter)}
+.eyebrow{font:500 12px/1.35 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--selva-2)}
+svg{display:block}
+.ico{width:16px;height:16px;flex:none}
+
+/* Logo */
+.brand{display:inline-flex;align-items:center;gap:.45em}
+.bean{width:1.25em;height:1.25em;color:var(--selva)}
+.brand-word{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:-.01em}
+.on-dark .bean{color:var(--crema)}
+
+/* Pulsanti */
+.btn,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:8px;font:600 15px/1.2 var(--font-body);cursor:pointer;text-decoration:none;transition:background-color .18s ease,border-color .18s ease,color .18s ease}
+.btn{background:var(--selva);color:var(--on-dark);border:1px solid var(--selva)}
+.btn:hover{background:var(--selva-2);border-color:var(--selva-2)}
+.btn-accent{background:var(--ciliegia);border-color:var(--ciliegia)}
+.btn-accent:hover{background:var(--selva);border-color:var(--selva)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--selva);background:var(--selva-tint)}
+.btn .ico,.btn-ghost .ico{width:15px;height:15px}
+.btn-link{background:none;border:0;padding:6px 0;font:500 13.5px var(--font-body);color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2);cursor:pointer}
+.btn-link:hover{color:var(--ink);text-decoration-color:var(--ink)}
+
+/* ---------- Testata ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.topbar .brand{font-size:22px;color:var(--ink)}
+.brand-sub{font:500 11px var(--font-mono);letter-spacing:.14em;color:var(--muted);margin-left:14px;padding-left:14px;border-left:1px solid var(--line)}
+.topbar-right{font:500 11.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right}
+@media (max-width:1340px){html:not(.is-embedded):not(.is-thumb) .topbar{padding-top:62px}}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr);gap:56px;align-items:center;padding:44px 0 34px}
+.greet{font-family:var(--font-display);font-weight:700;font-size:clamp(38px,4.6vw,62px);line-height:1.06;letter-spacing:-.018em;margin:14px 0 18px;overflow-wrap:anywhere}
+.greet-name{font-style:italic;color:var(--ciliegia)}
+.greet-brand{font-style:italic}
+.lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:60ch}
+.namefield{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-top:24px}
+.namefield label{display:block;font-weight:600;font-size:15px;margin-bottom:7px}
+.namefield input{width:min(300px,100%);height:48px;padding:0 14px;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);color:var(--ink);font:500 18px var(--font-body);transition:border-color .18s,box-shadow .18s}
+.namefield input:focus{outline:none;border-color:var(--selva);box-shadow:0 0 0 3px var(--selva-tint-2)}
+.namefield .hint{font-size:13.5px;color:var(--muted);padding-bottom:13px}
+
+/* Badge */
+.badge{--bean-cut:var(--selva);position:relative;background:var(--selva);color:var(--on-dark);border-radius:10px;padding:26px 24px 20px;box-shadow:var(--shadow);transform:rotate(-1.6deg);max-width:420px;width:100%;justify-self:end}
+.badge::before{content:"";position:absolute;top:10px;left:50%;width:46px;height:7px;margin-left:-23px;border-radius:4px;background:var(--paper);opacity:.9}
+.badge-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--on-dark-line)}
+.badge-top .brand{font-size:20px}
+.badge-top .mono{font:500 10.5px var(--font-mono);letter-spacing:.14em;color:var(--on-dark-2)}
+.badge-mid{display:flex;align-items:center;gap:16px;padding:18px 0}
+.badge-photo{flex:none;width:64px;height:64px;border-radius:50%;background:var(--crema);color:var(--selva);display:grid;place-items:center;font:700 22px var(--font-body);letter-spacing:.02em}
+.badge-role{font:500 11px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crema)}
+.badge-name{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:34px;line-height:1.08;margin-top:4px;overflow-wrap:anywhere}
+.badge-name.is-empty{color:var(--on-dark-2)}
+.badge-foot{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--on-dark-line);font-size:14px}
+.badge-foot span{display:block}
+.badge-foot .k{font:500 10.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-2)}
+.badge-foot .v{font-weight:600}
+
+/* Percorso / stepper */
+.journey{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 24px 22px;box-shadow:var(--shadow-sm);scroll-margin-top:16px}
+.journey-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.journey-title{font:700 17px/1.3 var(--font-body)}
+.journey-sub{font-size:14px;color:var(--muted);margin-top:2px}
+.journey-pct{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.journey-pct b{font:700 30px/1 var(--font-body);color:var(--selva);letter-spacing:-.01em}
+.journey-pct span{font-size:14px;color:var(--ink-2)}
+.pbar{height:6px;border-radius:3px;background:var(--line);margin:14px 0 16px;overflow:hidden}
+.pbar span{display:block;height:100%;width:0;background:var(--selva);border-radius:3px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.step{display:flex;align-items:center;gap:12px;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);text-align:left;cursor:pointer;transition:border-color .18s,background-color .18s}
+.step:hover{border-color:var(--line-2);background:var(--surface)}
+.step.is-active{border-color:var(--selva);background:var(--surface);box-shadow:inset 0 0 0 1px var(--selva)}
+.step-dot{flex:none;position:relative;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line-2);background:var(--surface);display:grid;place-items:center;font:600 13px var(--font-body);color:var(--ink-2)}
+.step-dot .ico{display:none;width:15px;height:15px}
+.step.is-active .step-dot{border-color:var(--selva);color:var(--selva)}
+.step.is-done .step-dot{background:var(--selva);border-color:var(--selva);color:var(--on-dark)}
+.step.is-done .step-dot .ico{display:block}
+.step.is-done .step-n{display:none}
+.step.just-done .step-dot{animation:pop .55s cubic-bezier(.3,1.5,.5,1)}
+.step-text{display:block;min-width:0}
+.step-label{display:block;font-weight:600;font-size:14.5px;line-height:1.25}
+.step-sub{display:block;font:500 11.5px/1.4 var(--font-mono);letter-spacing:.04em;color:var(--muted);margin-top:2px}
+.step.is-done .step-sub{color:var(--selva-2)}
+.steps-caption{display:none;margin-top:12px;font-size:14px;color:var(--ink-2)}
+.steps-caption b{color:var(--ink)}
+
+/* ---------- Pannelli ---------- */
+main{padding:40px 0 64px}
+.panel{animation:panelIn .35s ease both}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.panel-head > div{max-width:680px}
+.panel-title{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,3.4vw,44px);line-height:1.08;letter-spacing:-.012em;margin:8px 0 10px}
+.panel-lead{font-size:17px;color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);font:500 12.5px var(--font-mono);letter-spacing:.04em;color:var(--ink-2);white-space:nowrap}
+.chip b{color:var(--ink);font-weight:600}
+.chip.is-done{border-color:transparent;background:var(--good-tint);color:var(--good)}
+.chip .ico{width:14px;height:14px}
+.panel-nav{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+
+/* Tappa 1: settimana */
+.week{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:start}
+.day-list{display:grid;gap:8px}
+.day-btn{display:grid;grid-template-columns:44px minmax(0,1fr) 18px;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-align:left;cursor:pointer;transition:border-color .18s,background-color .18s}
+.day-btn:hover{border-color:var(--line-2)}
+.day-abbr{width:44px;height:44px;border-radius:6px;background:var(--selva-tint);color:var(--selva-2);display:grid;place-items:center;font:600 12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;transition:background-color .18s,color .18s}
+.day-txt{display:block;min-width:0}
+.day-name{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.day-short{display:block;font-size:13.5px;color:var(--ink-2)}
+.day-seen{color:var(--selva-2);opacity:0}
+.day-btn.is-seen .day-seen{opacity:1}
+.day-btn.is-active{border-color:var(--selva);box-shadow:inset 0 0 0 1px var(--selva)}
+.day-btn.is-active .day-abbr{background:var(--selva);color:var(--on-dark)}
+.day-detail{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px 32px 26px;box-shadow:var(--shadow-sm);min-width:0}
+.day-detail.swap > *{animation:fadeUp .3s ease both}
+.dd-title{font-family:var(--font-display);font-weight:600;font-size:32px;line-height:1.12;margin:8px 0 8px}
+.dd-where{display:flex;align-items:center;gap:7px;font-size:14.5px;color:var(--ink-2)}
+.dd-where .ico{color:var(--ciliegia)}
+.dd-hello{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--selva-tint);font-weight:500}
+.timeline{list-style:none;margin:14px 0 0;padding:0}
+.tl-item{display:grid;grid-template-columns:62px minmax(0,1fr);gap:16px;padding:15px 0;border-top:1px solid var(--line)}
+.tl-time{font:700 15px/1.45 var(--font-body);font-variant-numeric:tabular-nums;color:var(--selva)}
+.tl-title{font-weight:600}
+.tl-desc{color:var(--ink-2);font-size:15px;margin-top:2px}
+.who{display:inline-flex;align-items:center;gap:9px;margin-top:9px;font-size:13.5px;color:var(--ink-2)}
+.who b{color:var(--ink);font-weight:600}
+.avatar{flex:none;width:28px;height:28px;border-radius:50%;background:var(--selva);color:var(--on-dark);display:grid;place-items:center;font:600 10.5px var(--font-body);letter-spacing:.04em}
+.dd-tip{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--crema-tint);font-size:15px}
+.dd-tip .eyebrow{display:block;color:var(--ink-2);margin-bottom:3px}
+
+/* Tappa 2: organigramma */
+.org-facts{font:500 12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.org{display:grid;justify-items:center}
+.org-ceo-host{position:relative;display:grid;justify-items:center;margin-bottom:28px;width:100%}
+.org-ceo-host::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:28px;background:var(--line-2)}
+.org-node{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;width:100%;padding:16px 12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;box-shadow:var(--shadow-sm);transition:border-color .18s,background-color .18s}
+.org-node:hover{border-color:var(--line-2)}
+.org-node.is-active{border-color:var(--selva);box-shadow:inset 0 0 0 1px var(--selva)}
+.org-node .avatar{width:40px;height:40px;font-size:13px;margin-bottom:6px;background:var(--selva-tint-2);color:var(--selva)}
+.org-node.is-active .avatar{background:var(--selva);color:var(--on-dark)}
+.org-ceo{width:min(340px,100%);border-color:var(--selva-2)}
+.org-ceo .avatar{background:var(--selva);color:var(--crema)}
+.on-dept{display:flex;align-items:center;justify-content:center;min-height:2.7em;font:500 11px/1.35 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--selva-2)}
+.org-ceo .on-dept{min-height:0}
+.on-name{display:block;font-weight:600;font-size:15px;line-height:1.25}
+.on-count{display:block;font-size:13px;color:var(--muted)}
+.on-seen{position:absolute;top:9px;right:9px;color:var(--selva-2);opacity:0}
+.org-node.is-seen .on-seen{opacity:1}
+.org-row{list-style:none;margin:0;padding:28px 0 0;width:100%;position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.org-row::before{content:"";position:absolute;top:0;left:calc((100% - 60px) / 12);right:calc((100% - 60px) / 12);height:1px;background:var(--line-2)}
+.org-row > li{position:relative;display:flex;flex-direction:column;min-width:0}
+.org-row > li::before{content:"";position:absolute;top:-28px;left:50%;width:1px;height:28px;background:var(--line-2)}
+.org-row > li > .org-node{flex:1}
+.org-detail{width:100%;margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px 30px 28px;box-shadow:var(--shadow-sm);text-align:left}
+.org-detail.swap > *{animation:fadeUp .3s ease both}
+.od-head{display:flex;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.avatar-lg{width:56px;height:56px;font-size:17px}
+.od-name{font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1.1;margin-top:3px}
+.od-role{font-size:14.5px;color:var(--ink-2);margin-top:2px}
+.od-grid{display:grid;grid-template-columns:1.25fr .8fr 1.25fr;gap:32px;padding-top:20px}
+.od-h{font:500 11.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.od-col p{font-size:15.5px}
+.od-col .od-num{font:700 40px/1 var(--font-body);color:var(--selva);letter-spacing:-.01em}
+.od-col .od-num small{font:500 15px var(--font-body);color:var(--ink-2);letter-spacing:0;margin-left:6px}
+.od-bar{height:8px;border-radius:4px;background:var(--line);margin:12px 0 8px;overflow:hidden}
+.od-bar span{display:block;height:100%;background:var(--c1);border-radius:4px}
+.od-share{font-size:13.5px !important;color:var(--ink-2)}
+.od-ask{list-style:none;margin:0;padding:0}
+.od-ask li{position:relative;padding:7px 0 7px 18px;border-top:1px solid var(--line);font-size:15px}
+.od-ask li:first-child{border-top:0;padding-top:0}
+.od-ask li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--ciliegia)}
+.od-ask li:first-child::before{top:8px}
+.org-total{margin-top:14px;font-size:13.5px;color:var(--muted)}
+
+/* Tappa 3: carte */
+.cards-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.flip-count{font-size:15px;color:var(--ink-2)}
+.flip-count b{color:var(--ink);font-variant-numeric:tabular-nums}
+.flip-dots{display:flex;gap:6px}
+.flip-dots i{width:10px;height:10px;border-radius:3px;background:var(--line);transition:background-color .2s}
+.flip-dots i.on{background:var(--selva)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.flip{display:block;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer;perspective:1200px;border-radius:10px}
+.flip:focus-visible{outline:2px solid var(--selva);outline-offset:3px}
+.flip-inner{display:grid;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.75,.25,1)}
+.flip.is-flipped .flip-inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;display:flex;flex-direction:column;min-height:214px;padding:18px 20px 16px;border-radius:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.front{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:border-color .18s}
+.flip:hover .front{border-color:var(--selva-2)}
+.back{background:var(--selva);color:var(--on-dark);transform:rotateY(180deg)}
+.face-top{display:flex;align-items:center;gap:10px;font:500 11.5px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.face-n{color:var(--selva-2)}
+.face-tag{flex:1}
+.seen-mark{color:var(--selva-2);opacity:0}
+.flip.is-seen .seen-mark{opacity:1}
+.face-word{display:block;margin-top:auto;padding-top:24px;font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+.face-hint{display:flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;color:var(--muted)}
+.face-hint .ico{width:14px;height:14px}
+.back-word{font:600 11.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--crema)}
+.back-def{display:block;margin-top:10px;font-size:15.5px;line-height:1.5;color:var(--on-dark)}
+.back .face-hint{color:var(--on-dark-2);margin-top:auto;padding-top:12px}
+
+/* Tappa 4: valori */
+.motto{margin:0 0 26px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.motto blockquote{margin:0;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(28px,3vw,38px);line-height:1.15;color:var(--selva)}
+.motto figcaption{font-size:14px;color:var(--muted)}
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+.value{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px 26px 24px;box-shadow:var(--shadow-sm)}
+.value-top{display:flex;align-items:center;justify-content:space-between}
+.value-icon{width:46px;height:46px;color:var(--selva)}
+.value-icon .cherry{fill:var(--ciliegia)}
+.value-n{display:flex;align-items:center;gap:6px;font:500 12px var(--font-mono);letter-spacing:.1em;color:var(--muted)}
+.value-n .ico{color:var(--selva-2);opacity:0;width:14px;height:14px}
+.value.is-read .value-n .ico{opacity:1}
+.value-name{font-family:var(--font-display);font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.012em;margin:16px 0 8px}
+.value-principle{font-size:17px;line-height:1.45;min-height:2.9em}
+.value-toggle{margin-top:18px}
+.value-toggle .ico{transition:transform .2s}
+.value-toggle[aria-expanded="true"] .ico{transform:rotate(180deg)}
+.value-story{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);animation:fadeUp .35s ease both}
+.story-year{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:1;color:var(--selva)}
+.story-text{margin-top:10px;font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.story-practice{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--selva-tint);font-size:15px}
+.story-practice .eyebrow{display:block;margin-bottom:3px}
+
+/* Tappa 5: quiz */
+.quiz{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:24px;align-items:start}
+.quiz.has-cert{grid-template-columns:minmax(0,1fr)}
+.quiz.has-cert .quiz-aside{display:none}
+.q-card,.quiz-aside{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow-sm)}
+.q-card{padding:28px 32px 28px;animation:fadeUp .3s ease both}
+.q-intro-title{font-family:var(--font-display);font-weight:600;font-size:34px;line-height:1.12;margin:10px 0 12px}
+.q-intro p{color:var(--ink-2);max-width:56ch}
+.q-intro-note{margin-top:12px;padding:11px 14px;border-radius:8px;background:var(--crema-tint);color:var(--ink) !important;font-size:15px}
+.q-intro .btn{margin-top:22px}
+.q-bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:12px 0 22px}
+.q-bar span{display:block;height:100%;background:var(--selva);border-radius:3px;transition:width .4s ease}
+.q-text{font:700 24px/1.3 var(--font-body);letter-spacing:-.005em}
+.q-text:focus{outline:none}
+.q-options{display:grid;gap:10px;margin-top:20px}
+.q-opt{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:14px;width:100%;padding:12px 16px 12px 12px;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);text-align:left;font:500 16.5px/1.35 var(--font-body);color:var(--ink);cursor:pointer;transition:border-color .15s,background-color .15s,opacity .2s}
+.q-opt:hover:not(:disabled){border-color:var(--selva);background:var(--selva-tint)}
+.q-opt:disabled{cursor:default}
+.q-letter{width:34px;height:34px;border-radius:6px;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;font:600 13px var(--font-mono);color:var(--ink-2)}
+.q-tag{font:600 13.5px var(--font-body);white-space:nowrap}
+.q-opt.is-correct{border-color:var(--good);background:var(--good-tint)}
+.q-opt.is-correct .q-letter{background:var(--good);border-color:var(--good);color:var(--on-dark)}
+.q-opt.is-correct .q-tag{color:var(--good)}
+.q-opt.is-wrong{border-color:var(--bad);background:var(--bad-tint)}
+.q-opt.is-wrong .q-letter{background:var(--bad);border-color:var(--bad);color:var(--on-dark)}
+.q-opt.is-wrong .q-tag{color:var(--bad)}
+.q-opt.is-dim{opacity:.55}
+.q-feedback:empty{display:none}
+.q-feedback{margin-top:18px;padding:14px 16px;border-radius:8px;background:var(--paper);border:1px solid var(--line);font-size:15.5px;animation:fadeUp .25s ease both}
+.fb-ok{color:var(--good)}
+.fb-ko{color:var(--bad)}
+.q-next{display:flex;justify-content:flex-end;margin-top:18px}
+.quiz-aside{padding:22px 22px 20px;position:sticky;top:16px}
+.qa-score{display:flex;align-items:baseline;gap:6px;margin:6px 0 16px}
+.qa-score b{font:700 44px/1 var(--font-body);color:var(--selva)}
+.qa-score span{font-size:16px;color:var(--ink-2)}
+.qa-dots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.qa-dots li{height:34px;border-radius:6px;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;font:600 12.5px var(--font-mono);color:var(--muted)}
+.qa-dots li.is-now{border-color:var(--selva);color:var(--selva);background:var(--surface);box-shadow:inset 0 0 0 1px var(--selva)}
+.qa-dots li.is-ok{background:var(--good);border-color:var(--good);color:var(--on-dark)}
+.qa-dots li.is-ko{background:var(--bad);border-color:var(--bad);color:var(--on-dark)}
+.qa-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+
+/* Attestato */
+.cert{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line-2);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+.cert::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent 38%,var(--crema-shine) 50%,transparent 62%);transform:translateX(-70%)}
+.cert-inner{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center;border:1px solid var(--crema);border-radius:6px;padding:40px 48px 36px}
+.cert-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cert-top .brand{font-size:22px}
+.cert-top .eyebrow{padding-left:16px;border-left:1px solid var(--line);color:var(--muted)}
+.cert-title{margin:28px 0 10px;font:500 24px/1.3 var(--font-body);color:var(--ink-2)}
+.cert-name{display:block;font-family:var(--font-display);font-style:italic;font-weight:700;font-size:clamp(44px,6vw,78px);line-height:1.02;letter-spacing:-.015em;color:var(--selva);margin-bottom:8px;overflow-wrap:anywhere}
+.cert-meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:18px;font-weight:600;color:var(--ink)}
+.cert-meta .sep{color:var(--crema)}
+.cert-meta .l{font-weight:500;color:var(--ink-2)}
+.cert-msg{margin-top:14px;font-size:16px;color:var(--ink-2);max-width:52ch}
+.cert-sign{margin-top:28px;width:220px}
+.cert-sign svg{width:190px;height:52px;color:var(--ink)}
+.cert-sign p{margin-top:4px;padding-top:8px;border-top:1px solid var(--line-2);font-size:13.5px;color:var(--ink-2)}
+.seal{width:150px;height:150px;transform:rotate(-8deg);--bean-cut:var(--selva)}
+.seal-bg{fill:var(--selva)}
+.seal-ring{fill:none;stroke:var(--crema);stroke-width:1}
+.seal-text{fill:var(--crema);font:500 9.5px var(--font-mono);letter-spacing:.06em}
+.seal-bean{color:var(--crema)}
+.cert-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.cert.is-celebrating{animation:certIn .6s cubic-bezier(.2,.7,.2,1) both}
+.cert.is-celebrating .seal{animation:stamp .55s cubic-bezier(.3,1.35,.5,1) .4s both}
+.cert.is-celebrating .sign-path{stroke-dasharray:1;animation:sign 1.2s ease .7s both}
+.cert.is-celebrating::after{animation:shine 1.4s ease 1s both}
+
+/* Toast */
+.toast{position:fixed;right:16px;bottom:16px;z-index:8000;display:flex;align-items:center;gap:10px;max-width:min(380px,calc(100vw - 32px));padding:12px 16px;border-radius:8px;background:var(--selva);color:var(--on-dark);box-shadow:var(--shadow);font-weight:600;font-size:14.5px;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.toast .ico{color:var(--crema)}
+.toast.show{opacity:1;transform:none}
+html.is-thumb .toast{display:none}
+
+/* Footer */
+.foot{border-top:1px solid var(--line);background:var(--paper)}
+.foot-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding-top:28px;padding-bottom:88px}
+.foot .brand{font-size:18px}
+.foot-legal{margin-top:10px;font-size:14px;color:var(--ink-2)}
+.foot-meta{margin-top:4px;font-size:13px;color:var(--muted)}
+
+/* Animazioni */
+@keyframes panelIn{from{opacity:0;transform:translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}}
+@keyframes pop{0%{transform:scale(.55)}100%{transform:scale(1)}}
+@keyframes certIn{from{opacity:0;transform:translateY(16px)}}
+@keyframes stamp{from{opacity:0;transform:rotate(-26deg) scale(1.55)}}
+@keyframes sign{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes shine{0%{opacity:0;transform:translateX(-70%)}25%{opacity:1}100%{opacity:0;transform:translateX(70%)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.hero > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero > *:nth-child(2){animation-delay:.12s}
+.journey{animation:rise .7s cubic-bezier(.2,.7,.2,1) .2s both}
+
+html.is-thumb *,html.is-thumb *::before,html.is-thumb *::after{animation:none !important;transition:none !important}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .od-grid{grid-template-columns:1fr 1fr}
+  .od-grid > .od-col:last-child{grid-column:1 / -1}
+}
+@media (max-width:959px){
+  .org{justify-items:stretch}
+  .org-ceo-host{justify-items:stretch;margin-bottom:0}
+  .org-ceo-host::after{left:28px;height:16px}
+  .org-ceo{width:100%}
+  .org-row{grid-template-columns:1fr;gap:8px;padding:16px 0 0 22px;margin-left:28px;border-left:1px solid var(--line-2);width:auto}
+  .org-row::before{display:none}
+  .org-row > li::before{top:30px;left:-22px;width:22px;height:1px}
+  .org-node{flex-direction:row;text-align:left;align-items:center;gap:14px;padding:12px 14px}
+  .org-node .avatar{margin:0}
+  .org-node .on-txt{flex:1;min-width:0}
+  .on-dept{justify-content:flex-start;min-height:0}
+  .on-seen{position:static;order:3}
+  .org-detail{margin-top:8px;padding:20px 18px 22px}
+  .od-grid{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr;gap:28px;padding-top:32px}
+  .badge{justify-self:start;transform:rotate(-1deg)}
+  .values{grid-template-columns:1fr}
+  .value-principle{min-height:0}
+  .quiz{grid-template-columns:1fr}
+  .quiz-aside{order:-1;padding:16px 18px;position:static}
+  .qa-score{margin:2px 0 10px}
+  .qa-score b{font-size:32px}
+  .qa-note{display:none}
+  .cert-inner{grid-template-columns:1fr;padding:30px 26px 28px}
+  .seal{position:absolute;top:18px;right:18px;width:96px;height:96px}
+}
+@media (max-width:820px){
+  .week{grid-template-columns:1fr;gap:14px}
+  .day-list{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .day-btn{grid-template-columns:1fr;justify-items:center;gap:4px;padding:8px 4px 6px}
+  .day-btn .day-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .day-abbr{width:40px;height:40px}
+  .day-seen{width:14px;height:14px}
+  .day-detail{padding:22px 18px 20px}
+  .dd-title{font-size:28px}
+  .tl-item{grid-template-columns:52px minmax(0,1fr);gap:12px}
+}
+@media (max-width:760px){
+  .journey{padding:16px 16px 16px}
+  .journey-head{align-items:flex-start}
+  .journey-sub{display:none}
+  .steps{gap:6px}
+  .step{flex-direction:column;align-items:center;gap:6px;padding:10px 2px 8px;text-align:center}
+  .step-label,.step-unit{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .step-sub{margin-top:0}
+  .steps-caption{display:block}
+  .topbar-right{display:none}
+  .brand-sub{display:none}
+}
+@media (max-width:640px){
+  .toast{left:16px;right:16px;bottom:64px;max-width:none}
+  .badge-name{font-size:30px}
+  .badge-foot{grid-template-columns:1fr 1fr}
+  .badge-foot > span:last-child{display:none}
+  .panel-nav .btn-ghost{display:none}
+  .q-card{padding:22px 18px}
+  .q-text{font-size:21px}
+  .q-opt{grid-template-columns:30px minmax(0,1fr);font-size:15.5px}
+  .q-letter{width:30px;height:30px}
+  .q-tag{grid-column:2}
+  .q-tag:empty{display:none}
+  .cert-inner{padding:26px 20px 24px}
+  .seal{width:76px;height:76px;top:14px;right:14px}
+  .cert-top .eyebrow{border-left:0;padding-left:0;width:100%}
+  .cert-title{font-size:20px;margin-top:20px}
+}
+@media (max-width:520px){
+  .cards{grid-template-columns:1fr}
+  .face{min-height:168px}
+}
+
+/* Stampa */
+@media print{
+  body{background:var(--surface)}
+  .toast,.panel-nav,#reset,.journey{display:none !important}
+  .badge,.cert,.q-card,.value,.day-detail,.org-detail{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<a class="dc-back" href="../index.html">← Galleria</a>
+<details class="dc-hint">
+  <summary>Cosa provare</summary>
+  <ul>
+    <li>Scrivi il tuo nome in alto: saluto, badge e attestato cambiano con te.</li>
+    <li>Gira le carte delle «Parole del caffè», anche con Tab e Invio.</li>
+    <li>Fai il quiz finale e guarda comparire il tuo attestato.</li>
+    <li>Ricarica la pagina: il percorso riparte da dove eri.</li>
+  </ul>
+</details>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="topbar">
+      <div style="display:flex;align-items:center">
+        <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+        <span class="brand-sub">CAFFÈ · DAL 1961</span>
+      </div>
+      <p class="topbar-right">Percorso di onboarding · HR &amp; People</p>
+    </div>
+
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Il tuo primo giorno inizia qui</p>
+        <h1 class="greet" id="greet"><span id="greet-hello">Ciao <em class="greet-name">Chiara</em>,</span> ti diamo il benvenuto in <span class="greet-brand">Selvana</span></h1>
+        <p class="lead">Cinque tappe per arrivare a lunedì con le idee chiare: chi incontri, chi fa cosa, le parole del caffè e i nostri valori. Alla fine, un quiz di sei domande.</p>
+        <div class="namefield">
+          <div>
+            <label for="nome">Come ti chiami?</label>
+            <input id="nome" name="nome" type="text" value="Chiara" maxlength="30" autocomplete="off" spellcheck="false" placeholder="Il tuo nome">
+          </div>
+          <p class="hint">Il nome resta su questo dispositivo.</p>
+        </div>
+      </div>
+
+      <div class="badge on-dark" role="group" aria-label="Il tuo badge Selvana">
+        <div class="badge-top">
+          <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+          <span class="mono">CAFFÈ · DAL 1961</span>
+        </div>
+        <div class="badge-mid">
+          <span class="badge-photo" id="badge-initials" aria-hidden="true">C</span>
+          <div>
+            <p class="badge-role">Nuovo ingresso</p>
+            <p class="badge-name" id="badge-name">Chiara</p>
+          </div>
+        </div>
+        <div class="badge-foot">
+          <span><span class="k">Sede</span><span class="v">Bergamo</span></span>
+          <span><span class="k">Dal</span><span class="v" id="badge-month">ottobre 2026</span></span>
+          <span><span class="k">Percorso</span><span class="v" id="badge-pct">0%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="journey" id="journey" aria-labelledby="journey-title">
+      <div class="journey-head">
+        <div>
+          <h2 class="journey-title" id="journey-title">Il tuo percorso</h2>
+          <p class="journey-sub">5 tappe · circa 15 minuti · l'avanzamento si salva da solo</p>
+        </div>
+        <p class="journey-pct"><b id="pct-num">0%</b><span>completato</span></p>
+      </div>
+      <div class="pbar" id="pbar" role="progressbar" aria-label="Avanzamento complessivo del percorso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="pbar-fill"></span></div>
+      <div class="steps" role="tablist" aria-label="Tappe del percorso" id="steps">
+        <button type="button" class="step" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">
+          <span class="step-dot"><span class="step-n">1</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-text"><span class="step-label">La prima settimana</span><span class="step-sub"><span class="step-count">0/5</span><span class="step-unit"> giorni</span><span class="sr-only step-sr"></span></span></span>
+        </button>
+        <button type="button" class="step" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">
+          <span class="step-dot"><span class="step-n">2</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-text"><span class="step-label">Chi fa cosa</span><span class="step-sub"><span class="step-count">0/6</span><span class="step-unit"> direzioni</span><span class="sr-only step-sr"></span></span></span>
+        </button>
+        <button type="button" class="step" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">
+          <span class="step-dot"><span class="step-n">3</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-text"><span class="step-label">Le parole del caffè</span><span class="step-sub"><span class="step-count">0/8</span><span class="step-unit"> carte</span><span class="sr-only step-sr"></span></span></span>
+        </button>
+        <button type="button" class="step" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1">
+          <span class="step-dot"><span class="step-n">4</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-text"><span class="step-label">I nostri valori</span><span class="step-sub"><span class="step-count">0/3</span><span class="step-unit"> storie</span><span class="sr-only step-sr"></span></span></span>
+        </button>
+        <button type="button" class="step" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1">
+          <span class="step-dot"><span class="step-n">5</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-text"><span class="step-label">Quiz</span><span class="step-sub"><span class="step-count">0/6</span><span class="step-unit"> risposte</span><span class="sr-only step-sr"></span></span></span>
+        </button>
+      </div>
+      <p class="steps-caption" id="steps-caption">Tappa 1 di 5 · <b>La prima settimana</b></p>
+    </section>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- TAPPA 1 -->
+  <section class="panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Tappa 1 di 5</p>
+        <h2 class="panel-title">La tua prima settimana</h2>
+        <p class="panel-lead">Cinque giorni per conoscere persone, luoghi e caffè. Apri ogni giorno per vedere orari e chi incontri.</p>
+      </div>
+      <p class="chip" id="status-1">Giorni aperti <b>0/5</b></p>
+    </div>
+    <div class="week">
+      <div class="day-list" id="day-list" role="group" aria-label="Giorni della prima settimana">
+        <button type="button" class="day-btn" data-day="lun" aria-controls="day-detail" aria-pressed="false"><span class="day-abbr">Lun</span><span class="day-txt"><span class="day-name">Lunedì</span><span class="day-short">Accoglienza</span></span><svg class="ico day-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="day-btn" data-day="mar" aria-controls="day-detail" aria-pressed="false"><span class="day-abbr">Mar</span><span class="day-txt"><span class="day-name">Martedì</span><span class="day-short">Cupping</span></span><svg class="ico day-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="day-btn" data-day="mer" aria-controls="day-detail" aria-pressed="false"><span class="day-abbr">Mer</span><span class="day-txt"><span class="day-name">Mercoledì</span><span class="day-short">Un bar cliente</span></span><svg class="ico day-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="day-btn" data-day="gio" aria-controls="day-detail" aria-pressed="false"><span class="day-abbr">Gio</span><span class="day-txt"><span class="day-name">Giovedì</span><span class="day-short">Strumenti e sistemi</span></span><svg class="ico day-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="day-btn" data-day="ven" aria-controls="day-detail" aria-pressed="false"><span class="day-abbr">Ven</span><span class="day-txt"><span class="day-name">Venerdì</span><span class="day-short">Pranzo e feedback</span></span><svg class="ico day-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <article class="day-detail" id="day-detail" aria-live="polite"></article>
+    </div>
+    <div class="panel-nav">
+      <button type="button" class="btn" data-go="1">Avanti: Chi fa cosa <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- TAPPA 2 -->
+  <section class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Tappa 2 di 5</p>
+        <h2 class="panel-title">Chi fa cosa</h2>
+        <p class="panel-lead">Siamo 640 persone in sei direzioni. Tocca un riquadro per scoprire cosa fa ogni direzione e quando ti conviene chiedere a loro.</p>
+      </div>
+      <p class="chip" id="status-2">Direzioni esplorate <b>0/6</b></p>
+    </div>
+    <p class="org-facts">640 persone · 6 direzioni · Bergamo · Lodi · Piacenza</p>
+    <div class="org" id="org">
+      <div class="org-ceo-host" id="org-ceo-host">
+        <button type="button" class="org-node org-ceo" data-unit="ad" aria-controls="org-detail" aria-pressed="false">
+          <span class="avatar" aria-hidden="true">GR</span>
+          <span class="on-txt"><span class="on-dept">Amministratrice Delegata</span><span class="on-name">Giulia Ravelli</span><span class="on-count">Direzione generale · 4 persone</span></span>
+        </button>
+      </div>
+      <ul class="org-row" id="org-row">
+        <li><button type="button" class="org-node" data-unit="fin" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">MF</span><span class="on-txt"><span class="on-dept">Finanza</span><span class="on-name">Marco Fenaroli</span><span class="on-count">38 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+        <li><button type="button" class="org-node" data-unit="com" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">EB</span><span class="on-txt"><span class="on-dept">Commerciale</span><span class="on-name">Elena Bassi</span><span class="on-count">148 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+        <li><button type="button" class="org-node" data-unit="ops" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">LM</span><span class="on-txt"><span class="on-dept">Operations</span><span class="on-name">Luca Moretti</span><span class="on-count">372 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+        <li><button type="button" class="org-node" data-unit="hr" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">SC</span><span class="on-txt"><span class="on-dept">HR &amp; People</span><span class="on-name">Sara Colombo</span><span class="on-count">16 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+        <li><button type="button" class="org-node" data-unit="mkt" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">DF</span><span class="on-txt"><span class="on-dept">Marketing</span><span class="on-name">Davide Ferri</span><span class="on-count">34 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+        <li><button type="button" class="org-node" data-unit="sos" aria-controls="org-detail" aria-pressed="false"><span class="avatar" aria-hidden="true">AG</span><span class="on-txt"><span class="on-dept">Sostenibilità &amp; Filiera</span><span class="on-name">Anna Ghisleri</span><span class="on-count">28 persone</span></span><svg class="ico on-seen" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+      </ul>
+      <article class="org-detail" id="org-detail"></article>
+    </div>
+    <p class="org-total" id="org-total">640 persone in tutto: 4 nella direzione generale e 636 nelle sei direzioni.</p>
+    <div class="panel-nav">
+      <button type="button" class="btn-ghost" data-go="0"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> La prima settimana</button>
+      <button type="button" class="btn" data-go="2">Avanti: Le parole del caffè <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- TAPPA 3 -->
+  <section class="panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Tappa 3 di 5</p>
+        <h2 class="panel-title">Le parole del caffè</h2>
+        <p class="panel-lead">Otto parole che sentirai dal primo giorno. Gira le carte: sul retro c'è la spiegazione in due righe.</p>
+      </div>
+      <p class="chip" id="status-3">Carte girate <b>0/8</b></p>
+    </div>
+    <div class="cards-bar">
+      <p class="flip-count" id="flip-count" aria-live="polite">Carte girate <b>0/8</b></p>
+      <div class="flip-dots" id="flip-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="cards" id="cards">
+      <button type="button" class="flip" data-card="horeca" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">01</span><span class="face-tag">Mercato</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Ho.Re.Ca.</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Ho.Re.Ca.</span><span class="back-def">Sta per Hotel, Restaurant, Café: alberghi, ristoranti e bar. È il nostro primo canale, con 9.800 locali serviti in Italia.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="tostatura" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">02</span><span class="face-tag">Processo</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Tostatura</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Tostatura</span><span class="back-def">La cottura dei chicchi verdi, a circa 200 °C per 12–18 minuti. È qui che nascono aroma, colore e gusto.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="crack" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">03</span><span class="face-tag">Processo</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Primo crack</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Primo crack</span><span class="back-def">Lo scoppiettio dei chicchi a metà tostatura: il vapore interno li fa aprire. Da lì il tostatore decide quanto tostare ancora.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="crema" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">04</span><span class="face-tag">In tazza</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Crema</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Crema</span><span class="back-def">La schiuma color nocciola sopra l'espresso. Se è densa e resta compatta, l'espresso è fatto bene.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="cupping" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">05</span><span class="face-tag">Assaggio</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Cupping</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Cupping</span><span class="back-def">L'assaggio professionale: si annusa il caffè, lo si aspira dal cucchiaio e si dà un voto. Così scegliamo i lotti e teniamo costante ogni miscela.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="specie" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">06</span><span class="face-tag">Materia prima</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Arabica e robusta</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Arabica e robusta</span><span class="back-def">Le due specie di caffè più diffuse. L'arabica è aromatica e delicata; la robusta ha più corpo, più caffeina e più crema.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="monorigine" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">07</span><span class="face-tag">Prodotto</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Monorigine</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Monorigine</span><span class="back-def">Un caffè che arriva da un solo paese o da una sola zona, senza miscela. È l'idea della nuova linea Selvana Origini.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+      <button type="button" class="flip" data-card="capsula" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="face-top"><span class="face-n">08</span><span class="face-tag">Prodotto</span><svg class="ico seen-mark" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="face-word">Capsula compostabile</span><span class="face-hint"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5A5.5 5.5 0 0 1 12.7 4.2M13.5 9.5a5.5 5.5 0 0 1-10.2 2.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12.9 1.8v2.6h-2.6M3.1 14.2v-2.6h2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gira la carta</span></span>
+          <span class="face back" aria-hidden="true"><span class="back-word">Capsula compostabile</span><span class="back-def">Una capsula che dopo l'uso va nell'umido, insieme al caffè. La nostra è la Capsula Verde: 96 milioni prodotte a Lodi nel 2025.</span><span class="face-hint">Tocca per rigirare</span></span>
+        </span>
+      </button>
+    </div>
+    <div class="panel-nav">
+      <button type="button" class="btn-ghost" data-go="1"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Chi fa cosa</button>
+      <button type="button" class="btn" data-go="3">Avanti: I nostri valori <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- TAPPA 4 -->
+  <section class="panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Tappa 4 di 5</p>
+        <h2 class="panel-title">I nostri valori</h2>
+        <p class="panel-lead">Tre parole che usiamo quando dobbiamo decidere. Ognuna ha una storia: leggile tutte e tre.</p>
+      </div>
+      <p class="chip" id="status-4">Storie lette <b>0/3</b></p>
+    </div>
+    <figure class="motto">
+      <blockquote>«Tostato con pazienza, dal 1961.»</blockquote>
+      <figcaption>Il nostro payoff, scritto sopra l'ingresso della torrefazione</figcaption>
+    </figure>
+    <div class="values">
+      <article class="value" data-value="pazienza">
+        <div class="value-top">
+          <svg class="value-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 6h22M13 42h22M16 6c0 10 8 12 8 18s-8 8-8 18M32 6c0 10-8 12-8 18s8 8 8 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 39c2.2-3 3.8-4.2 5.5-4.2s3.3 1.2 5.5 4.2z" fill="currentColor"/><path d="M20 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <p class="value-n"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>01</p>
+        </div>
+        <h3 class="value-name">Pazienza</h3>
+        <p class="value-principle">Il caffè buono chiede tempo. Anche le decisioni.</p>
+        <button type="button" class="btn-ghost value-toggle" aria-expanded="false" aria-controls="story-pazienza" data-value="pazienza"><span class="vt-label">Leggi la storia</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="value-story" id="story-pazienza" hidden>
+          <p class="story-year">1961</p>
+          <p class="story-text">Ernesto Ravelli tostava pochi chili alla volta nel retro del Bar Selvana, in Città Alta. Lina assaggiava ogni lotto prima di servirlo: se non la convinceva, si ricominciava. Nel 2023 un grande cliente ci ha chiesto una tostatura più rapida per abbassare il prezzo. Abbiamo fatto tre mesi di prove e gli abbiamo fatto assaggiare la differenza. Ha scelto la tostatura lenta.</p>
+          <p class="story-practice"><span class="eyebrow">Per te, ogni giorno</span>Se una cosa non è pronta, dillo. Meglio un giorno in più che un caffè sbagliato.</p>
+        </div>
+      </article>
+      <article class="value" data-value="filiera">
+        <div class="value-top">
+          <svg class="value-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M9 42C17 31 25 21 39 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 28c-6.5-.6-10-4.6-10-10.5 6.4.2 9.8 4.2 10 10.5zM28.5 19.5c.6-6.5 4.6-10 10.5-10-.2 6.4-4.2 9.8-10.5 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle class="cherry" cx="29" cy="31" r="3.4"/><circle class="cherry" cx="35.5" cy="27.5" r="3.4"/><circle class="cherry" cx="33.5" cy="35" r="3.4"/></svg>
+          <p class="value-n"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>02</p>
+        </div>
+        <h3 class="value-name">Filiera</h3>
+        <p class="value-principle">Sappiamo da dove arriva ogni sacco e chi l'ha raccolto.</p>
+        <button type="button" class="btn-ghost value-toggle" aria-expanded="false" aria-controls="story-filiera" data-value="filiera"><span class="vt-label">Leggi la storia</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="value-story" id="story-filiera" hidden>
+          <p class="story-year">2018</p>
+          <p class="story-text">Anna Ghisleri è partita per Sidama, in Etiopia, con un quaderno e un elenco di cooperative. Ha passato tre settimane tra le piantagioni ed è tornata con un accordo diretto con una cooperativa di 1.200 famiglie. Oggi il 71% del nostro caffè arriva da filiere tracciate. L'obiettivo è il 90% nel 2028.</p>
+          <p class="story-practice"><span class="eyebrow">Per te, ogni giorno</span>Quando parli di un nostro caffè, sai dire da dove viene. Se non lo sai, chiedi a Sostenibilità &amp; Filiera.</p>
+        </div>
+      </article>
+      <article class="value" data-value="ospitalita">
+        <div class="value-top">
+          <svg class="value-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M9 19h25v7a11 11 0 0 1-11 11h-3A11 11 0 0 1 9 26z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M34 22h3a4.5 4.5 0 0 1 0 9h-3.5M7 42h30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 7c-2 2 2 4 0 7M22 5c-2 2 2 4 0 7M28 7c-2 2 2 4 0 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <p class="value-n"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>03</p>
+        </div>
+        <h3 class="value-name">Ospitalità</h3>
+        <p class="value-principle">Il nostro cliente è il bar. E il bar ha i suoi clienti.</p>
+        <button type="button" class="btn-ghost value-toggle" aria-expanded="false" aria-controls="story-ospitalita" data-value="ospitalita"><span class="vt-label">Leggi la storia</span><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="value-story" id="story-ospitalita" hidden>
+          <p class="story-year">2022</p>
+          <p class="story-text">Una domenica d'agosto la macchina di un bar di Bergamo bassa si è rotta alle 6:30, un'ora prima della colazione. Il nostro tecnico di turno è arrivato con la sua macchina di prova e ha fatto lui i primi cappuccini, mentre il titolare apriva. Da allora abbiamo una regola: nessun locale Selvana resta senza caffè.</p>
+          <p class="story-practice"><span class="eyebrow">Per te, ogni giorno</span>Rispondi a un cliente in giornata, anche solo per dire che ci stai lavorando.</p>
+        </div>
+      </article>
+    </div>
+    <div class="panel-nav">
+      <button type="button" class="btn-ghost" data-go="2"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Le parole del caffè</button>
+      <button type="button" class="btn" data-go="4">Avanti: Quiz finale <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </section>
+
+  <!-- TAPPA 5 -->
+  <section class="panel" id="panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Tappa 5 di 5</p>
+        <h2 class="panel-title">Quiz finale</h2>
+        <p class="panel-lead">Sei domande, una alla volta. Le risposte sono tutte nelle tappe precedenti.</p>
+      </div>
+      <p class="chip" id="status-5">Risposte <b>0/6</b></p>
+    </div>
+    <div class="quiz" id="quiz">
+      <div class="quiz-stage" id="quiz-stage"></div>
+      <aside class="quiz-aside" id="quiz-aside" aria-label="Punteggio del quiz"></aside>
+    </div>
+    <div class="panel-nav">
+      <button type="button" class="btn-ghost" data-go="3"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> I nostri valori</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div>
+      <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <p class="foot-legal">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+      <p class="foot-meta">Percorso di onboarding a cura di HR &amp; People · Torrefazione Selvana S.p.A. · Via dei Tostatori 12, Bergamo</p>
+    </div>
+    <button type="button" class="btn-link" id="reset">Azzera il percorso</button>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="toast-text"></span></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var root = document.documentElement;
+  var IS_THUMB = root.classList.contains('is-thumb');
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function reduced(){ return IS_THUMB || !!(mqReduce && mqReduce.matches); }
+
+  var KEY = 'selvana-onboarding-v1';
+  var DEFAULT_NAME = 'Chiara';
+  var fmtDate = new Intl.DateTimeFormat('it-IT', {day:'numeric', month:'long', year:'numeric'});
+  var fmtMonth = new Intl.DateTimeFormat('it-IT', {month:'long', year:'numeric'});
+  var fmtInt = new Intl.NumberFormat('it-IT');
+  var fmtPct = new Intl.NumberFormat('it-IT', {minimumFractionDigits:1, maximumFractionDigits:1});
+
+  var ICON_CHECK = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_PIN = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s5-4.6 5-8.5a5 5 0 1 0-10 0c0 3.9 5 8.5 5 8.5z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="6" r="1.8" fill="currentColor"/></svg>';
+  var ICON_NEXT = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var LOGO = '<span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>';
+  var SEAL = '<svg class="seal" viewBox="0 0 140 140" aria-hidden="true">' +
+    '<defs><path id="seal-arc" d="M20,70 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>' +
+    '<circle class="seal-bg" cx="70" cy="70" r="68"/>' +
+    '<circle class="seal-ring" cx="70" cy="70" r="63"/>' +
+    '<circle class="seal-ring" cx="70" cy="70" r="41"/>' +
+    '<text class="seal-text"><textPath href="#seal-arc" xlink:href="#seal-arc" textLength="306" lengthAdjust="spacing">TORREFAZIONE SELVANA · BERGAMO · DAL 1961 ·</textPath></text>' +
+    '<g class="seal-bean" transform="translate(52 52) scale(1.125)"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></g>' +
+    '</svg>';
+  var SIGN = '<svg viewBox="0 0 190 52" aria-hidden="true"><path class="sign-path" pathLength="1" d="M6 38c6-14 12-26 18-26 5 0 1 18-4 24 8-9 14-15 18-13 3 2-3 11 1 12 4 1 9-10 14-10 4 0-1 9 3 10 5 1 10-11 16-11 4 0 0 10 4 10 6 0 10-14 18-14 5 0 1 13 6 13 7 0 13-12 21-12 5 0 2 9 7 9 8 0 18-6 30-8M118 18c-4 6-7 16-5 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  /* ---------------- Dati ---------------- */
+  var STEP_NAMES = ['La prima settimana', 'Chi fa cosa', 'Le parole del caffè', 'I nostri valori', 'Quiz'];
+
+  var PEOPLE = {
+    sc: {n:'Sara Colombo', r:'HR & People', i:'SC'},
+    pl: {n:'Pietro Locatelli', r:'capo tostatore', i:'PL'},
+    gr: {n:'Giulia Ravelli', r:'Amministratrice Delegata', i:'GR'},
+    mg: {n:'Marta Gualandris', r:'tecnica Accademia Selvana', i:'MG'},
+    sp: {n:'Simone Pesenti', r:'IT e sistemi', i:'SP'}
+  };
+
+  var DAYS = [
+    {id:'lun', n:1, name:'Lunedì', title:'Accoglienza e giro della torrefazione', where:'Sede di Bergamo, Via dei Tostatori 12', hello:true,
+     items:[
+      {t:'9:00', h:'Accoglienza in reception', d:'Badge, kit e programma della settimana. Poi un caffè, ovviamente.', w:'sc'},
+      {t:'10:00', h:'Giro della torrefazione', d:'Dal sacco di caffè verde al pacco pronto per il bar, reparto per reparto.', w:'pl'},
+      {t:'12:30', h:'Pranzo in mensa', d:'Con il tuo responsabile e due colleghi del team.'},
+      {t:'14:30', h:'Da dove veniamo', d:'La storia di Selvana dal 1961 a oggi, in 30 minuti nella Sala Lina.', w:'gr'},
+      {t:'15:30', h:'La tua postazione', d:'Scrivania, armadietto e le prime presentazioni in ufficio.'}
+     ],
+     tip:"Porta un documento d'identità: serve per il badge."},
+    {id:'mar', n:2, name:'Martedì', title:'Cupping con i maestri tostatori', where:'Laboratorio qualità, sede di Bergamo',
+     items:[
+      {t:'9:30', h:'Come si assaggia un caffè', d:'Annusare, aspirare dal cucchiaio, dare un voto: le regole del cupping.', w:'pl'},
+      {t:'10:30', h:'Sei origini a confronto', d:"Brasile, Colombia, Etiopia e Honduras per l'arabica; India e Vietnam per la robusta."},
+      {t:'14:00', h:'Tostatura dal vivo', d:'Ascolti il primo crack e vedi il chicco cambiare colore minuto per minuto.', w:'pl'},
+      {t:'16:00', h:'Le tue note', d:'Scegli il caffè che ti è piaciuto di più e racconti perché.'}
+     ],
+     tip:'Oggi niente profumo: al cupping conta il naso.'},
+    {id:'mer', n:3, name:'Mercoledì', title:'Una giornata in un bar cliente', where:'Un locale Ho.Re.Ca. nel centro di Bergamo',
+     items:[
+      {t:'7:30', h:'Ritrovo al bar', d:"Ti accompagna una tecnica dell'Accademia Selvana per tutta la giornata.", w:'mg'},
+      {t:'8:00', h:'Dietro al banco', d:'Il servizio della colazione visto da chi lo fa: 300 caffè in tre ore.'},
+      {t:'11:00', h:'Macinatura e pulizia', d:'Come si regola il macinino e come si pulisce la macchina a fine turno.', w:'mg'},
+      {t:'15:00', h:"L'ordine della settimana", d:"Il titolare ordina dall'app ordini: osservi cosa funziona e cosa no."}
+     ],
+     tip:'Scarpe comode. Il caffè lo offre il bar.'},
+    {id:'gio', n:4, name:'Giovedì', title:'Strumenti e sistemi', where:'Sede di Bergamo, sala formazione',
+     items:[
+      {t:'9:00', h:'Posta e calendario', d:'Attivazione degli account e configurazione del telefono aziendale.', w:'sp'},
+      {t:'10:30', h:'App ordini', d:"Come la usano i 9.800 locali e cosa vediamo noi dall'altra parte."},
+      {t:'14:00', h:'Intranet', d:"Dove trovi procedure, ferie, buoni pasto e le notizie dall'azienda."},
+      {t:'16:00', h:'Sicurezza in 30 minuti', d:"Password, accesso in due passaggi e cosa fare con un'email sospetta.", w:'sp'}
+     ],
+     tip:"Tieni il telefono a portata di mano: serve per l'accesso in due passaggi."},
+    {id:'ven', n:5, name:'Venerdì', title:'Pranzo con il team e primo feedback', where:'Città Alta e sede di Bergamo',
+     items:[
+      {t:'9:30', h:'Mattina con il tuo team', d:'La prima attività vera, in affiancamento a un collega.'},
+      {t:'12:30', h:'Pranzo con il team', d:'In Città Alta, a due passi dal Bar Selvana dove tutto è cominciato.'},
+      {t:'15:00', h:'Primo colloquio di feedback', d:'Con il tuo responsabile: cosa è andato bene e cosa ti manca.', w:'sc'},
+      {t:'16:00', h:'Il piano del primo mese', d:'Tre obiettivi semplici per le prossime quattro settimane.'}
+     ],
+     tip:'Arriva al colloquio con almeno una domanda. Qualsiasi domanda va bene.'}
+  ];
+
+  var UNITS = [
+    {id:'ad', dept:'Direzione generale', name:'Giulia Ravelli', role:'Amministratrice Delegata · terza generazione della famiglia Ravelli', ini:'GR', people:4,
+     what:'Guida l\'azienda e il piano 2027 «Tre mosse»: filiera diretta, Ho.Re.Ca. 2.0, digitale e abbonamenti. Lo staff della direzione segue segreteria e affari legali.',
+     share:'Lo staff della direzione generale: segreteria e affari legali.',
+     askTitle:'Chiedi a lei quando…',
+     ask:['vuoi conoscerla: il primo lunedì del mese, alle 8:30, offre il caffè alle persone appena entrate', 'hai un\'idea che riguarda tutta l\'azienda', 'vuoi sapere com\'era il Bar Selvana nel 1961']},
+    {id:'fin', dept:'Finanza', name:'Marco Fenaroli', role:'Direttore Finanza (CFO)', ini:'MF', people:38,
+     what:'Tiene i conti dell\'azienda: budget, bilancio, pagamenti a fornitori e incassi dai clienti. Qui lavora anche il team IT e sistemi.',
+     ask:['devi presentare una nota spese o prenotare una trasferta', 'un fornitore ti chiede quando verrà pagato', 'ti serve un computer, un accesso o una licenza']},
+    {id:'com', dept:'Commerciale', name:'Elena Bassi', role:'Direttrice Commerciale', ini:'EB', people:148,
+     what:'Segue i 9.800 locali Ho.Re.Ca. in Italia, la grande distribuzione, l\'export in 34 paesi e la Linea Office. Qui lavorano anche i tecnici dell\'Accademia Selvana.',
+     ask:['un bar cliente ha un problema con la macchina o con la macinatura', 'ti serve un listino o il contatto di un locale', 'vuoi accompagnare un agente in una visita']},
+    {id:'ops', dept:'Operations', name:'Luca Moretti', role:'Direttore Operations', ini:'LM', people:372,
+     what:'Fa funzionare la torrefazione di Bergamo, lo stabilimento capsule di Lodi e l\'hub logistico di Piacenza: produzione, qualità, sicurezza e consegne.',
+     ask:['vuoi assistere a una tostatura o visitare un reparto', 'devi sapere a che punto è un ordine', 'noti qualcosa che non è sicuro, anche se sembra un dettaglio']},
+    {id:'hr', dept:'HR & People', name:'Sara Colombo', role:'Direttrice HR & People', ini:'SC', people:16,
+     what:'Selezione, formazione, buste paga e benessere delle persone. Ha costruito il percorso che stai facendo adesso.',
+     ask:['hai domande su ferie, permessi o busta paga', 'vuoi proporre o seguire un corso', 'qualcosa non va e vuoi parlarne in modo riservato']},
+    {id:'mkt', dept:'Marketing', name:'Davide Ferri', role:'Direttore Marketing', ini:'DF', people:34,
+     what:'Cura il marchio, il sito, l\'e-commerce e gli abbonamenti, che a settembre 2026 sono 29.400. Sta preparando il lancio di Selvana Origini.',
+     ask:['ti serve il logo o un materiale con il marchio', 'un cliente chiede informazioni su un abbonamento', 'vuoi pubblicare qualcosa a nome dell\'azienda']},
+    {id:'sos', dept:'Sostenibilità & Filiera', name:'Anna Ghisleri', role:'Direttrice Sostenibilità & Filiera', ini:'AG', people:28,
+     what:'Compra il caffè verde in sei paesi d\'origine e segue cooperative e certificazioni. Oggi il 71% del nostro caffè arriva da filiere tracciate: l\'obiettivo è il 90% nel 2028.',
+     ask:['un cliente vuole sapere da dove arriva un caffè', 'ti serve un dato su CO₂ o energia rinnovabile', 'vuoi capire cosa vuol dire «filiera tracciata»']}
+  ];
+  var DIRECTIONS = UNITS.filter(function(u){ return u.id !== 'ad'; });
+  var TOTAL = UNITS.reduce(function(s, u){ return s + u.people; }, 0); /* 640 */
+
+  var CARD_IDS = ['horeca', 'tostatura', 'crack', 'crema', 'cupping', 'specie', 'monorigine', 'capsula'];
+  var VALUE_IDS = ['pazienza', 'filiera', 'ospitalita'];
+
+  var QUIZ = [
+    {q:'In che anno è nata Selvana?', o:['1948', '1961', '1975', '1989'], a:1,
+     e:'Nel 1961 Ernesto e Lina Ravelli hanno iniziato a tostare nel retro del Bar Selvana, in Città Alta.'},
+    {q:'Cosa vuol dire Ho.Re.Ca.?', o:['Hotel, Restaurant, Café', 'Home, Retail, Catering', 'È una varietà di arabica', 'Hospitality, Retail, Cash & carry'], a:0,
+     e:'Alberghi, ristoranti e bar: il nostro primo canale, con 9.800 locali serviti in Italia.'},
+    {q:'Chi guida HR & People?', o:['Elena Bassi', 'Anna Ghisleri', 'Sara Colombo', 'Davide Ferri'], a:2,
+     e:'È Sara Colombo, la persona che ti accoglie lunedì alle 9:00.'},
+    {q:"Cos'è il primo crack?", o:['Il primo assaggio di un cupping', 'Una crepa nella capsula', 'La prima macinatura del mattino', 'Lo scoppiettio dei chicchi durante la tostatura'], a:3,
+     e:'Il vapore dentro il chicco lo fa aprire: da quel momento il tostatore decide quanto tostare ancora.'},
+    {q:'Da dove arriva il nostro caffè etiope?', o:['Huila', 'Sidama', 'Copán', 'Đắk Lắk'], a:1,
+     e:'Arriva da Sidama: Huila è in Colombia, Copán in Honduras e Đắk Lắk in Vietnam.'},
+    {q:'Quale nostro prodotto è la capsula compostabile?', o:['Gran Riserva', 'Linea Office', 'Capsula Verde', 'Decaffeinato Dolce'], a:2,
+     e:"La Capsula Verde, prodotta a Lodi: dopo l'uso va nell'umido, insieme al caffè."}
+  ];
+
+  /* ---------------- Stato ---------------- */
+  var state = {
+    name: DEFAULT_NAME, tab: 0,
+    days: [], units: [], cards: [], values: [],
+    quiz: {done:false, score:0, date:null, answers:[]}
+  };
+  var quizRun = {active:false, i:0, answers:[], score:0, locked:false};
+  var currentDay = 'lun';
+  var currentUnit = 'ad';
+
+  function onlyKnown(list, allowed){
+    if (!Array.isArray(list)) return [];
+    var out = [];
+    list.forEach(function(x){ if (allowed.indexOf(x) !== -1 && out.indexOf(x) === -1) out.push(x); });
+    return out;
+  }
+  function load(){
+    if (IS_THUMB) return;
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (!s || typeof s !== 'object') return;
+      if (typeof s.name === 'string') state.name = s.name.slice(0, 30);
+      if (typeof s.tab === 'number' && s.tab >= 0 && s.tab < 5) state.tab = Math.floor(s.tab);
+      state.days = onlyKnown(s.days, DAYS.map(function(d){ return d.id; }));
+      state.units = onlyKnown(s.units, DIRECTIONS.map(function(u){ return u.id; }));
+      state.cards = onlyKnown(s.cards, CARD_IDS);
+      state.values = onlyKnown(s.values, VALUE_IDS);
+      if (s.quiz && typeof s.quiz === 'object' && s.quiz.done) {
+        var sc = Number(s.quiz.score);
+        state.quiz.done = true;
+        state.quiz.score = (sc >= 0 && sc <= QUIZ.length) ? Math.round(sc) : 0;
+        state.quiz.date = (typeof s.quiz.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s.quiz.date)) ? s.quiz.date : null;
+        state.quiz.answers = Array.isArray(s.quiz.answers) ? s.quiz.answers.slice(0, QUIZ.length).map(Boolean) : [];
+      }
+    } catch (e) { /* storage non disponibile: la pagina funziona lo stesso */ }
+  }
+  function save(){
+    if (IS_THUMB) return;
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignora */ }
+  }
+
+  /* ---------------- Utilità ---------------- */
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c];
+    });
+  }
+  function displayName(){ return (state.name || '').trim().replace(/\s+/g, ' '); }
+  function initials(n){
+    var parts = n.split(' ').filter(Boolean).slice(0, 2);
+    var out = parts.map(function(w){ return Array.from(w)[0].toUpperCase(); }).join('');
+    return out || '·';
+  }
+  function todayISO(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function parseISO(s){
+    if (!s) return null;
+    var p = s.split('-').map(Number);
+    var d = new Date(p[0], p[1] - 1, p[2]);
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function scrollToJourney(){
+    var j = $('journey');
+    var top = j.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.6) {
+      j.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth', block: 'start'});
+    }
+  }
+  function replay(el, cls){
+    if (reduced()) return;
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }
+
+  /* ---------------- Nome e saluto ---------------- */
+  var nameInput = $('nome');
+  function applyName(){
+    var n = displayName();
+    var hello = $('greet-hello');
+    hello.textContent = '';
+    if (n) {
+      hello.appendChild(document.createTextNode('Ciao '));
+      var em = document.createElement('em');
+      em.className = 'greet-name';
+      em.textContent = n;
+      hello.appendChild(em);
+      hello.appendChild(document.createTextNode(','));
+    } else {
+      hello.appendChild(document.createTextNode('Ciao,'));
+    }
+    var bn = $('badge-name');
+    bn.textContent = n || 'Il tuo nome';
+    bn.classList.toggle('is-empty', !n);
+    $('badge-initials').textContent = initials(n);
+    var dh = document.querySelector('[data-hello]');
+    if (dh) dh.textContent = n ? (n + ', ti aspettiamo lunedì alle 9:00 in reception.') : 'Ti aspettiamo lunedì alle 9:00 in reception.';
+    updateCertName();
+  }
+  nameInput.value = state.name;
+  nameInput.addEventListener('input', function(){
+    state.name = nameInput.value.slice(0, 30);
+    applyName();
+    save();
+  });
+  $('badge-month').textContent = fmtMonth.format(new Date());
+
+  /* ---------------- Avanzamento ---------------- */
+  function fractions(){
+    var q = state.quiz.done ? 1 : (quizRun.active ? quizRun.answers.length / QUIZ.length : 0);
+    return [
+      state.days.length / DAYS.length,
+      state.units.length / DIRECTIONS.length,
+      state.cards.length / CARD_IDS.length,
+      state.values.length / VALUE_IDS.length,
+      q
+    ];
+  }
+  function doneFlags(){ return fractions().map(function(f){ return f >= 1; }); }
+  var prevDone = null;
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var panels = [1, 2, 3, 4, 5].map(function(n){ return $('panel-' + n); });
+
+  function counts(){
+    var qCount, qUnit;
+    if (state.quiz.done && !quizRun.active) { qCount = state.quiz.score + '/' + QUIZ.length; qUnit = ' corrette'; }
+    else { qCount = (quizRun.active ? quizRun.answers.length : 0) + '/' + QUIZ.length; qUnit = ' risposte'; }
+    return [
+      [state.days.length + '/' + DAYS.length, ' giorni', 'Giorni aperti'],
+      [state.units.length + '/' + DIRECTIONS.length, ' direzioni', 'Direzioni esplorate'],
+      [state.cards.length + '/' + CARD_IDS.length, ' carte', 'Carte girate'],
+      [state.values.length + '/' + VALUE_IDS.length, ' storie', 'Storie lette'],
+      [qCount, qUnit, state.quiz.done && !quizRun.active ? 'Risposte corrette' : 'Risposte']
+    ];
+  }
+
+  function renderProgress(announce){
+    var fr = fractions();
+    var flags = fr.map(function(f){ return f >= 1; });
+    var c = counts();
+    var pct = Math.round(fr.reduce(function(s, f){ return s + Math.min(1, f); }, 0) / fr.length * 100);
+
+    tabs.forEach(function(t, i){
+      t.classList.toggle('is-done', flags[i]);
+      t.querySelector('.step-count').textContent = c[i][0];
+      t.querySelector('.step-unit').textContent = c[i][1];
+      t.querySelector('.step-sr').textContent = flags[i] ? ', tappa completata' : '';
+      var chip = $('status-' + (i + 1));
+      if (flags[i] && i < 4) {
+        chip.classList.add('is-done');
+        chip.innerHTML = ICON_CHECK + '<span>Tappa completata</span>';
+      } else if (i === 4 && state.quiz.done && !quizRun.active) {
+        chip.classList.add('is-done');
+        chip.innerHTML = ICON_CHECK + '<span>Quiz completato · ' + esc(state.quiz.score + '/' + QUIZ.length) + '</span>';
+      } else {
+        chip.classList.remove('is-done');
+        chip.innerHTML = esc(c[i][2]) + ' <b>' + esc(c[i][0]) + '</b>';
+      }
+    });
+
+    $('pct-num').textContent = pct + '%';
+    $('badge-pct').textContent = pct + '%';
+    $('pbar-fill').style.width = pct + '%';
+    $('pbar').setAttribute('aria-valuenow', String(pct));
+
+    if (announce && prevDone) {
+      var newly = [];
+      flags.forEach(function(f, i){ if (f && !prevDone[i]) newly.push(i); });
+      newly.forEach(function(i){ replay(tabs[i], 'just-done'); });
+      if (newly.length) {
+        if (pct === 100) toast('Percorso completato al 100%');
+        else toast('Tappa completata: ' + STEP_NAMES[newly[newly.length - 1]]);
+      }
+    }
+    prevDone = flags;
+  }
+
+  var toastTimer = null;
+  function toast(text){
+    if (IS_THUMB) return;
+    var t = $('toast');
+    $('toast-text').textContent = text;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+  }
+
+  /* ---------------- Tab ---------------- */
+  function setTab(i, opts){
+    opts = opts || {};
+    state.tab = i;
+    tabs.forEach(function(t, k){
+      var on = k === i;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach(function(p, k){ p.hidden = k !== i; });
+    $('steps-caption').innerHTML = 'Tappa ' + (i + 1) + ' di 5 · <b>' + esc(STEP_NAMES[i]) + '</b>';
+    if (i === 0) markDay(currentDay);
+    if (i === 1) placeOrgDetail();
+    if (i === 4 && !quizRun.active && !state.quiz.done) renderIntro();
+    if (opts.focusTab) tabs[i].focus();
+    if (opts.scroll) scrollToJourney();
+    save();
+    renderProgress(!opts.silent);
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ setTab(i); });
+  });
+  $('steps').addEventListener('keydown', function(e){
+    var i = state.tab, n = tabs.length, to = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (i + 1) % n;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (i - 1 + n) % n;
+    else if (e.key === 'Home') to = 0;
+    else if (e.key === 'End') to = n - 1;
+    if (to !== null) { e.preventDefault(); setTab(to, {focusTab:true}); }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function(b){
+    b.addEventListener('click', function(){ setTab(Number(b.getAttribute('data-go')), {scroll:true}); });
+  });
+
+  /* ---------------- Tappa 1: settimana ---------------- */
+  var dayBtns = Array.prototype.slice.call(document.querySelectorAll('.day-btn'));
+  var dayDetail = $('day-detail');
+
+  function whoChip(key){
+    var p = PEOPLE[key];
+    if (!p) return '';
+    return '<p class="who"><span class="avatar" aria-hidden="true">' + esc(p.i) + '</span><span><b>' + esc(p.n) + '</b> · ' + esc(p.r) + '</span></p>';
+  }
+  function renderDay(id){
+    var d = DAYS.filter(function(x){ return x.id === id; })[0] || DAYS[0];
+    currentDay = d.id;
+    dayBtns.forEach(function(b){
+      var on = b.getAttribute('data-day') === d.id;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var html =
+      '<p class="eyebrow">' + esc(d.name) + ' · giorno ' + d.n + ' di 5</p>' +
+      '<h3 class="dd-title">' + esc(d.title) + '</h3>' +
+      '<p class="dd-where">' + ICON_PIN + '<span>' + esc(d.where) + '</span></p>' +
+      (d.hello ? '<p class="dd-hello" data-hello></p>' : '') +
+      '<ol class="timeline">' + d.items.map(function(it){
+        return '<li class="tl-item"><span class="tl-time">' + esc(it.t) + '</span><div><p class="tl-title">' + esc(it.h) + '</p><p class="tl-desc">' + esc(it.d) + '</p>' + (it.w ? whoChip(it.w) : '') + '</div></li>';
+      }).join('') + '</ol>' +
+      '<p class="dd-tip"><span class="eyebrow">Da sapere</span>' + esc(d.tip) + '</p>';
+    dayDetail.innerHTML = html;
+    applyName();
+    replay(dayDetail, 'swap');
+  }
+  function markDay(id){
+    if (state.days.indexOf(id) === -1) state.days.push(id);
+    dayBtns.forEach(function(b){
+      b.classList.toggle('is-seen', state.days.indexOf(b.getAttribute('data-day')) !== -1);
+    });
+  }
+  dayBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-day');
+      renderDay(id);
+      markDay(id);
+      save();
+      renderProgress(true);
+    });
+  });
+
+  /* ---------------- Tappa 2: chi fa cosa ---------------- */
+  var orgBtns = Array.prototype.slice.call(document.querySelectorAll('.org-node'));
+  var orgDetail = $('org-detail');
+  var orgWrap = $('org');
+  var mqNarrow = window.matchMedia ? window.matchMedia('(max-width: 959px)') : null;
+
+  function renderUnit(id){
+    var u = UNITS.filter(function(x){ return x.id === id; })[0] || UNITS[0];
+    currentUnit = u.id;
+    orgBtns.forEach(function(b){
+      var on = b.getAttribute('data-unit') === u.id;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var share = u.people / TOTAL * 100;
+    var shareText = u.share ? u.share : (fmtPct.format(share) + '% delle ' + fmtInt.format(TOTAL) + ' persone di Selvana');
+    orgDetail.innerHTML =
+      '<div class="od-head"><span class="avatar avatar-lg" aria-hidden="true">' + esc(u.ini) + '</span><div>' +
+        '<p class="eyebrow">' + esc(u.dept) + '</p><h3 class="od-name">' + esc(u.name) + '</h3><p class="od-role">' + esc(u.role) + '</p></div></div>' +
+      '<div class="od-grid">' +
+        '<div class="od-col"><h4 class="od-h">Cosa fa</h4><p>' + esc(u.what) + '</p></div>' +
+        '<div class="od-col"><h4 class="od-h">Quante persone</h4><p class="od-num">' + fmtInt.format(u.people) + '<small>persone</small></p>' +
+          '<div class="od-bar" aria-hidden="true"><span style="width:' + share.toFixed(2) + '%"></span></div><p class="od-share">' + esc(shareText) + '</p></div>' +
+        '<div class="od-col"><h4 class="od-h">' + esc(u.askTitle || 'Chiedi a loro quando…') + '</h4><ul class="od-ask">' +
+          u.ask.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div>' +
+      '</div>';
+    placeOrgDetail();
+    replay(orgDetail, 'swap');
+  }
+  function placeOrgDetail(){
+    var narrow = mqNarrow && mqNarrow.matches;
+    if (narrow) {
+      var btn = orgWrap.querySelector('[data-unit="' + currentUnit + '"]');
+      var host = btn ? (btn.closest('li') || $('org-ceo-host')) : null;
+      if (host && orgDetail.parentNode !== host) host.appendChild(orgDetail);
+    } else if (orgDetail.parentNode !== orgWrap || orgWrap.lastElementChild !== orgDetail) {
+      orgWrap.appendChild(orgDetail);
+    }
+  }
+  if (mqNarrow) {
+    if (mqNarrow.addEventListener) mqNarrow.addEventListener('change', placeOrgDetail);
+    else if (mqNarrow.addListener) mqNarrow.addListener(placeOrgDetail);
+  }
+  function markUnits(){
+    orgBtns.forEach(function(b){
+      b.classList.toggle('is-seen', state.units.indexOf(b.getAttribute('data-unit')) !== -1);
+    });
+  }
+  orgBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-unit');
+      renderUnit(id);
+      if (id !== 'ad' && state.units.indexOf(id) === -1) state.units.push(id);
+      markUnits();
+      save();
+      renderProgress(true);
+    });
+  });
+  (function(){
+    var inDirs = DIRECTIONS.reduce(function(s, u){ return s + u.people; }, 0);
+    $('org-total').textContent = fmtInt.format(TOTAL) + ' persone in tutto: ' + fmtInt.format(TOTAL - inDirs) + ' nella direzione generale e ' + fmtInt.format(inDirs) + ' nelle sei direzioni.';
+  })();
+
+  /* ---------------- Tappa 3: carte ---------------- */
+  var flips = Array.prototype.slice.call(document.querySelectorAll('.flip'));
+  function setFlip(card, on){
+    card.classList.toggle('is-flipped', on);
+    card.setAttribute('aria-pressed', on ? 'true' : 'false');
+    card.querySelector('.front').setAttribute('aria-hidden', on ? 'true' : 'false');
+    card.querySelector('.back').setAttribute('aria-hidden', on ? 'false' : 'true');
+  }
+  function renderCards(){
+    flips.forEach(function(c){
+      c.classList.toggle('is-seen', state.cards.indexOf(c.getAttribute('data-card')) !== -1);
+    });
+    var n = state.cards.length;
+    $('flip-count').innerHTML = 'Carte girate <b>' + n + '/' + CARD_IDS.length + '</b>';
+    Array.prototype.forEach.call($('flip-dots').children, function(dot, k){ dot.classList.toggle('on', k < n); });
+  }
+  flips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var on = !c.classList.contains('is-flipped');
+      setFlip(c, on);
+      var id = c.getAttribute('data-card');
+      if (on && state.cards.indexOf(id) === -1) {
+        state.cards.push(id);
+        renderCards();
+        save();
+        renderProgress(true);
+      }
+    });
+  });
+
+  /* ---------------- Tappa 4: valori ---------------- */
+  var valueToggles = Array.prototype.slice.call(document.querySelectorAll('.value-toggle'));
+  function renderValues(){
+    Array.prototype.forEach.call(document.querySelectorAll('.value'), function(v){
+      v.classList.toggle('is-read', state.values.indexOf(v.getAttribute('data-value')) !== -1);
+    });
+  }
+  valueToggles.forEach(function(b){
+    b.addEventListener('click', function(){
+      var story = $(b.getAttribute('aria-controls'));
+      var open = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      b.querySelector('.vt-label').textContent = open ? 'Chiudi la storia' : 'Leggi la storia';
+      story.hidden = !open;
+      var id = b.getAttribute('data-value');
+      if (open && state.values.indexOf(id) === -1) {
+        state.values.push(id);
+        renderValues();
+        save();
+        renderProgress(true);
+      }
+    });
+  });
+
+  /* ---------------- Tappa 5: quiz ---------------- */
+  var stage = $('quiz-stage');
+  var aside = $('quiz-aside');
+  var quizBox = $('quiz');
+
+  function scoreMsg(s){
+    if (s === QUIZ.length) return 'Tutto giusto. Lunedì ti sentirai già a casa.';
+    if (s >= 4) return 'Ottimo risultato. Un ripasso veloce delle tappe e sei a posto.';
+    if (s >= 2) return 'Buon inizio. Riguarda le tappe con calma: la pazienza è uno dei nostri valori.';
+    return 'Si parte da qui. Riguarda le tappe e rifai il quiz quando vuoi.';
+  }
+
+  function renderAside(mode){
+    var answers = mode === 'done' ? state.quiz.answers : quizRun.answers;
+    var score = mode === 'done' ? state.quiz.score : quizRun.score;
+    var current = mode === 'run' ? quizRun.i : -1;
+    var dots = QUIZ.map(function(_, k){
+      var cls = '', label = 'Domanda ' + (k + 1) + ': ', mark = String(k + 1);
+      if (k < answers.length) {
+        cls = answers[k] ? 'is-ok' : 'is-ko';
+        label += answers[k] ? 'corretta' : 'sbagliata';
+        mark = answers[k] ? '✓' : '✗';
+      } else if (k === current) { cls = 'is-now'; label += 'in corso'; }
+      else { label += 'da fare'; }
+      return '<li class="' + cls + '"><span aria-hidden="true">' + mark + '</span><span class="sr-only">' + label + '</span></li>';
+    }).join('');
+    aside.innerHTML =
+      '<p class="eyebrow">Punteggio</p>' +
+      '<p class="qa-score"><b>' + score + '</b><span>su ' + QUIZ.length + '</span></p>' +
+      '<ol class="qa-dots">' + dots + '</ol>' +
+      '<p class="qa-note">Domande su storia, persone, parole del caffè, origini e prodotti.</p>';
+  }
+
+  function renderIntro(){
+    quizBox.classList.remove('has-cert');
+    var missing = [0, 1, 2, 3].filter(function(i){ return !doneFlags()[i]; }).length;
+    var note = missing === 0
+      ? 'Hai completato tutte le tappe: sei nella condizione migliore per il quiz.'
+      : (missing === 1 ? 'Ti manca ancora una tappa: puoi fare il quiz anche adesso.' : 'Ti mancano ancora ' + missing + ' tappe: puoi fare il quiz anche adesso.');
+    stage.innerHTML =
+      '<div class="q-card q-intro">' +
+        '<p class="eyebrow">6 domande · circa 2 minuti</p>' +
+        '<h3 class="q-intro-title">Vediamo cosa ti è rimasto</h3>' +
+        '<p>Una domanda alla volta, con la risposta giusta subito dopo. Alla fine ricevi un attestato con il tuo nome.</p>' +
+        '<p class="q-intro-note">' + esc(note) + '</p>' +
+        '<button type="button" class="btn btn-accent" id="quiz-start">Inizia il quiz ' + ICON_NEXT + '</button>' +
+      '</div>';
+    $('quiz-start').addEventListener('click', startQuiz);
+    renderAside('intro');
+  }
+
+  function startQuiz(){
+    quizRun = {active:true, i:0, answers:[], score:0, locked:false};
+    quizBox.classList.remove('has-cert');
+    renderQuestion();
+    renderProgress(true);
+  }
+
+  function renderQuestion(){
+    var q = QUIZ[quizRun.i], n = quizRun.i + 1;
+    quizRun.locked = false;
+    stage.innerHTML =
+      '<div class="q-card">' +
+        '<p class="eyebrow">Domanda ' + n + ' di ' + QUIZ.length + '</p>' +
+        '<div class="q-bar" role="progressbar" aria-label="Avanzamento del quiz" aria-valuemin="0" aria-valuemax="' + QUIZ.length + '" aria-valuenow="' + quizRun.i + '"><span style="width:' + (quizRun.i / QUIZ.length * 100) + '%"></span></div>' +
+        '<h3 class="q-text" id="q-text" tabindex="-1">' + esc(q.q) + '</h3>' +
+        '<div class="q-options" role="group" aria-labelledby="q-text">' +
+          q.o.map(function(t, k){
+            return '<button type="button" class="q-opt" data-k="' + k + '"><span class="q-letter" aria-hidden="true">' + 'ABCD'.charAt(k) + '</span><span class="q-label">' + esc(t) + '</span><span class="q-tag"></span></button>';
+          }).join('') +
+        '</div>' +
+        '<div class="q-feedback" id="q-feedback" role="status" aria-live="polite"></div>' +
+        '<div class="q-next" id="q-next-row" hidden><button type="button" class="btn" id="q-next">' + (n < QUIZ.length ? 'Domanda successiva' : 'Vedi il risultato') + ' ' + ICON_NEXT + '</button></div>' +
+      '</div>';
+    Array.prototype.forEach.call(stage.querySelectorAll('.q-opt'), function(b){
+      b.addEventListener('click', function(){ answer(Number(b.getAttribute('data-k'))); });
+    });
+    $('q-next').addEventListener('click', nextQuestion);
+    renderAside('run');
+    $('q-text').focus({preventScroll:true});
+  }
+
+  function answer(k){
+    if (quizRun.locked) return;
+    quizRun.locked = true;
+    var q = QUIZ[quizRun.i];
+    var ok = k === q.a;
+    if (ok) quizRun.score++;
+    quizRun.answers.push(ok);
+    Array.prototype.forEach.call(stage.querySelectorAll('.q-opt'), function(b){
+      var kk = Number(b.getAttribute('data-k'));
+      b.disabled = true;
+      var tag = b.querySelector('.q-tag');
+      if (kk === q.a) { b.classList.add('is-correct'); tag.textContent = ok ? '✓ Corretta' : '✓ Risposta giusta'; }
+      else if (kk === k) { b.classList.add('is-wrong'); tag.textContent = '✗ Sbagliata'; }
+      else { b.classList.add('is-dim'); }
+    });
+    $('q-feedback').innerHTML = (ok ? '<strong class="fb-ok">Corretta.</strong> ' : '<strong class="fb-ko">Sbagliata.</strong> ') + esc(q.e);
+    var bar = stage.querySelector('.q-bar');
+    bar.querySelector('span').style.width = ((quizRun.i + 1) / QUIZ.length * 100) + '%';
+    bar.setAttribute('aria-valuenow', String(quizRun.i + 1));
+    $('q-next-row').hidden = false;
+    $('q-next').focus({preventScroll:true});
+    renderAside('run');
+    renderProgress(false);
+  }
+
+  function nextQuestion(){
+    if (quizRun.i < QUIZ.length - 1) {
+      quizRun.i++;
+      renderQuestion();
+      var top = stage.getBoundingClientRect().top;
+      if (top < 0) stage.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth', block:'start'});
+    } else {
+      finishQuiz();
+    }
+  }
+
+  function finishQuiz(){
+    var wasDone = state.quiz.done;
+    state.quiz = {done:true, score:quizRun.score, date:todayISO(), answers:quizRun.answers.slice()};
+    quizRun.active = false;
+    save();
+    renderCert(true);
+    if (!wasDone && prevDone) prevDone[4] = false;
+    renderProgress(true);
+    if (wasDone) toast('Attestato aggiornato');
+    var top = stage.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.5) stage.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth', block:'start'});
+  }
+
+  function renderCert(celebrate){
+    quizBox.classList.add('has-cert');
+    var d = parseISO(state.quiz.date) || new Date();
+    stage.innerHTML =
+      '<article class="cert' + (celebrate && !reduced() ? ' is-celebrating' : '') + '" aria-labelledby="cert-title">' +
+        '<div class="cert-inner">' +
+          '<div class="cert-main">' +
+            '<div class="cert-top">' + LOGO + '<span class="eyebrow">Attestato di onboarding</span></div>' +
+            '<h3 class="cert-title" id="cert-title" tabindex="-1"><span class="cert-name"></span> <span class="cert-verb"></span></h3>' +
+            '<p class="cert-meta"><span>' + esc(fmtDate.format(d)) + '</span><span class="sep" aria-hidden="true">·</span><span>' + state.quiz.score + '/' + QUIZ.length + ' <span class="l">risposte corrette</span></span></p>' +
+            '<p class="cert-msg">' + esc(scoreMsg(state.quiz.score)) + '</p>' +
+            '<div class="cert-sign">' + SIGN + '<p>Sara Colombo · HR &amp; People</p></div>' +
+          '</div>' +
+          SEAL +
+        '</div>' +
+      '</article>' +
+      '<div class="cert-actions">' +
+        '<button type="button" class="btn" id="quiz-redo">Rifai il quiz</button>' +
+        '<button type="button" class="btn-ghost" id="quiz-review">Rivedi le tappe</button>' +
+      '</div>';
+    updateCertName();
+    $('quiz-redo').addEventListener('click', startQuiz);
+    $('quiz-review').addEventListener('click', function(){ setTab(0, {scroll:true}); });
+    renderAside('done');
+    if (celebrate) $('cert-title').focus({preventScroll:true});
+  }
+
+  function updateCertName(){
+    var nameEl = stage.querySelector('.cert-name');
+    var verbEl = stage.querySelector('.cert-verb');
+    if (!nameEl || !verbEl) return;
+    var n = displayName();
+    if (n) {
+      nameEl.textContent = n;
+      nameEl.hidden = false;
+      verbEl.textContent = "ha completato l'onboarding";
+    } else {
+      nameEl.textContent = '';
+      nameEl.hidden = true;
+      verbEl.textContent = "Hai completato l'onboarding";
+    }
+  }
+
+  function renderQuizIdle(){
+    if (state.quiz.done) renderCert(false);
+    else renderIntro();
+  }
+
+  /* ---------------- Azzera ---------------- */
+  var resetBtn = $('reset');
+  var resetArmed = false, resetTimer = null;
+  resetBtn.addEventListener('click', function(){
+    if (!resetArmed) {
+      resetArmed = true;
+      resetBtn.textContent = 'Confermi? Clicca di nuovo';
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = 'Azzera il percorso'; }, 4000);
+      return;
+    }
+    clearTimeout(resetTimer);
+    resetArmed = false;
+    resetBtn.textContent = 'Azzera il percorso';
+    state.days = []; state.units = []; state.cards = []; state.values = [];
+    state.quiz = {done:false, score:0, date:null, answers:[]};
+    quizRun = {active:false, i:0, answers:[], score:0, locked:false};
+    flips.forEach(function(c){ setFlip(c, false); });
+    valueToggles.forEach(function(b){
+      b.setAttribute('aria-expanded', 'false');
+      b.querySelector('.vt-label').textContent = 'Leggi la storia';
+      $(b.getAttribute('aria-controls')).hidden = true;
+    });
+    prevDone = doneFlags();
+    markUnits(); renderCards(); renderValues(); renderQuizIdle();
+    renderDay('lun'); renderUnit('ad');
+    setTab(0, {scroll:true, silent:true});
+    toast('Percorso azzerato: si riparte da lunedì');
+  });
+
+  /* ---------------- Avvio ---------------- */
+  load();
+  if (IS_THUMB) {
+    state.name = DEFAULT_NAME;
+    state.days = DAYS.map(function(d){ return d.id; });
+    state.units = DIRECTIONS.map(function(u){ return u.id; });
+    state.cards = []; state.values = [];
+    state.quiz = {done:false, score:0, date:null, answers:[]};
+    state.tab = 2;
+  }
+  nameInput.value = state.name;
+  renderDay('lun');
+  dayBtns.forEach(function(b){ b.classList.toggle('is-seen', state.days.indexOf(b.getAttribute('data-day')) !== -1); });
+  renderUnit('ad');
+  markUnits();
+  renderCards();
+  renderValues();
+  renderQuizIdle();
+  applyName();
+  prevDone = null;
+  setTab(state.tab, {silent:true});
+  prevDone = doneFlags();
+})();
+</script>
+</body>
+</html>

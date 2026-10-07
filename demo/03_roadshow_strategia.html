@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piano Selvana 2027</title>
+<script>
+(function(){var h=document.documentElement;
+  if(location.hash==='#thumb'){h.classList.add('is-thumb');}
+  try{if(window.self!==window.top){h.classList.add('is-embedded');}}catch(e){h.classList.add('is-embedded');}
+})();
+</script>
+<meta name="description" content="Piano Selvana 2027: tre mosse. Roadshow dei responsabili, novembre 2026. Deck 16:9 in HTML con note del relatore, vista d'insieme e collegamenti diretti alle slide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F3F5F0; --surface:#FBFCFA; --ink:#15201A; --ink-2:#4A5650; --muted:#7D8882; --line:#DDE3DC;
+  --selva:#1D3B2F; --selva-2:#2A5242; --ciliegia:#C8402A; --crema:#E2B15B;
+  --on-dark:#F1F4EE; --on-dark-2:rgba(241,244,238,.72);
+  --good:#0E8A3E; --bad:#C0362C;
+  --c1:#178A5A; --c2:#D4502F; --c3:#2F6FC0; --c4:#B8860B; --c5:#9B4FA8;
+  --on-dark-3:rgba(241,244,238,.5);
+  --on-dark-line:rgba(241,244,238,.18);
+  --glass:rgba(21,32,26,.88);
+  --glass-line:rgba(241,244,238,.16);
+  --glass-hover:rgba(241,244,238,.12);
+  --scrim:rgba(12,19,15,.96);
+  --shadow:rgba(10,16,12,.28);
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --nw:0px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{background:var(--ink);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow:hidden}
+p,h1,h2,h3,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- Logo ---------- */
+.brand{display:inline-flex;align-items:center;gap:.45em}
+.bean{width:1.25em;height:1.25em;color:var(--selva)}
+.brand-word{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:-.01em}
+.dark .bean{color:var(--crema)}
+
+/* ---------- Motore deck 16:9 ---------- */
+.deck-viewport{position:fixed;top:0;left:0;bottom:0;right:var(--nw);overflow:hidden;background:var(--ink)}
+.deck{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s;background:var(--surface);color:var(--ink);display:flex;flex-direction:column;--bean-cut:var(--surface)}
+.slide.active{opacity:1;visibility:visible}
+.notes{display:none}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.slide.active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(120ms + var(--i,0) * 85ms)}
+.slide.active .mb>span{animation:grow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(450ms + var(--r,0) * 90ms)}
+
+/* ---------- Header / footer delle slide di contenuto ---------- */
+.sh{height:88px;flex:none;display:flex;align-items:center;gap:22px;margin:0 88px;border-bottom:1px solid var(--line)}
+.sh .brand{font-size:26px;color:var(--ink)}
+.sh-sep{width:1px;height:26px;background:var(--line)}
+.sh-sec{font:500 16px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.sh-right{margin-left:auto;font:500 16px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sf{height:64px;flex:none;margin:0 88px;border-top:1px solid var(--line);display:flex;align-items:center;gap:28px;font-size:16px;color:var(--muted)}
+.sf-int{margin-left:auto;font:500 16px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.sf-pg{font:600 16px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink);font-variant-numeric:tabular-nums}
+.sb{flex:1;min-height:0;padding:44px 88px 28px;display:flex;flex-direction:column}
+
+/* ---------- Tipografia ---------- */
+.eyebrow{font:500 16px/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--selva-2);margin-bottom:18px}
+.t{font-family:var(--font-display);font-weight:700;font-size:64px;line-height:1.04;letter-spacing:-.015em;color:var(--ink);max-width:1280px;text-wrap:balance}
+.t em{font-style:italic;color:var(--selva-2)}
+.lede{font-size:26px;line-height:1.4;color:var(--ink-2);margin-top:20px;max-width:1060px}
+.src{margin-top:auto;font-size:16px;line-height:1.4;color:var(--muted)}
+.src b{font-weight:600;color:var(--ink-2)}
+.u{font-size:.42em;font-weight:500;letter-spacing:0;color:var(--ink-2);margin-left:.14em}
+.up{color:var(--good)}
+
+/* ---------- Copertina e Grazie ---------- */
+.dark{background:var(--selva);color:var(--on-dark);--bean-cut:var(--selva)}
+.cover{padding:60px 120px 46px}
+.cover>*:not(.cv-art){position:relative}
+.cv-art{position:absolute;right:-190px;top:-20px;width:900px;height:900px;pointer-events:none}
+.cv-art .b{fill:var(--selva-2)}
+.cv-art .c{fill:none;stroke:var(--selva);stroke-width:.9;stroke-linecap:round}
+.cv-art .o{fill:none;stroke:var(--crema);stroke-opacity:.45;stroke-width:.05}
+.thanks .cv-art{right:-120px;top:60px;transform:rotate(24deg)}
+.cv-top{display:flex;align-items:center;gap:22px}
+.cv-top .brand{font-size:34px;color:var(--on-dark)}
+.cv-tag{padding-left:22px;border-left:1px solid var(--on-dark-line);font:500 16px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-2)}
+.cv-int{margin-left:auto;font:500 16px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-2)}
+.cv-main{margin-top:auto;margin-bottom:auto;padding-top:24px}
+.cv-eyebrow{font:500 18px/1.2 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crema)}
+.cv-title{margin-top:26px;font-family:var(--font-display);font-weight:700;font-size:136px;line-height:.98;letter-spacing:-.02em;color:var(--on-dark)}
+.cv-title em{font-style:italic;color:var(--crema)}
+.cv-by{margin-top:40px;display:flex;align-items:baseline;gap:16px;font-size:24px}
+.cv-by strong{font-weight:600}
+.cv-by span{color:var(--on-dark-2)}
+.cv-nums{display:flex}
+.cv-nums div{display:flex;flex-direction:column-reverse;padding:0 52px;border-left:1px solid var(--on-dark-line)}
+.cv-nums div:first-child{padding-left:0;border-left:0}
+.cv-nums dd{font-size:44px;font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--on-dark)}
+.cv-nums dt{margin-top:10px;font:500 16px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-2)}
+.cv-foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--on-dark-line);display:flex;justify-content:space-between;gap:40px;font-size:16px;color:var(--on-dark-2)}
+.cv-foot b{font-weight:600;color:var(--on-dark)}
+.ty{font-family:var(--font-display);font-weight:700;font-size:220px;line-height:.9;letter-spacing:-.025em;color:var(--on-dark)}
+.ty-pay{margin-top:34px;font-family:var(--font-display);font-style:italic;font-weight:700;font-size:46px;line-height:1.1;color:var(--crema)}
+
+/* ---------- 02 Agenda ---------- */
+.ag{flex:1;display:grid;grid-template-columns:500px 1fr;gap:96px;align-items:center}
+.ag-list{border-top:1px solid var(--line)}
+.ag-list li{border-bottom:1px solid var(--line)}
+.ag-list a{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:24px;padding:22px 18px 22px 10px;border-radius:8px;color:inherit;text-decoration:none;transition:background .2s}
+.ag-list a:hover{background:var(--paper)}
+.ag-list a:focus-visible{outline:2px solid var(--selva-2);outline-offset:2px}
+.ag-n{font-family:var(--font-display);font-weight:700;font-style:italic;font-size:48px;line-height:1;color:var(--selva-2)}
+.ag-txt strong{display:block;font-size:30px;font-weight:600;line-height:1.15}
+.ag-txt span{display:block;margin-top:5px;font-size:20px;color:var(--ink-2)}
+.ag-go{font:500 16px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s,transform .2s}
+.ag-list a:hover .ag-go{color:var(--ciliegia);transform:translateX(4px)}
+
+/* ---------- 03 KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;margin-top:60px}
+.kpi{border-top:2px solid var(--ink);padding-top:22px}
+.k-l,.tr-k,.g-l,.w-k,.mv-tl{font:500 16px/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.k-v{margin-top:16px;font-size:80px;font-weight:600;line-height:1;letter-spacing:-.025em;color:var(--selva);white-space:nowrap}
+.k-d{margin-top:18px;font-size:21px;font-weight:600;color:var(--ink)}
+.k-d.up{color:var(--good)}
+.k-s{margin-top:6px;font-size:20px;line-height:1.4;color:var(--ink-2)}
+.facts{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);font-size:20px;color:var(--ink-2)}
+.facts span+span::before{content:"·";margin:0 18px;color:var(--muted)}
+
+/* ---------- 04 Canali ---------- */
+.head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px}
+.tbtn{flex:none;display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 18px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 17px/1 var(--font-body);cursor:pointer;transition:background .2s}
+.tbtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}
+.tbtn:hover{background:var(--paper)}
+.tbtn:focus-visible{outline:2px solid var(--selva-2);outline-offset:2px}
+.tbtn[aria-pressed="true"]{background:var(--selva);border-color:var(--selva);color:var(--on-dark)}
+.ch{margin-top:40px}
+.seg-wrap{position:relative;padding:44px 0}
+.segbar{display:flex;gap:2px;height:116px}
+.seg{flex:var(--w) 1 0;min-width:0;overflow:hidden;background:var(--c);color:var(--surface);border-radius:4px;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.seg:first-child{border-radius:8px 4px 4px 8px}
+.seg:last-child{border-radius:4px 8px 8px 4px}
+.seg.sm{padding:18px 12px}
+.seg b{font-size:34px;font-weight:700;line-height:1;letter-spacing:-.01em}
+.seg span{font-size:19px;font-weight:500;white-space:nowrap;opacity:.94}
+.seg-out{position:absolute;font-size:19px;font-weight:600;line-height:24px;color:var(--ink);white-space:nowrap}
+.seg-out::after{content:"";position:absolute;right:0;width:1px;height:14px;background:var(--ink-2)}
+.seg-out.top{top:0;right:11.5%}
+.seg-out.top::after{top:28px}
+.seg-out.bot{bottom:0;right:3.5%}
+.seg-out.bot::after{bottom:28px}
+.legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:22px}
+.legend li{display:flex;gap:10px;align-items:flex-start;font-size:18px;line-height:1.35;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.legend b{display:block;font-weight:600;color:var(--ink)}
+.sw{display:inline-block;flex:none;width:14px;height:14px;margin-top:4px;border-radius:3px;background:var(--k)}
+.ch-table{display:none}
+.ch.is-table .seg-wrap,.ch.is-table .legend{display:none}
+.ch.is-table .ch-table{display:table}
+.ch-table th .sw{margin:0 12px 0 0;vertical-align:-1px}
+.ins{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.ins p{display:flex;align-items:baseline;gap:16px;font-size:20px;line-height:1.35;color:var(--ink-2)}
+.ins b{flex:none;font-size:40px;font-weight:600;letter-spacing:-.02em;color:var(--selva)}
+
+/* ---------- Tabelle ---------- */
+.dt{width:100%;border-collapse:collapse;font-size:21px;font-variant-numeric:tabular-nums}
+.dt th,.dt td{height:56px;padding:0 14px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--line)}
+.dt th:first-child,.dt td:first-child{padding-left:0}
+.dt thead th{height:44px;font:500 16px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink-2)}
+.dt tbody th{font-weight:600;color:var(--ink)}
+.dt .num{text-align:right}
+.dt tfoot th,.dt tfoot td{height:62px;border-top:2px solid var(--ink);border-bottom:0;font-weight:700}
+.ch-table{max-width:900px}
+
+/* ---------- 05 Contesto ---------- */
+.trends{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px;margin-top:64px}
+.tr{border-top:2px solid var(--ink);padding-top:22px}
+.tr-v{margin-top:18px;height:96px;font-size:96px;font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--selva);white-space:nowrap}
+.tr-v small{font-size:.42em;font-weight:500;letter-spacing:0;color:var(--ink-2)}
+.tr-dual{display:flex;flex-direction:column;justify-content:space-between;font-size:42px;line-height:1.05;letter-spacing:-.01em}
+.tr-t{margin-top:22px;font-size:22px;line-height:1.42;color:var(--ink)}
+
+/* ---------- 06 Sfide ---------- */
+.c3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:64px;margin-top:52px}
+.c3 article{border-top:1px solid var(--line);padding-top:26px;display:flex;flex-direction:column}
+.c3-n{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:112px;line-height:.9;color:var(--ciliegia)}
+.c3 h3{margin-top:22px;font-size:32px;font-weight:700;line-height:1.18;letter-spacing:-.01em}
+.c3 .d{margin-top:16px;font-size:22px;line-height:1.45;color:var(--ink-2)}
+.c3-link{align-self:flex-start;margin-top:22px;font:500 16px/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--selva-2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:3px}
+.c3-link:hover{color:var(--ciliegia);border-color:var(--ciliegia)}
+.c3-link:focus-visible{outline:2px solid var(--selva-2);outline-offset:3px}
+
+/* ---------- 07 Tre mosse ---------- */
+.mv-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:38px}
+.mv{display:flex;flex-direction:column;padding:30px 32px;background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.mv-n{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:68px;line-height:.9;color:var(--selva-2)}
+.mv h3{margin-top:14px;font-family:var(--font-display);font-weight:600;font-size:36px;line-height:1.08;letter-spacing:-.01em}
+.mv-d{margin-top:14px;font-size:21px;line-height:1.45;color:var(--ink-2)}
+.mv-t{margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}
+.mv-tv{margin-top:8px;font-size:52px;font-weight:600;line-height:1;letter-spacing:-.02em;color:var(--selva)}
+.mv-ts{margin-top:6px;font-size:19px;color:var(--ink-2)}
+.mv-o{margin-top:16px;font-size:17px;color:var(--muted)}
+
+/* ---------- 08 Roadmap ---------- */
+.rm{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;margin-top:44px}
+.rm::before{content:"";position:absolute;left:0;right:0;top:87px;height:1px;background:var(--line)}
+.rm-h b{display:block;font-size:40px;font-weight:700;line-height:1;letter-spacing:-.01em}
+.rm-h span{display:block;margin-top:8px;font:500 16px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.rm-dot{position:relative;display:block;width:18px;height:18px;margin:14px 0 24px;border-radius:50%;background:var(--surface);border:2px solid var(--selva)}
+.rm-q.is-last .rm-dot{background:var(--selva)}
+.rm-items li{padding:14px 0;border-top:1px solid var(--line)}
+.rm-items li:first-child{padding-top:0;border-top:0}
+.rm-tag{display:inline-flex;align-items:center;gap:8px;font:500 16px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.dot{display:inline-block;flex:none;width:10px;height:10px;border-radius:50%;background:var(--k)}
+.rm-txt{display:block;margin-top:8px;font-size:21px;line-height:1.35;color:var(--ink)}
+
+/* ---------- 09 Investimenti ---------- */
+.inv-wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:72px;align-items:start;margin-top:36px}
+.inv td.m{font-size:19px;color:var(--ink-2)}
+.inv tbody tr:first-child th,.inv tbody tr:first-child td.num{color:var(--selva)}
+.mb{display:block;width:150px;height:10px;border-radius:3px;background:var(--paper);overflow:hidden}
+.mb>span{display:block;height:100%;width:calc(var(--p) * 1%);border-radius:3px;background:var(--c1);transform-origin:left center}
+.inv-call{border-top:2px solid var(--ink);padding-top:22px}
+.inv-call .big{font-size:96px;font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--selva)}
+.inv-call p{font-size:22px;line-height:1.42;color:var(--ink)}
+.inv-call p+p{margin-top:16px}
+.inv-call .muted{color:var(--ink-2)}
+
+/* ---------- 10 Obiettivi ---------- */
+.goals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px;margin-top:64px}
+.goal{border-top:2px solid var(--selva);padding-top:22px}
+.g-v{margin-top:18px;font-size:92px;font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--selva);white-space:nowrap}
+.g-from{margin-top:24px;font-size:20px;color:var(--ink-2)}
+.g-from b{font-weight:600;color:var(--ink)}
+.g-d{margin-top:10px;font-size:19px;font-weight:600;color:var(--good)}
+
+/* ---------- 11 Cosa cambia per te ---------- */
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;margin-top:46px}
+.w{border-top:2px solid var(--ink);padding-top:22px}
+.w h3{margin-top:14px;font-size:30px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
+.w ul{margin-top:18px}
+.w li{position:relative;padding:13px 0 13px 28px;border-top:1px solid var(--line);font-size:21px;line-height:1.4}
+.w li::before{content:"";position:absolute;left:2px;top:27px;width:12px;height:2px;background:var(--selva-2)}
+
+/* ---------- 12 Chiusura ---------- */
+.s-quote{background:var(--paper);--bean-cut:var(--paper)}
+.q-wrap{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:0 88px 0 210px}
+.q-mark{position:absolute;right:100%;top:0;margin-right:30px;font-style:normal;color:var(--crema);transform:scale(2.8);transform-origin:100% 58%}
+.q{position:relative;font-family:var(--font-display);font-weight:700;font-size:76px;line-height:1.1;letter-spacing:-.015em;max-width:1240px;text-wrap:balance}
+.q em{font-style:italic;color:var(--selva-2)}
+.q-by{margin-top:30px;font:500 16px/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.qa{margin-top:64px;max-width:1240px;padding-top:26px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:28px}
+.qa strong{font-size:44px;font-weight:700;letter-spacing:-.01em;color:var(--ciliegia)}
+.qa span{font-size:22px;color:var(--ink-2)}
+
+/* ---------- Barra di avanzamento ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none;background:var(--glass-line)}
+.progress span{display:block;height:100%;background:var(--ciliegia);transform-origin:0 50%;transform:scaleX(0);transition:transform .35s ease}
+
+/* ---------- Barra di navigazione ---------- */
+.nav{position:fixed;bottom:14px;left:max(375px, calc((100vw - var(--nw)) / 2));transform:translateX(-50%);z-index:70;display:flex;align-items:center;gap:2px;padding:5px;border-radius:999px;background:var(--glass);color:var(--on-dark);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 20px var(--shadow);transition:opacity .35s ease}
+html.nav-idle .nav{opacity:0;pointer-events:none}
+.nb{position:relative;display:inline-grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--on-dark);cursor:pointer;transition:background .15s}
+.nb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.nb:hover{background:var(--glass-hover)}
+.nb:focus-visible{outline:2px solid var(--crema);outline-offset:1px}
+.nb:disabled{opacity:.35;cursor:default;background:transparent}
+.nb[aria-pressed="true"]{background:var(--on-dark);color:var(--ink)}
+.nk{position:absolute;right:4px;bottom:3px;font:600 9px/1 var(--font-mono);color:var(--on-dark-3)}
+.nb[aria-pressed="true"] .nk{color:var(--ink-2)}
+.nb-keys>span{font:700 16px/1 var(--font-body)}
+.nc{min-width:78px;text-align:center;font:500 14px/1 var(--font-mono);letter-spacing:.06em;font-variant-numeric:tabular-nums;color:var(--on-dark)}
+.nsep{width:1px;height:22px;margin:0 6px;background:var(--glass-line)}
+
+/* ---------- Legenda scorciatoie ---------- */
+.keys{position:fixed;bottom:72px;left:max(375px, calc((100vw - var(--nw)) / 2));transform:translateX(-50%);z-index:75;width:340px;max-width:calc(100vw - 32px);padding:16px 18px 14px;border-radius:10px;background:var(--glass);color:var(--on-dark);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 24px var(--shadow);font-size:14px}
+.keys-t{margin-bottom:10px;font:500 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crema)}
+.keys dl div{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 0;border-top:1px solid var(--glass-line)}
+.keys dt{display:flex;gap:4px;flex:none}
+.keys dd{text-align:right;color:var(--on-dark-2)}
+kbd{display:inline-block;min-width:24px;padding:3px 7px;border-radius:5px;border:1px solid var(--glass-line);background:var(--glass-hover);font:500 12px/1.2 var(--font-mono);text-align:center;color:var(--on-dark)}
+.keys-foot{margin-top:10px;font-size:13px;color:var(--on-dark-2)}
+.keys code{font-family:var(--font-mono);color:var(--crema)}
+
+/* ---------- Note del relatore ---------- */
+.notes-panel{position:fixed;top:0;right:0;bottom:0;width:380px;z-index:80;display:flex;flex-direction:column;gap:14px;padding:26px 26px 22px;overflow:auto;background:var(--ink);color:var(--on-dark);border-left:1px solid var(--glass-line)}
+.np-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.np-k{font:500 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crema)}
+.np-close{display:grid;place-items:center;width:34px;height:34px;padding:0;border-radius:50%;border:1px solid var(--glass-line);background:transparent;color:var(--on-dark);cursor:pointer}
+.np-close svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.np-close:hover{background:var(--glass-hover)}
+.np-close:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+.np-pos{font:500 13px/1 var(--font-mono);letter-spacing:.08em;color:var(--on-dark-3)}
+.np-title{font:600 21px/1.3 var(--font-body);color:var(--on-dark)}
+.np-body{font-size:18px;line-height:1.6;color:var(--on-dark)}
+.np-body p+p{margin-top:12px}
+.np-next{margin-top:auto;padding-top:14px;border-top:1px solid var(--glass-line);font-size:14px;color:var(--on-dark-2)}
+.np-tip{font-size:13px;color:var(--on-dark-3)}
+
+/* ---------- Vista d'insieme ---------- */
+.overview{position:fixed;inset:0;z-index:90;overflow:auto;padding:72px 40px 48px;background:var(--scrim);color:var(--on-dark)}
+.ov-head{display:flex;align-items:flex-end;gap:24px;max-width:1400px;margin:0 auto 28px}
+.ov-head h2{font-family:var(--font-display);font-weight:600;font-size:40px;line-height:1}
+.ov-sub{padding-bottom:4px;font-size:15px;color:var(--on-dark-2)}
+.ov-close{margin-left:auto;height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--glass-line);background:transparent;color:var(--on-dark);font:600 14px/1 var(--font-body);cursor:pointer}
+.ov-close:hover{background:var(--glass-hover)}
+.ov-close:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+.ov-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 24px;max-width:1400px;margin:0 auto}
+.ov-item{position:relative}
+.ov-frame{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;border-radius:8px;background:var(--surface);box-shadow:0 0 0 1px var(--glass-line);transition:transform .2s ease,box-shadow .2s ease}
+.ov-inner{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;transform:scale(var(--ts,.2));pointer-events:none}
+.ov-inner .slide{opacity:1;visibility:visible;transition:none}
+.ov-inner .anim,.ov-inner .mb>span{animation:none!important}
+.ov-item:hover .ov-frame{transform:translateY(-3px)}
+.ov-item.is-current .ov-frame{box-shadow:0 0 0 3px var(--crema)}
+.ov-hit{display:flex;align-items:baseline;gap:10px;width:100%;margin-top:10px;padding:0;border:0;background:none;color:var(--on-dark-2);font:500 14px/1.35 var(--font-body);text-align:left;cursor:pointer}
+.ov-hit::before{content:"";position:absolute;inset:-6px;border-radius:12px}
+.ov-hit:focus-visible{outline:none}
+.ov-hit:focus-visible::before{outline:2px solid var(--crema)}
+.ov-hit b{flex:none;font:600 12px/1 var(--font-mono);letter-spacing:.06em;color:var(--crema)}
+.ov-item.is-current .ov-hit{color:var(--on-dark)}
+
+/* ---------- Avvisi ---------- */
+.toast{position:fixed;top:22px;left:calc((100vw - var(--nw)) / 2);transform:translate(-50%,-8px);z-index:95;max-width:calc(100vw - 32px);padding:10px 16px;border-radius:8px;background:var(--glass);color:var(--on-dark);font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.rotate-hint{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:65;width:max-content;max-width:calc(100vw - 32px);padding:8px 14px;border-radius:999px;background:var(--glass);color:var(--on-dark);font-size:13px;text-align:center}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){.ov-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:999px){
+  .notes-panel{top:auto;left:0;width:auto;height:48vh;border-left:0;border-top:1px solid var(--glass-line);border-radius:12px 12px 0 0}
+}
+@media (max-width:759px){
+  .nav,.keys{left:auto;right:14px;transform:none}
+  .ov-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}
+  .overview{padding:64px 16px 32px}
+  .ov-head{flex-wrap:wrap}
+  .ov-head h2{font-size:30px}
+}
+@media (max-width:699px) and (orientation:portrait){
+  .rotate-hint{display:block}
+  .nav{bottom:62px}
+  .keys{bottom:120px}
+}
+@media (max-width:480px){.nb-keys,.nsep{display:none}.nc{min-width:62px}.nb{width:38px;height:38px}}
+
+/* ---------- Anteprima galleria e movimento ridotto ---------- */
+html.is-thumb .nav,html.is-thumb .progress,html.is-thumb .notes-panel,html.is-thumb .overview,
+html.is-thumb .keys,html.is-thumb .toast,html.is-thumb .rotate-hint{display:none!important}
+html.is-thumb .slide{transition:none}
+html.is-thumb .anim,html.is-thumb .mb>span{animation:none!important}
+@media (prefers-reduced-motion:reduce){
+  .slide,.progress span,.nav,.toast,.ov-frame,.ag-go{transition:none}
+  .slide.active .anim,.slide.active .mb>span{animation:none}
+}
+
+/* ---------- Stampa: una slide per pagina ---------- */
+@media print{
+  @page{size:1600px 900px;margin:0}
+  html,body{height:auto;overflow:visible;background:var(--surface)}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck-viewport{position:static;overflow:visible;background:none}
+  .deck{position:static;width:1600px;height:auto;transform:none!important}
+  .slide{position:relative;width:1600px;height:900px;opacity:1;visibility:visible;break-after:page;page-break-after:always}
+  .anim,.mb>span{animation:none!important}
+  .nav,.progress,.notes-panel,.overview,.keys,.toast,.rotate-hint{display:none!important}
+}
+
+/* ---------- Cromatura demo (identica in ogni file) ---------- */
+.dc-back,.dc-hint{position:fixed;z-index:9000;font:500 13px/1.4 "Hanken Grotesk",system-ui,sans-serif;}
+.dc-back{top:14px;left:14px;padding:7px 12px;border-radius:999px;background:rgba(21,32,26,.82);color:#F1F4EE;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dc-back:hover{background:rgba(21,32,26,.95)}
+.dc-back:focus-visible,.dc-hint summary:focus-visible{outline:2px solid #E2B15B;outline-offset:2px}
+.dc-hint{left:14px;bottom:14px;max-width:320px;background:rgba(21,32,26,.88);color:#F1F4EE;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.dc-hint summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:600;letter-spacing:.02em}
+.dc-hint summary::-webkit-details-marker{display:none}
+.dc-hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:#E2B15B;color:#15201A;font-size:11px;font-weight:800}
+.dc-hint ul{margin:0;padding:0 16px 12px 30px}
+.dc-hint li{margin:4px 0;color:rgba(241,244,238,.86)}
+html.is-embedded .dc-back,html.is-thumb .dc-back,html.is-thumb .dc-hint{display:none}
+@media print{.dc-back,.dc-hint{display:none}}
+</style>
+</head>
+<body>
+<a class="dc-back" href="../index.html">← Galleria</a>
+<details class="dc-hint">
+  <summary>Cosa provare</summary>
+  <ul>
+    <li>Premi <b>G</b> per la vista d'insieme e salta a una slide con un clic.</li>
+    <li>Premi <b>N</b> per aprire le note del relatore.</li>
+    <li>Premi <b>F</b> per lo schermo intero (Esc per uscire).</li>
+    <li>Copia il link con <b>#slide-9</b>: chi lo apre arriva dritto agli investimenti.</li>
+  </ul>
+</details>
+
+<div class="deck-viewport" id="viewport">
+<div class="deck" id="deck">
+<section class="slide dark cover active" data-title="Piano 2027: tre mosse" aria-roledescription="slide" aria-label="1 di 13: Piano 2027: tre mosse">
+<svg class="cv-art" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse class="b" cx="16" cy="16" rx="9.5" ry="13.5"/><path class="c" d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5"/></g><g transform="rotate(-18 16 16) translate(.9 -.5)"><ellipse class="o" cx="16" cy="16" rx="9.5" ry="13.5"/></g></svg>
+<div class="cv-top anim"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="cv-tag">Caffè · dal 1961</span><span class="cv-int">Uso interno</span></div>
+<div class="cv-main">
+  <p class="cv-eyebrow anim">Roadshow dei responsabili · novembre 2026</p>
+  <h1 class="cv-title anim">Piano 2027:<br><em>tre mosse</em></h1>
+  <p class="cv-by anim"><strong>Giulia Ravelli</strong><span>Amministratrice Delegata</span></p>
+</div>
+<dl class="cv-nums anim">
+  <div><dt>Anno di fondazione</dt><dd>1961</dd></div>
+  <div><dt>Persone</dt><dd>640</dd></div>
+  <div><dt>Locali Ho.Re.Ca. serviti</dt><dd>9.800</dd></div>
+  <div><dt>Paesi con export</dt><dd>34</dd></div>
+</dl>
+<div class="cv-foot anim"><span>Torrefazione Selvana S.p.A. · Via dei Tostatori 12, Bergamo</span><span>Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span></div>
+<aside class="notes"><p>Benvenuti. In quaranta minuti vi racconto il piano 2027, poi lasciamo spazio alle domande.</p><p>Partiamo da chi siamo: 640 persone, 9.800 locali serviti in Italia, caffè esportato in 34 paesi.</p></aside>
+</section>
+<section class="slide" data-title="Oggi in cinque passaggi" aria-roledescription="slide" aria-label="2 di 13: Oggi in cinque passaggi">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Agenda</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb"><div class="ag">
+  <div class="ag-l">
+    <p class="eyebrow anim">Agenda</p>
+    <h2 class="t anim">Oggi in <em>cinque passaggi</em></h2>
+    <p class="lede anim">Dal bilancio 2025 a quello che chiediamo a ognuno di voi. Ogni voce apre direttamente la sua slide.</p>
+  </div>
+  <ol class="ag-list">
+    <li class="anim"><a href="#slide-3"><span class="ag-n">01</span><span class="ag-txt"><strong>Dove siamo</strong><span>I numeri del 2025 e i canali di vendita</span></span><span class="ag-go">Slide 03 →</span></a></li>
+    <li class="anim"><a href="#slide-5"><span class="ag-n">02</span><span class="ag-txt"><strong>Cosa sta cambiando</strong><span>Materia prima, clienti, mercato</span></span><span class="ag-go">Slide 05 →</span></a></li>
+    <li class="anim"><a href="#slide-7"><span class="ag-n">03</span><span class="ag-txt"><strong>Le tre mosse</strong><span>Filiera diretta, Ho.Re.Ca. 2.0, digitale</span></span><span class="ag-go">Slide 07 →</span></a></li>
+    <li class="anim"><a href="#slide-8"><span class="ag-n">04</span><span class="ag-txt"><strong>Tempi e investimenti</strong><span>La roadmap trimestrale e i 14,8 M€</span></span><span class="ag-go">Slide 08 →</span></a></li>
+    <li class="anim"><a href="#slide-10"><span class="ag-n">05</span><span class="ag-txt"><strong>Cosa chiediamo a ognuno</strong><span>Gli obiettivi e cosa cambia per te</span></span><span class="ag-go">Slide 10 →</span></a></li>
+  </ol>
+</div></div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">02 / 13</span></footer>
+<aside class="notes"><p>Questa è la scaletta. Prima i numeri del 2025, poi cosa cambia fuori da noi, poi le tre mosse con tempi e soldi.</p><p>La parte più importante è l'ultima: cosa chiediamo a ognuno di voi. Ogni voce dell'agenda è un collegamento alla sua slide.</p></aside>
+</section>
+<section class="slide" data-title="Abbiamo chiuso il 2025 in crescita" aria-roledescription="slide" aria-label="3 di 13: Abbiamo chiuso il 2025 in crescita">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Dove siamo</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Dove siamo · Risultati 2025</p>
+  <h2 class="t anim">Abbiamo chiuso il 2025 <em>in crescita</em></h2>
+  <p class="lede anim">Quattro numeri da tenere a mente prima di guardare avanti.</p>
+  <div class="kpis">
+    <div class="kpi anim"><p class="k-l">Ricavi</p><p class="k-v">186,4<span class="u">M€</span></p><p class="k-d up">▲ +8,5% sul 2024</p><p class="k-s">Nel 2024 erano 171,8 M€.</p></div>
+    <div class="kpi anim"><p class="k-l">Margine EBITDA</p><p class="k-v">11,4<span class="u">%</span></p><p class="k-d">21,3 M€ di EBITDA</p><p class="k-s">Utile netto 9,6 M€.</p></div>
+    <div class="kpi anim"><p class="k-l">NPS Ho.Re.Ca.</p><p class="k-v">62</p><p class="k-d">Scala da −100 a +100</p><p class="k-s">Misurato sui locali che serviamo in Italia.</p></div>
+    <div class="kpi anim"><p class="k-l">Abbonati e-commerce</p><p class="k-v">21.000</p><p class="k-d up">▲ +40% nel 2026</p><p class="k-s">A settembre 2026 sono già 29.400.</p></div>
+  </div>
+  <p class="facts anim"><span>14.200 t di caffè tostato</span><span>96 milioni di capsule compostabili</span><span>Export in 34 paesi</span><span>Posizione finanziaria netta −18,2 M€</span></p>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">03 / 13</span></footer>
+<aside class="notes"><p>Il 2025 è andato bene: 186,4 milioni di ricavi, l'8,5% in più del 2024, con un margine EBITDA dell'11,4%.</p><p>Gli abbonati online erano 21.000 a fine anno e a settembre sono già 29.400. Partiamo da una base solida.</p></aside>
+</section>
+<section class="slide" data-title="Da dove arrivano i ricavi" aria-roledescription="slide" aria-label="4 di 13: Da dove arrivano i ricavi">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Dove siamo</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Dove siamo · Ricavi 2025 per canale</p>
+  <div class="head-row anim"><h2 class="t">Da dove arrivano <em>i ricavi</em></h2><button type="button" class="tbtn" id="btn-tab-canali" aria-pressed="false" aria-controls="ch-canali"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="1.5"/><path d="M3 8h14M3 12h14M8 4v12"/></svg><span>Vista tabella</span></button></div>
+  <p class="lede anim">Il bar resta il primo canale: 4 euro su 10 arrivano dall'Ho.Re.Ca. italiano.</p>
+  <div class="ch anim" id="ch-canali">
+    <div class="seg-wrap">
+      <div class="segbar" role="img" aria-label="Ricavi 2025 per canale: Ho.Re.Ca. Italia 42%, GDO Italia 24%, Export 18%, E-commerce e abbonamenti 9%, Office 7%">
+        <div class="seg" style="--w:42;--c:var(--c1)"><b>42%</b><span>Ho.Re.Ca. Italia</span></div>
+        <div class="seg" style="--w:24;--c:var(--c2)"><b>24%</b><span>GDO Italia</span></div>
+        <div class="seg" style="--w:18;--c:var(--c3)"><b>18%</b><span>Export</span></div>
+        <div class="seg sm" style="--w:9;--c:var(--c4)"><b>9%</b></div>
+        <div class="seg sm" style="--w:7;--c:var(--c5)"><b>7%</b></div>
+      </div>
+      <span class="seg-out top" aria-hidden="true">E-commerce e abbonamenti</span>
+      <span class="seg-out bot" aria-hidden="true">Office</span>
+    </div>
+    <ul class="legend">
+      <li><i class="sw" style="--k:var(--c1)"></i><span><b>Ho.Re.Ca. Italia</b>78,2 M€ · 42%</span></li>
+      <li><i class="sw" style="--k:var(--c2)"></i><span><b>GDO Italia</b>44,7 M€ · 24%</span></li>
+      <li><i class="sw" style="--k:var(--c3)"></i><span><b>Export</b>33,6 M€ · 18%</span></li>
+      <li><i class="sw" style="--k:var(--c4)"></i><span><b>E-commerce e abbonamenti</b>16,8 M€ · 9%</span></li>
+      <li><i class="sw" style="--k:var(--c5)"></i><span><b>Office</b>13,1 M€ · 7%</span></li>
+    </ul>
+    <table class="dt ch-table">
+      <caption class="sr">Ricavi 2025 per canale</caption>
+      <thead><tr><th scope="col">Canale</th><th scope="col" class="num">Ricavi 2025</th><th scope="col" class="num">Quota</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><i class="sw" style="--k:var(--c1)"></i>Ho.Re.Ca. Italia</th><td class="num">78,2 M€</td><td class="num">42%</td></tr>
+        <tr><th scope="row"><i class="sw" style="--k:var(--c2)"></i>GDO Italia</th><td class="num">44,7 M€</td><td class="num">24%</td></tr>
+        <tr><th scope="row"><i class="sw" style="--k:var(--c3)"></i>Export</th><td class="num">33,6 M€</td><td class="num">18%</td></tr>
+        <tr><th scope="row"><i class="sw" style="--k:var(--c4)"></i>E-commerce e abbonamenti</th><td class="num">16,8 M€</td><td class="num">9%</td></tr>
+        <tr><th scope="row"><i class="sw" style="--k:var(--c5)"></i>Office</th><td class="num">13,1 M€</td><td class="num">7%</td></tr>
+      </tbody>
+      <tfoot><tr><th scope="row">Totale</th><td class="num">186,4 M€</td><td class="num">100%</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="ins anim">
+    <p><b>66%</b><span>arriva dall'Italia tra bar e GDO, i due canali storici.</span></p>
+    <p><b>18%</b><span>arriva dall'export, in 34 paesi.</span></p>
+    <p><b>+40%</b><span>di abbonati online tra gennaio e settembre 2026.</span></p>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">04 / 13</span></footer>
+<aside class="notes"><p>Il bar resta il nostro cuore: l'Ho.Re.Ca. italiano vale il 42% dei ricavi e con la GDO arriviamo al 66%.</p><p>E-commerce e abbonamenti pesano il 9%, ma è il canale che cresce più in fretta. Per i valori esatti premete «Vista tabella».</p></aside>
+</section>
+<section class="slide" data-title="Cosa sta cambiando intorno a noi" aria-roledescription="slide" aria-label="5 di 13: Cosa sta cambiando intorno a noi">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Cosa sta cambiando</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Cosa sta cambiando · Stime interne</p>
+  <h2 class="t anim">Cosa sta cambiando <em>intorno a noi</em></h2>
+  <div class="trends">
+    <div class="tr anim"><p class="tr-k">Materia prima</p><p class="tr-v">+38%</p><p class="tr-t">Il prezzo dell'arabica negli ultimi 18 mesi.</p></div>
+    <div class="tr anim"><p class="tr-k">Ho.Re.Ca.</p><p class="tr-v tr-dual"><span>▼ bar</span><span>▲ catene</span></p><p class="tr-t">I bar indipendenti calano, le catene crescono e comprano a livello nazionale.</p></div>
+    <div class="tr anim"><p class="tr-k">Consumatori</p><p class="tr-v">31%</p><p class="tr-t">dei clienti consumatori compra il caffè online.</p></div>
+    <div class="tr anim"><p class="tr-k">Buyer</p><p class="tr-v">6<small> su 10</small></p><p class="tr-t">chiedono di sapere da dove arriva il caffè: vogliono la tracciabilità.</p></div>
+  </div>
+  <p class="src anim"><b>Fonte:</b> stime interne Selvana (2026) su dati di vendita, rete commerciale e interviste ai buyer. Non sono statistiche ufficiali di mercato.</p>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">05 / 13</span></footer>
+<aside class="notes"><p>Questi numeri sono stime interne Selvana: ditelo sempre quando li riprendete.</p><p>L'arabica è salita del 38% in diciotto mesi. I bar indipendenti calano, le catene crescono e i clienti vogliono sapere da dove arriva il caffè.</p></aside>
+</section>
+<section class="slide" data-title="Tre sfide per il 2027" aria-roledescription="slide" aria-label="6 di 13: Tre sfide per il 2027">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Cosa sta cambiando</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Cosa sta cambiando · Le sfide</p>
+  <h2 class="t anim">Tre sfide <em>per il 2027</em></h2>
+  <div class="c3">
+    <article class="anim"><p class="c3-n">1</p><h3>Il costo della materia prima è volatile</h3><p class="d">L'arabica è salita del 38% in 18 mesi. Nel 2026 ci è già costata 0,7 punti di margine rispetto al budget.</p><a class="c3-link" href="#slide-7">Risposta: mossa 1 →</a></article>
+    <article class="anim"><p class="c3-n">2</p><h3>L'Ho.Re.Ca. si concentra</h3><p class="d">Le catene crescono e trattano a livello nazionale. Il bar indipendente, il nostro cliente storico, è in calo.</p><a class="c3-link" href="#slide-7">Risposta: mossa 2 →</a></article>
+    <article class="anim"><p class="c3-n">3</p><h3>Il cliente vuole sapere da dove arriva il caffè</h3><p class="d">6 buyer su 10 chiedono la tracciabilità. Oggi tracciamo il 71% del caffè che tostiamo.</p><a class="c3-link" href="#slide-7">Risposta: mosse 1 e 3 →</a></article>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">06 / 13</span></footer>
+<aside class="notes"><p>Da questi cambiamenti nascono tre sfide. La prima la vediamo già nei conti: nel 2026 l'arabica ci è costata 0,7 punti di margine rispetto al budget.</p><p>Le altre due riguardano chi sono i nostri clienti e cosa ci chiedono.</p></aside>
+</section>
+<section class="slide" data-title="Tre mosse, tre numeri da raggiungere" aria-roledescription="slide" aria-label="7 di 13: Tre mosse, tre numeri da raggiungere">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Le tre mosse</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Le tre mosse</p>
+  <h2 class="t anim">Tre mosse, <em>tre numeri da raggiungere</em></h2>
+  <div class="mv-grid">
+    <article class="mv anim"><p class="mv-n">1</p><h3>Filiera diretta</h3><p class="mv-d">Contratti pluriennali con 6 cooperative nei paesi d'origine e copertura del prezzo della materia prima.</p><div class="mv-t"><p class="mv-tl">Target 2027</p><p class="mv-tv">82%</p><p class="mv-ts">del caffè da filiera tracciata · oggi 71%</p></div><p class="mv-o">Guida: Anna Ghisleri, Sostenibilità e Filiera</p></article>
+    <article class="mv anim"><p class="mv-n">2</p><h3>Ho.Re.Ca. 2.0</h3><p class="mv-d">L'Accademia Selvana forma i baristi. Una nuova app permette ai locali di ordinare in pochi tocchi.</p><div class="mv-t"><p class="mv-tl">Target 2027</p><p class="mv-tv">NPS 68</p><p class="mv-ts">soddisfazione dei locali · oggi 62</p></div><p class="mv-o">Guida: Elena Bassi, Direttrice Commerciale</p></article>
+    <article class="mv anim"><p class="mv-n">3</p><h3>Digitale e abbonamenti</h3><p class="mv-d">Più abbonati sull'e-commerce, con le monorigini Selvana Origini come prodotto di punta.</p><div class="mv-t"><p class="mv-tl">Target 2027</p><p class="mv-tv">48.000</p><p class="mv-ts">abbonati · 21.000 a fine 2025</p></div><p class="mv-o">Guida: Davide Ferri, Marketing</p></article>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">07 / 13</span></footer>
+<aside class="notes"><p>Le tre mosse rispondono alle tre sfide. Ognuna ha un numero da raggiungere e una persona che la guida: Anna, Elena e Davide.</p><p>Tre numeri da ricordare: 82% di filiera tracciata, NPS 68, 48.000 abbonati.</p></aside>
+</section>
+<section class="slide" data-title="La roadmap 2027, trimestre per trimestre" aria-roledescription="slide" aria-label="8 di 13: La roadmap 2027, trimestre per trimestre">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Tempi e investimenti</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Tempi e investimenti · Roadmap</p>
+  <h2 class="t anim">La roadmap 2027, <em>trimestre per trimestre</em></h2>
+  <div class="rm"><div class="rm-q anim"><p class="rm-h"><b>T1</b><span>Gennaio – marzo</span></p><span class="rm-dot" aria-hidden="true"></span><ul class="rm-items"><li><span class="rm-tag"><i class="dot" style="--k:var(--c1)"></i>Filiera</span><span class="rm-txt">Contratti firmati con le prime 3 cooperative</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c4)"></i>Tostatura</span><span class="rm-txt">Parte il cantiere della nuova linea a Bergamo</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c3)"></i>Ho.Re.Ca.</span><span class="rm-txt">App ordini in prova in 200 locali</span></li></ul></div><div class="rm-q anim"><p class="rm-h"><b>T2</b><span>Aprile – giugno</span></p><span class="rm-dot" aria-hidden="true"></span><ul class="rm-items"><li><span class="rm-tag"><i class="dot" style="--k:var(--c1)"></i>Filiera</span><span class="rm-txt">Firmate le altre 3 cooperative, prezzo coperto</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c3)"></i>Ho.Re.Ca.</span><span class="rm-txt">Apre l'Accademia Selvana a Bergamo</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c5)"></i>Digitale</span><span class="rm-txt">Selvana Origini arriva in abbonamento</span></li></ul></div><div class="rm-q anim"><p class="rm-h"><b>T3</b><span>Luglio – settembre</span></p><span class="rm-dot" aria-hidden="true"></span><ul class="rm-items"><li><span class="rm-tag"><i class="dot" style="--k:var(--c4)"></i>Tostatura</span><span class="rm-txt">La nuova linea entra in funzione</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c3)"></i>Ho.Re.Ca.</span><span class="rm-txt">App ordini in tutta Italia</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c5)"></i>Digitale</span><span class="rm-txt">Abbonamenti flessibili sul nuovo sito</span></li></ul></div><div class="rm-q anim is-last"><p class="rm-h"><b>T4</b><span>Ottobre – dicembre</span></p><span class="rm-dot" aria-hidden="true"></span><ul class="rm-items"><li><span class="rm-tag"><i class="dot" style="--k:var(--c1)"></i>Filiera</span><span class="rm-txt">82% del caffè tracciato</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c3)"></i>Ho.Re.Ca.</span><span class="rm-txt">NPS dei locali a 68</span></li><li><span class="rm-tag"><i class="dot" style="--k:var(--c5)"></i>Digitale</span><span class="rm-txt">48.000 abbonati</span></li></ul></div></div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">08 / 13</span></footer>
+<aside class="notes"><p>Il primo semestre serve a firmare e a costruire: cooperative, nuova linea di tostatura, Accademia.</p><p>Nel secondo semestre mettiamo tutto in funzione e a dicembre controlliamo i tre target.</p></aside>
+</section>
+<section class="slide" data-title="14,8 M€ di investimenti, quasi metà sulla tostatura" aria-roledescription="slide" aria-label="9 di 13: 14,8 M€ di investimenti, quasi metà sulla tostatura">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Tempi e investimenti</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Tempi e investimenti · Budget 2027</p>
+  <h2 class="t anim">14,8 M€ di investimenti, <em>quasi metà sulla tostatura</em></h2>
+  <div class="inv-wrap">
+    <table class="dt inv anim">
+      <caption class="sr">Investimenti 2027 per voce, in milioni di euro</caption>
+      <thead><tr><th scope="col">Voce</th><th scope="col">Mossa</th><th scope="col" class="num">M€</th><th scope="col" class="num">% sul totale</th><th scope="col"><span class="sr">Peso sul totale</span></th></tr></thead>
+      <tbody><tr><th scope="row">Nuova linea di tostatura a basse emissioni</th><td class="m">Produzione</td><td class="num">6,2</td><td class="num">42%</td><td><span class="mb" aria-hidden="true"><span style="--p:42"></span></span></td></tr><tr><th scope="row">Digitale e app</th><td class="m">Mosse 2 e 3</td><td class="num">3,1</td><td class="num">21%</td><td><span class="mb" aria-hidden="true"><span style="--p:21"></span></span></td></tr><tr><th scope="row">Accademia e persone</th><td class="m">Mossa 2</td><td class="num">2,4</td><td class="num">16%</td><td><span class="mb" aria-hidden="true"><span style="--p:16"></span></span></td></tr><tr><th scope="row">Filiera e certificazioni</th><td class="m">Mossa 1</td><td class="num">1,9</td><td class="num">13%</td><td><span class="mb" aria-hidden="true"><span style="--p:13"></span></span></td></tr><tr><th scope="row">Marketing Selvana Origini</th><td class="m">Mossa 3</td><td class="num">1,2</td><td class="num">8%</td><td><span class="mb" aria-hidden="true"><span style="--p:8"></span></span></td></tr></tbody>
+      <tfoot><tr><th scope="row">Totale</th><td></td><td class="num">14,8</td><td class="num">100%</td><td><span class="mb" aria-hidden="true"><span style="--p:100"></span></span></td></tr></tfoot>
+    </table>
+    <aside class="inv-call anim">
+      <p class="big">42%</p>
+      <p>del budget va alla nuova linea di tostatura a basse emissioni.</p>
+      <p class="muted">Gli altri 8,6 M€ finanziano direttamente le tre mosse.</p>
+    </aside>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">09 / 13</span></footer>
+<aside class="notes"><p>Investiamo 14,8 milioni. Il 42%, cioè 6,2 milioni, va alla nuova linea di tostatura a basse emissioni: è la voce più grande del piano.</p><p>Gli altri 8,6 milioni finanziano direttamente le tre mosse.</p></aside>
+</section>
+<section class="slide" data-title="Dove vogliamo arrivare a fine 2027" aria-roledescription="slide" aria-label="10 di 13: Dove vogliamo arrivare a fine 2027">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Cosa chiediamo a ognuno</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Cosa chiediamo a ognuno · Obiettivi</p>
+  <h2 class="t anim">Dove vogliamo arrivare <em>a fine 2027</em></h2>
+  <p class="lede anim">Quattro numeri, misurati ogni trimestre rispetto al punto di partenza del 2025.</p>
+  <div class="goals">
+    <div class="goal anim"><p class="g-l">Ricavi</p><p class="g-v">215<span class="u">M€</span></p><p class="g-from">Partenza 2025: <b>186,4 M€</b></p><p class="g-d">▲ +15,3% in due anni</p></div>
+    <div class="goal anim"><p class="g-l">Margine EBITDA</p><p class="g-v">12,5<span class="u">%</span></p><p class="g-from">Partenza 2025: <b>11,4%</b></p><p class="g-d">▲ +1,1 punti</p></div>
+    <div class="goal anim"><p class="g-l">Filiera tracciata</p><p class="g-v">82<span class="u">%</span></p><p class="g-from">Partenza 2025: <b>71%</b></p><p class="g-d">▲ +11 punti</p></div>
+    <div class="goal anim"><p class="g-l">Abbonati</p><p class="g-v">48.000</p><p class="g-from">Partenza 2025: <b>21.000</b></p><p class="g-d">▲ più del doppio</p></div>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">10 / 13</span></footer>
+<aside class="notes"><p>Questi sono i quattro numeri su cui ci misureremo a fine 2027. Ricavi a 215 milioni vuol dire crescere di circa il 7,4% l'anno.</p><p>Con un margine del 12,5%, l'EBITDA arriva a circa 26,9 milioni. Gli abbonati devono più che raddoppiare rispetto al 2025.</p></aside>
+</section>
+<section class="slide" data-title="Cosa cambia per te" aria-roledescription="slide" aria-label="11 di 13: Cosa cambia per te">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Cosa chiediamo a ognuno</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="sb">
+  <p class="eyebrow anim">Cosa chiediamo a ognuno · Per funzione</p>
+  <h2 class="t anim">Cosa cambia <em>per te</em></h2>
+  <p class="lede anim">Le prime novità arrivano già nel primo trimestre.</p>
+  <div class="who">
+    <article class="w anim"><p class="w-k">Commerciale</p><h3>Porti l'app e l'Accademia nei locali</h3><ul>
+      <li>Da gennaio proponi l'app ordini: 200 locali in prova entro marzo.</li>
+      <li>Iscrivi i baristi dei tuoi clienti ai corsi dell'Accademia Selvana.</li>
+      <li>Con le catene usi la tracciabilità come argomento di vendita.</li></ul></article>
+    <article class="w anim"><p class="w-k">Produzione e logistica</p><h3>Nuova linea e lotti tracciati</h3><ul>
+      <li>Da aprile ti formi sulla nuova linea, in funzione da luglio.</li>
+      <li>Ogni lotto ha un codice d'origine, dalla cooperativa al sacco.</li>
+      <li>Da Piacenza gli abbonamenti partono entro 48 ore.</li></ul></article>
+    <article class="w anim"><p class="w-k">Uffici e staff</p><h3>Numeri chiari e più formazione</h3><ul>
+      <li>Ogni mese un cruscotto unico con i numeri delle tre mosse.</li>
+      <li>Due giornate all'anno di formazione in Accademia, per tutti.</li>
+      <li>Un canale con HR &amp; People per proporre idee sulle tre mosse.</li></ul></article>
+  </div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">11 / 13</span></footer>
+<aside class="notes"><p>Ora la parte che vi riguarda. Ogni funzione ha due o tre cose concrete che cambiano già dal primo trimestre.</p><p>I vostri responsabili vi daranno i dettagli entro dicembre.</p></aside>
+</section>
+<section class="slide s-quote" data-title="Il caffè lo sappiamo tostare. Nel 2027 impariamo a raccontare da dove arriva." aria-roledescription="slide" aria-label="12 di 13: Il caffè lo sappiamo tostare. Nel 2027 impariamo a raccontare da dove arriva.">
+<header class="sh"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="sh-sep" aria-hidden="true"></span><span class="sh-sec">Chiusura</span><span class="sh-right">Piano 2027 · Roadshow</span></header>
+<div class="q-wrap">
+  <p class="q anim"><span class="q-mark" aria-hidden="true">«</span>Il caffè lo sappiamo tostare. <em>Nel 2027 impariamo a raccontare da dove arriva.</em></p>
+  <p class="q-by anim">Giulia Ravelli · Amministratrice Delegata</p>
+  <div class="qa anim"><strong>Domande?</strong><span>Abbiamo venti minuti: chiedete tutto, anche quello che non è in queste slide.</span></div>
+</div>
+<footer class="sf"><span class="sf-disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span><span class="sf-int">Uso interno</span><span class="sf-pg">12 / 13</span></footer>
+<aside class="notes"><p>Chiudo con una frase sola. Il caffè lo sappiamo tostare da 65 anni: adesso dobbiamo imparare a raccontarlo.</p><p>Ora tocca a voi: domande.</p></aside>
+</section>
+<section class="slide dark cover thanks" data-title="Grazie." aria-roledescription="slide" aria-label="13 di 13: Grazie.">
+<svg class="cv-art" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse class="b" cx="16" cy="16" rx="9.5" ry="13.5"/><path class="c" d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5"/></g><g transform="rotate(-18 16 16) translate(.9 -.5)"><ellipse class="o" cx="16" cy="16" rx="9.5" ry="13.5"/></g></svg>
+<div class="cv-top anim"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><span class="cv-tag">Caffè · dal 1961</span><span class="cv-int">Uso interno · 13 / 13</span></div>
+<div class="cv-main">
+  <h2 class="ty anim">Grazie.</h2>
+  <p class="ty-pay anim">Tostato con pazienza, dal 1961.</p>
+</div>
+<div class="cv-foot anim"><span><b>Giulia Ravelli</b> · Amministratrice Delegata</span><span>Slide e note sull'intranet, sezione Piano 2027</span><span>Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</span></div>
+<aside class="notes"><p>Grazie a tutti. Slide e note restano sull'intranet.</p><p>Il link apre direttamente la slide che vi serve: per esempio #slide-9 porta agli investimenti.</p></aside>
+</section>
+</div>
+</div>
+
+<div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
+<nav class="nav" id="nav" aria-label="Navigazione della presentazione">
+  <button type="button" class="nb" id="btn-prev" aria-label="Slide precedente" title="Slide precedente (←)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+  <span class="nc" id="nav-count" aria-hidden="true">01 / 13</span>
+  <button type="button" class="nb" id="btn-next" aria-label="Slide successiva" title="Slide successiva (→)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+  <span class="nsep" aria-hidden="true"></span>
+  <button type="button" class="nb" id="btn-grid" aria-label="Vista d'insieme" aria-pressed="false" title="Vista d'insieme (G)"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1.2"/><rect x="11" y="3" width="6" height="6" rx="1.2"/><rect x="3" y="11" width="6" height="6" rx="1.2"/><rect x="11" y="11" width="6" height="6" rx="1.2"/></svg><span class="nk" aria-hidden="true">G</span></button>
+  <button type="button" class="nb" id="btn-notes" aria-label="Note del relatore" aria-pressed="false" aria-controls="notes-panel" title="Note del relatore (N)"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="2.5" width="12" height="15" rx="1.6"/><path d="M7 7h6M7 10h6M7 13h3.5"/></svg><span class="nk" aria-hidden="true">N</span></button>
+  <button type="button" class="nb" id="btn-fs" aria-label="Schermo intero" aria-pressed="false" title="Schermo intero (F)"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7.5V3h4.5M12.5 3H17v4.5M17 12.5V17h-4.5M7.5 17H3v-4.5"/></svg><span class="nk" aria-hidden="true">F</span></button>
+  <button type="button" class="nb nb-keys" id="btn-keys" aria-label="Scorciatoie da tastiera" aria-expanded="false" aria-controls="keys" title="Scorciatoie (?)"><span aria-hidden="true">?</span></button>
+</nav>
+
+<div class="keys" id="keys" role="dialog" aria-label="Scorciatoie da tastiera" hidden>
+  <p class="keys-t">Scorciatoie</p>
+  <dl>
+    <div><dt><kbd>←</kbd><kbd>→</kbd></dt><dd>Slide precedente e successiva</dd></div>
+    <div><dt><kbd>Spazio</kbd></dt><dd>Avanti</dd></div>
+    <div><dt><kbd>Home</kbd><kbd>Fine</kbd></dt><dd>Prima e ultima slide</dd></div>
+    <div><dt><kbd>G</kbd></dt><dd>Vista d'insieme</dd></div>
+    <div><dt><kbd>N</kbd></dt><dd>Note del relatore</dd></div>
+    <div><dt><kbd>F</kbd></dt><dd>Schermo intero</dd></div>
+    <div><dt><kbd>?</kbd></dt><dd>Questa legenda</dd></div>
+    <div><dt><kbd>Esc</kbd></dt><dd>Chiude i pannelli</dd></div>
+  </dl>
+  <p class="keys-foot">Link diretto: aggiungi <code>#slide-5</code> all'indirizzo.</p>
+</div>
+
+<aside class="notes-panel" id="notes-panel" aria-label="Note del relatore" hidden>
+  <div class="np-head"><p class="np-k">Note del relatore</p><button type="button" class="np-close" id="notes-close" aria-label="Chiudi le note"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></div>
+  <p class="np-pos" id="notes-pos">Slide 01 / 13</p>
+  <h2 class="np-title" id="notes-title">Piano 2027: tre mosse</h2>
+  <div class="np-body" id="notes-body"></div>
+  <p class="np-next" id="notes-next"></p>
+  <p class="np-tip">N chiude le note · le frecce cambiano slide</p>
+</aside>
+
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-labelledby="ov-title" hidden>
+  <div class="ov-head"><h2 id="ov-title">Vista d'insieme</h2><p class="ov-sub">13 slide · clicca una miniatura per saltare · Esc per chiudere</p><button type="button" class="ov-close" id="ov-close">Chiudi</button></div>
+  <div class="ov-grid" id="ov-grid"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<p class="sr" id="live" aria-live="polite"></p>
+<p class="rotate-hint">Ruota il telefono in orizzontale per vedere meglio le slide</p>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.documentElement;
+  var THUMB = root.classList.contains('is-thumb');
+  var deck = document.getElementById('deck');
+  var viewport = document.getElementById('viewport');
+  var slides = Array.prototype.filter.call(deck.children, function(el){ return el.classList.contains('slide'); });
+  var N = slides.length;
+  var cur = 0;
+  var NOTES_W = 380;
+
+  function $(id){ return document.getElementById(id); }
+  var nav = $('nav'), prevBtn = $('btn-prev'), nextBtn = $('btn-next'), countEl = $('nav-count');
+  var gridBtn = $('btn-grid'), notesBtn = $('btn-notes'), fsBtn = $('btn-fs'), keysBtn = $('btn-keys');
+  var progress = $('progress-fill'), live = $('live'), toastEl = $('toast');
+  var notesPanel = $('notes-panel'), notesBody = $('notes-body'), notesPos = $('notes-pos');
+  var notesTitle = $('notes-title'), notesNext = $('notes-next'), notesClose = $('notes-close');
+  var ov = $('overview'), ovGrid = $('ov-grid'), ovClose = $('ov-close');
+  var keys = $('keys');
+
+  var notesOpen = false, ovOpen = false, keysOpen = false, lastFocus = null;
+  var idleT = null, toastT = null;
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function titleOf(i){ return slides[i].getAttribute('data-title') || ('Slide ' + (i + 1)); }
+
+  /* Ingressi scaglionati: indice progressivo per ogni elemento animato */
+  slides.forEach(function(s){
+    Array.prototype.forEach.call(s.querySelectorAll('.anim'), function(el, i){ el.style.setProperty('--i', i); });
+    Array.prototype.forEach.call(s.querySelectorAll('.mb > span'), function(el, i){ el.style.setProperty('--r', i); });
+  });
+
+  /* Scala il canvas 1600x900 per riempire l'area disponibile */
+  function fit(){
+    var w = viewport.clientWidth, h = viewport.clientHeight;
+    var s = Math.min(w / 1600, h / 900);
+    deck.style.transform = 'translate(' + (-800 * s) + 'px,' + (-450 * s) + 'px) scale(' + s + ')';
+  }
+
+  /* Collegamento diretto: #slide-5 (ignora #thumb) */
+  function readHash(){
+    var m = /^#slide-(\d{1,3})$/.exec(location.hash || '');
+    if (!m) return null;
+    var n = parseInt(m[1], 10);
+    return (n >= 1 && n <= N) ? n - 1 : null;
+  }
+  function writeHash(){
+    if (THUMB) return;
+    var h = '#slide-' + (cur + 1);
+    if (location.hash === h) return;
+    try { history.replaceState(null, '', h); }
+    catch (e) { try { location.hash = h; } catch (e2) { /* niente */ } }
+  }
+
+  function show(i){
+    slides.forEach(function(s, k){
+      var on = k === i;
+      s.classList.toggle('active', on);
+      if (on) { s.removeAttribute('aria-hidden'); } else { s.setAttribute('aria-hidden', 'true'); }
+    });
+    cur = i;
+  }
+  function go(i){
+    i = Math.max(0, Math.min(N - 1, i));
+    if (i !== cur) { show(i); }
+    update();
+  }
+  function next(){ go(cur + 1); }
+  function prev(){ go(cur - 1); }
+
+  function update(){
+    countEl.textContent = pad(cur + 1) + ' / ' + pad(N);
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === N - 1;
+    progress.style.transform = 'scaleX(' + ((cur + 1) / N) + ')';
+    live.textContent = 'Slide ' + (cur + 1) + ' di ' + N + ': ' + titleOf(cur);
+    renderNotes();
+    writeHash();
+  }
+
+  /* ---------- Note del relatore ---------- */
+  function renderNotes(){
+    if (!notesOpen) return;
+    var src = slides[cur].querySelector('.notes');
+    notesBody.innerHTML = src ? src.innerHTML : '<p>Nessuna nota per questa slide.</p>';
+    notesPos.textContent = 'Slide ' + pad(cur + 1) + ' / ' + pad(N);
+    notesTitle.textContent = titleOf(cur);
+    notesNext.textContent = cur < N - 1 ? 'Dopo: ' + titleOf(cur + 1) : 'Ultima slide della presentazione';
+  }
+  function applyNotesWidth(){
+    var w = (notesOpen && window.innerWidth >= 1000) ? Math.min(NOTES_W, Math.round(window.innerWidth * 0.4)) : 0;
+    root.style.setProperty('--nw', w + 'px');
+    notesPanel.style.width = w ? w + 'px' : '';
+  }
+  function setNotes(open){
+    notesOpen = open;
+    notesPanel.hidden = !open;
+    notesBtn.setAttribute('aria-pressed', open ? 'true' : 'false');
+    root.classList.toggle('notes-open', open);
+    applyNotesWidth();
+    renderNotes();
+    fit();
+  }
+
+  /* ---------- Vista d'insieme ---------- */
+  function sizeThumbs(){
+    var f = ovGrid.querySelector('.ov-frame');
+    if (f && f.clientWidth) { ovGrid.style.setProperty('--ts', (f.clientWidth / 1600).toFixed(5)); }
+  }
+  function buildOverview(){
+    ovGrid.textContent = '';
+    slides.forEach(function(s, i){
+      var item = document.createElement('div');
+      item.className = 'ov-item' + (i === cur ? ' is-current' : '');
+      var frame = document.createElement('div');
+      frame.className = 'ov-frame';
+      var inner = document.createElement('div');
+      inner.className = 'ov-inner';
+      inner.setAttribute('aria-hidden', 'true');
+      inner.setAttribute('inert', '');
+      var c = s.cloneNode(true);
+      c.classList.remove('active');
+      c.removeAttribute('aria-hidden');
+      Array.prototype.forEach.call(c.querySelectorAll('[id]'), function(el){ el.removeAttribute('id'); });
+      Array.prototype.forEach.call(c.querySelectorAll('.notes'), function(el){ el.parentNode.removeChild(el); });
+      Array.prototype.forEach.call(c.querySelectorAll('a, button'), function(el){ el.setAttribute('tabindex', '-1'); });
+      inner.appendChild(c);
+      frame.appendChild(inner);
+      var hit = document.createElement('button');
+      hit.type = 'button';
+      hit.className = 'ov-hit';
+      hit.setAttribute('aria-label', 'Vai alla slide ' + (i + 1) + ': ' + titleOf(i));
+      if (i === cur) { hit.setAttribute('aria-current', 'true'); }
+      var num = document.createElement('b');
+      num.textContent = pad(i + 1);
+      var cap = document.createElement('span');
+      cap.textContent = titleOf(i);
+      hit.appendChild(num);
+      hit.appendChild(cap);
+      hit.addEventListener('click', function(){ closeOverview(false); go(i); });
+      item.appendChild(frame);
+      item.appendChild(hit);
+      ovGrid.appendChild(item);
+    });
+  }
+  function openOverview(){
+    if (ovOpen || THUMB) return;
+    setKeys(false);
+    lastFocus = document.activeElement;
+    buildOverview();
+    ov.hidden = false;
+    ovOpen = true;
+    gridBtn.setAttribute('aria-pressed', 'true');
+    sizeThumbs();
+    var c = ovGrid.querySelector('.is-current .ov-hit');
+    if (c) {
+      try { c.focus({ preventScroll: true }); } catch (e) { c.focus(); }
+      if (c.parentNode.scrollIntoView) { c.parentNode.scrollIntoView({ block: 'nearest' }); }
+    }
+  }
+  function closeOverview(restore){
+    if (!ovOpen) return;
+    ov.hidden = true;
+    ovOpen = false;
+    gridBtn.setAttribute('aria-pressed', 'false');
+    ovGrid.textContent = '';
+    if (restore !== false && lastFocus && lastFocus.focus && document.body.contains(lastFocus)) {
+      try { lastFocus.focus({ preventScroll: true }); } catch (e) { /* niente */ }
+    }
+    lastFocus = null;
+  }
+  function overviewKey(e){
+    var k = e.key;
+    if (k === 'Escape' || k === 'g' || k === 'G') { closeOverview(); e.preventDefault(); return; }
+    var items = Array.prototype.slice.call(ovGrid.querySelectorAll('.ov-hit'));
+    if (!items.length) return;
+    var idx = items.indexOf(document.activeElement);
+    if (idx < 0) { idx = cur; }
+    var cols = getComputedStyle(ovGrid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+    var nidx;
+    if (k === 'ArrowRight') nidx = idx + 1;
+    else if (k === 'ArrowLeft') nidx = idx - 1;
+    else if (k === 'ArrowDown') nidx = idx + cols;
+    else if (k === 'ArrowUp') nidx = idx - cols;
+    else if (k === 'Home') nidx = 0;
+    else if (k === 'End') nidx = items.length - 1;
+    else return;
+    nidx = Math.max(0, Math.min(items.length - 1, nidx));
+    items[nidx].focus();
+    if (items[nidx].parentNode.scrollIntoView) { items[nidx].parentNode.scrollIntoView({ block: 'nearest' }); }
+    e.preventDefault();
+  }
+
+  /* ---------- Legenda scorciatoie ---------- */
+  function setKeys(open){
+    keysOpen = open;
+    keys.hidden = !open;
+    keysBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { wake(); }
+  }
+
+  /* ---------- Schermo intero ---------- */
+  function fsActive(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function fsFail(){ toast('Schermo intero non disponibile qui: apri la demo in una scheda a parte.'); }
+  function toggleFullscreen(){
+    try {
+      var p;
+      if (fsActive()) {
+        var ex = document.exitFullscreen || document.webkitExitFullscreen;
+        if (ex) { p = ex.call(document); }
+      } else {
+        var req = root.requestFullscreen || root.webkitRequestFullscreen;
+        if (!req) { fsFail(); return; }
+        p = req.call(root);
+      }
+      if (p && typeof p.catch === 'function') { p.catch(fsFail); }
+    } catch (e) { fsFail(); }
+  }
+  function onFsChange(){
+    fsBtn.setAttribute('aria-pressed', fsActive() ? 'true' : 'false');
+    fit();
+  }
+  document.addEventListener('fullscreenchange', onFsChange);
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+
+  /* ---------- Avvisi e barra che si nasconde quando il mouse è fermo ---------- */
+  function toast(msg){
+    if (THUMB) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toastEl.classList.remove('on'); }, 3000);
+  }
+  function wake(){
+    if (THUMB) return;
+    root.classList.remove('nav-idle');
+    clearTimeout(idleT);
+    idleT = setTimeout(function(){
+      if (keysOpen || nav.matches(':hover') || nav.contains(document.activeElement)) { wake(); return; }
+      root.classList.add('nav-idle');
+    }, 3200);
+  }
+
+  /* ---------- Tastiera ---------- */
+  function isTyping(t){
+    if (!t || !t.tagName) return false;
+    var tag = t.tagName;
+    return tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA' || t.isContentEditable;
+  }
+  document.addEventListener('keydown', function(e){
+    if (THUMB) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (isTyping(t)) return;
+    /* i controlli dentro le slide non fanno scattare la navigazione */
+    if (t && t.tagName === 'BUTTON' && t.closest && t.closest('.slide')) return;
+    if (ovOpen) { overviewKey(e); return; }
+    var k = e.key;
+    var activatable = t && (t.tagName === 'BUTTON' || t.tagName === 'A' || t.tagName === 'SUMMARY');
+    switch (k) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown':
+        next(); e.preventDefault(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        prev(); e.preventDefault(); break;
+      case ' ': case 'Spacebar':
+        if (activatable) return;
+        if (e.shiftKey) { prev(); } else { next(); }
+        e.preventDefault(); break;
+      case 'Home': go(0); e.preventDefault(); break;
+      case 'End': go(N - 1); e.preventDefault(); break;
+      case 'g': case 'G': openOverview(); e.preventDefault(); break;
+      case 'n': case 'N': setNotes(!notesOpen); e.preventDefault(); break;
+      case 'f': case 'F': toggleFullscreen(); e.preventDefault(); break;
+      case '?': setKeys(!keysOpen); e.preventDefault(); break;
+      case 'Escape':
+        if (keysOpen) { setKeys(false); } else if (notesOpen) { setNotes(false); }
+        break;
+    }
+  });
+
+  /* ---------- Pulsanti ---------- */
+  function onBtn(el, fn){
+    el.addEventListener('click', function(e){ fn(); if (e.detail > 0) { el.blur(); } });
+  }
+  onBtn(prevBtn, prev);
+  onBtn(nextBtn, next);
+  onBtn(gridBtn, function(){ if (ovOpen) { closeOverview(); } else { openOverview(); } });
+  onBtn(notesBtn, function(){ setNotes(!notesOpen); });
+  onBtn(fsBtn, toggleFullscreen);
+  onBtn(keysBtn, function(){ setKeys(!keysOpen); });
+  notesClose.addEventListener('click', function(){ setNotes(false); });
+  ovClose.addEventListener('click', function(){ closeOverview(); });
+  ov.addEventListener('click', function(e){ if (e.target === ov || e.target === ovGrid) { closeOverview(); } });
+  document.addEventListener('click', function(e){
+    if (keysOpen && !keys.contains(e.target) && !keysBtn.contains(e.target)) { setKeys(false); }
+  });
+
+  /* Vista tabella della slide 4 */
+  var tabBtn = $('btn-tab-canali'), chBox = $('ch-canali');
+  if (tabBtn && chBox) {
+    tabBtn.addEventListener('click', function(e){
+      var on = !chBox.classList.contains('is-table');
+      chBox.classList.toggle('is-table', on);
+      tabBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      tabBtn.querySelector('span').textContent = on ? 'Vista grafico' : 'Vista tabella';
+      if (e.detail > 0) { tabBtn.blur(); }
+    });
+  }
+
+  /* ---------- Swipe ---------- */
+  var tx = 0, ty = 0, tracking = false;
+  viewport.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) { tracking = false; return; }
+    tracking = true; tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, { passive: true });
+  viewport.addEventListener('touchend', function(e){
+    if (!tracking || THUMB) return;
+    tracking = false;
+    var p = e.changedTouches[0];
+    var dx = p.clientX - tx, dy = p.clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { if (dx < 0) { next(); } else { prev(); } }
+  }, { passive: true });
+
+  /* ---------- Eventi di finestra ---------- */
+  window.addEventListener('resize', function(){ applyNotesWidth(); fit(); if (ovOpen) { sizeThumbs(); } });
+  window.addEventListener('hashchange', function(){
+    var n = readHash();
+    if (n !== null && n !== cur) { closeOverview(false); go(n); }
+  });
+  if (!THUMB) {
+    document.addEventListener('mousemove', wake, { passive: true });
+    document.addEventListener('touchstart', wake, { passive: true });
+    nav.addEventListener('focusin', wake);
+  }
+
+  /* ---------- Avvio ---------- */
+  var h = THUMB ? null : readHash();
+  show(h === null ? 0 : h);
+  fit();
+  update();
+  wake();
+})();
+</script>
+</body>
+</html>

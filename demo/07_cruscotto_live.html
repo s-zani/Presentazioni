@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cruscotto Acquisti Live</title>
+<script>
+(function(){var h=document.documentElement;
+  if(location.hash==='#thumb'){h.classList.add('is-thumb');}
+  try{if(window.self!==window.top){h.classList.add('is-embedded');}}catch(e){h.classList.add('is-embedded');}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ============================================================
+   TOKEN
+   ============================================================ */
+:root{
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  /* brand Selvana */
+  --selva:#1D3B2F;
+  --selva-2:#2A5242;
+  --ciliegia:#C8402A;
+  --crema:#E2B15B;
+  --crema-2:#ECC373;
+  --on-dark:#F1F4EE;
+  --on-dark-2:rgba(241,244,238,.72);
+  --good:#0E8A3E;
+  --bad:#C0362C;
+
+  /* tema scuro "sala di controllo" */
+  --bg:#0F1512;
+  --surface:#161E1A;
+  --surface-2:#1B2520;
+  --surface-3:#22302A;
+  --line:rgba(241,244,238,.09);
+  --line-2:rgba(241,244,238,.17);
+  --muted:#8D978F;
+  --ink-on-crema:#15201A;
+  --grid-dot:rgba(241,244,238,.055);
+  --glow:rgba(42,82,66,.45);
+  --mask:#000;
+
+  /* segnali di stato */
+  --signal:#4CC38A;
+  --signal-soft:rgba(76,195,138,.13);
+  --signal-ring:rgba(76,195,138,.45);
+  --signal-off:rgba(76,195,138,0);
+  --amber:var(--crema);
+  --amber-soft:rgba(226,177,91,.10);
+  --amber-line:rgba(226,177,91,.42);
+  --alert:#F08A6C;
+  --alert-soft:rgba(240,138,108,.09);
+  --alert-line:rgba(240,138,108,.42);
+  --flash:rgba(226,177,91,.24);
+  --focus:var(--crema);
+
+  /* palette grafici su fondo scuro (ordine fisso) */
+  --c1:#2E9E6C;
+  --c2:#E0603F;
+  --c3:#4F86D9;
+  --c4:#BA8618;
+  --c5:#A06AB8;
+
+  --radius:10px;
+  --gutter:clamp(16px,3vw,40px);
+}
+
+/* ============================================================
+   CROMATURA DEMO (identica in tutte le demo)
+   ============================================================ */
+.dc-back,.dc-hint{position:fixed;z-index:9000;font:500 13px/1.4 "Hanken Grotesk",system-ui,sans-serif;}
+.dc-back{top:14px;left:14px;padding:7px 12px;border-radius:999px;background:rgba(21,32,26,.82);color:#F1F4EE;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dc-back:hover{background:rgba(21,32,26,.95)}
+.dc-back:focus-visible,.dc-hint summary:focus-visible{outline:2px solid #E2B15B;outline-offset:2px}
+.dc-hint{left:14px;bottom:14px;max-width:320px;background:rgba(21,32,26,.88);color:#F1F4EE;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.dc-hint summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:600;letter-spacing:.02em}
+.dc-hint summary::-webkit-details-marker{display:none}
+.dc-hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:#E2B15B;color:#15201A;font-size:11px;font-weight:800}
+.dc-hint ul{margin:0;padding:0 16px 12px 30px}
+.dc-hint li{margin:4px 0;color:rgba(241,244,238,.86)}
+html.is-embedded .dc-back,html.is-thumb .dc-back,html.is-thumb .dc-hint{display:none}
+@media print{.dc-back,.dc-hint{display:none}}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;min-height:100vh;
+  background:var(--bg);color:var(--on-dark);
+  font:400 15px/1.5 var(--font-body);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;overflow-x:clip;
+}
+.page{position:relative;isolation:isolate}
+.page::before{
+  content:"";position:absolute;z-index:-1;inset:0 0 auto 0;height:620px;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 90% at 12% -20%, var(--glow), transparent 70%),
+    radial-gradient(var(--grid-dot) 1px, transparent 1.4px) 0 0 / 22px 22px;
+  -webkit-mask-image:linear-gradient(to bottom, var(--mask) 30%, transparent);
+          mask-image:linear-gradient(to bottom, var(--mask) 30%, transparent);
+}
+.wrap{max-width:1560px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+a{color:var(--crema)}
+.mono{font-family:var(--font-mono)}
+.eyebrow{margin:0;font:500 11.5px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--crema);font-weight:600}
+.kpi-label{display:block;margin:0 0 6px;font:500 11px/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+.topbar{border-bottom:1px solid var(--line);position:relative;z-index:1}
+.topbar-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;padding-top:14px;padding-bottom:14px}
+html:not(.is-embedded):not(.is-thumb) .topbar-in{padding-left:max(var(--gutter), calc(128px - max(0px, (100vw - 1560px) / 2)))}
+.lockup{display:flex;align-items:center;gap:14px;min-width:0}
+.brand{display:inline-flex;align-items:center;gap:.45em}
+.bean{width:1.25em;height:1.25em;color:var(--crema)}
+.brand-word{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:-.01em}
+.topbar .brand{font-size:24px;line-height:1;--bean-cut:var(--bg)}
+.lockup-sep{width:1px;height:30px;background:var(--line-2)}
+.lockup-text{display:flex;flex-direction:column;gap:3px}
+.lockup-eyebrow{font:500 10px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lockup-title{font:600 15px/1.1 var(--font-body)}
+.top-right{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.clock{display:flex;align-items:baseline;gap:10px;font-family:var(--font-mono)}
+.clock-date{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.clock-time{font-size:17px;font-weight:500;color:var(--on-dark);letter-spacing:.02em}
+
+/* stato connessione (header) */
+.conn{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-size:13px;font-weight:500;color:var(--on-dark-2);white-space:nowrap}
+.conn .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.conn[data-state="loading"] .dot{animation:blink 1s ease-in-out infinite}
+.conn[data-state="live"]{color:var(--on-dark);border-color:var(--signal-ring)}
+.conn[data-state="live"] .dot{background:var(--signal);animation:pulse 1.8s ease-out infinite}
+.conn[data-state="sample"],.conn[data-state="stale"]{color:var(--amber);border-color:var(--amber-line);background:var(--amber-soft)}
+.conn[data-state="sample"] .dot,.conn[data-state="stale"] .dot{background:var(--amber)}
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+.intro{display:grid;grid-template-columns:minmax(0,1fr);gap:14px 48px;align-items:end;padding-top:clamp(22px,3vw,36px);padding-bottom:clamp(20px,2.4vw,30px);position:relative;z-index:1}
+.intro h1{margin:10px 0 0;font:700 clamp(30px,3.3vw,50px)/1.08 var(--font-display);letter-spacing:-.012em;max-width:22ch;text-wrap:balance}
+.intro h1 em{font-style:italic;color:var(--crema)}
+.lead{margin:0;max-width:52ch;font-size:16.5px;line-height:1.55;color:var(--on-dark-2)}
+@media (min-width:1080px){.intro{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+
+/* ============================================================
+   GRIGLIA E PANNELLI
+   ============================================================ */
+.dash{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;position:relative;z-index:1}
+@media (min-width:1080px){.dash{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
+.panel{min-width:0;display:flex;flex-direction:column;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(16px,1.7vw,26px)}
+.panel-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 16px}
+.panel-head h2{margin:6px 0 0;font:700 20px/1.25 var(--font-body);letter-spacing:-.005em;max-width:30ch}
+.head-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+
+/* badge LIVE */
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 11px 6px 10px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--on-dark-2);font:600 11.5px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.badge[data-state="loading"] .dot{animation:blink 1s ease-in-out infinite}
+.badge[data-state="live"]{color:var(--signal);border-color:var(--signal-ring);background:var(--signal-soft)}
+.badge[data-state="live"] .dot{background:var(--signal);animation:pulse 1.6s ease-out infinite}
+.badge[data-state="sample"],.badge[data-state="stale"]{color:var(--amber);border-color:var(--amber-line);background:var(--amber-soft)}
+.badge[data-state="sample"] .dot,.badge[data-state="stale"] .dot{background:var(--amber)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--signal-ring)}70%{box-shadow:0 0 0 8px var(--signal-off)}100%{box-shadow:0 0 0 0 var(--signal-off)}}
+@keyframes blink{50%{opacity:.25}}
+
+/* etichette */
+.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px dashed var(--line-2);font:500 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-2);white-space:nowrap}
+.tag-sim{border-color:var(--amber-line);color:var(--amber)}
+.tag-mine{border-style:solid;border-color:var(--signal-ring);color:var(--signal)}
+
+/* pulsanti */
+.btn{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:9px 15px;border-radius:8px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--on-dark);font:600 14px/1 var(--font-body);cursor:pointer;transition:background-color .15s,border-color .15s;white-space:nowrap}
+.btn:hover{background:var(--surface-3)}
+.btn-primary{background:var(--crema);border-color:var(--crema);color:var(--ink-on-crema)}
+.btn-primary:hover{background:var(--crema-2);border-color:var(--crema-2)}
+.btn:disabled{cursor:progress;opacity:.75}
+.btn svg{width:16px;height:16px;flex:none}
+.btn.is-busy svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-link{appearance:none;-webkit-appearance:none;background:none;border:0;padding:4px 2px;color:var(--crema);font:600 13px/1.2 var(--font-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.btn:focus-visible,.btn-link:focus-visible,select:focus-visible,input[type="range"]:focus-visible,.csv-form input:focus-visible,details.raw summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* ============================================================
+   A · CAMBI
+   ============================================================ */
+.rates{width:100%;border-collapse:collapse}
+.rates th{padding:0 10px 10px;border-bottom:1px solid var(--line-2);text-align:left;font:500 11px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rates td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.rates th:first-child,.rates td:first-child{padding-left:0}
+.rates th:last-child,.rates td:last-child{padding-right:0;text-align:right}
+.cur{display:flex;align-items:center;gap:10px}
+.iso{display:inline-block;min-width:44px;text-align:center;padding:5px 6px;border-radius:4px;border:1px solid var(--line-2);background:var(--surface-3);font:600 12px/1 var(--font-mono);letter-spacing:.06em;color:var(--on-dark)}
+.is-usd .iso{background:var(--crema);border-color:var(--crema);color:var(--ink-on-crema)}
+.cur-name{font-size:13px;color:var(--on-dark-2)}
+.orig strong{display:block;font-size:14.5px;font-weight:600}
+.orig span{display:block;font-size:12.5px;color:var(--muted)}
+.rate{display:inline-block;padding:4px 6px;margin-right:-6px;border-radius:4px;font:600 17px/1.1 var(--font-body);font-variant-numeric:tabular-nums;white-space:nowrap;transition:opacity .3s}
+.rates[data-loading="true"] .rate{opacity:.5}
+.rate.flash{animation:flash 1.5s ease-out}
+@keyframes flash{0%{background:var(--flash)}100%{background:transparent}}
+.rates-foot{display:flex;flex-direction:column;gap:14px;margin-top:auto}
+.meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0}
+.meta div{display:flex;flex-direction:column;gap:3px}
+.meta dt{font:500 10.5px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:0;font-size:14.5px;font-weight:600}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.switch{position:relative;display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:500;user-select:none}
+.switch input{position:absolute;opacity:0;width:36px;height:22px;margin:0;cursor:pointer}
+.track{position:relative;flex:none;width:36px;height:22px;border-radius:999px;background:var(--surface-3);border:1px solid var(--line-2);transition:background-color .2s,border-color .2s}
+.track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--on-dark-2);transition:transform .2s,background-color .2s}
+.switch input:checked + .track{background:var(--selva-2);border-color:var(--signal-ring)}
+.switch input:checked + .track::after{transform:translateX(14px);background:var(--signal)}
+.switch input:focus-visible + .track{outline:2px solid var(--focus);outline-offset:2px}
+.next{font:500 12px/1.2 var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.notice{margin:0;display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--amber-line);background:var(--amber-soft);color:var(--amber);font-size:14px;font-weight:500;line-height:1.45}
+.notice::before{content:"!";flex:none;display:inline-grid;place-items:center;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--amber);color:var(--ink-on-crema);font:800 11px/1 var(--font-body)}
+@media (max-width:560px){
+  .cur{flex-direction:column;align-items:flex-start;gap:4px}
+  .cur-name{font-size:11.5px}
+  .rates td{padding:9px 6px}
+  .rate{font-size:15.5px}
+}
+
+/* ============================================================
+   B · COSTO ARABICA
+   ============================================================ */
+.inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);min-width:0}
+.field > label{font-size:14px;font-weight:600}
+.field > label span{display:block;margin-top:2px;font:500 10.5px/1.3 var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.input-wrap{display:flex;align-items:center;border:1px solid var(--line-2);border-radius:8px;background:var(--bg)}
+.input-wrap:focus-within{outline:2px solid var(--focus);outline-offset:1px}
+.input-wrap input{flex:1;min-width:0;width:100%;border:0;background:transparent;color:var(--on-dark);padding:10px 12px;font:700 22px/1.1 var(--font-body);outline:none}
+.input-wrap .unit{padding:0 12px;font:500 12px/1 var(--font-mono);color:var(--muted);white-space:nowrap}
+.field.is-invalid .input-wrap{border-color:var(--alert-line)}
+.field-err{margin:0;font-size:13px;color:var(--alert)}
+.chips{display:flex;gap:8px}
+.chip{appearance:none;-webkit-appearance:none;flex:1;min-height:34px;border:1px solid var(--line-2);border-radius:6px;background:transparent;color:var(--on-dark-2);font:600 13px/1 var(--font-body);cursor:pointer}
+.chip:hover{background:var(--surface-3);color:var(--on-dark)}
+.chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:34px;margin:0;background:transparent;cursor:pointer}
+input[type="range"]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--crema) 0 var(--p,46%),var(--line-2) var(--p,46%) 100%)}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:var(--on-dark);border:4px solid var(--crema)}
+input[type="range"]::-moz-range-track{height:4px;border-radius:2px;background:var(--line-2)}
+input[type="range"]::-moz-range-progress{height:4px;border-radius:2px;background:var(--crema)}
+input[type="range"]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--on-dark);border:4px solid var(--crema)}
+.range-scale{display:flex;justify-content:space-between;margin-top:-6px;font:500 11px/1 var(--font-mono);color:var(--muted)}
+.result{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px 24px;align-items:end;transition:opacity .2s}
+.result.is-invalid{opacity:.4}
+.big{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font:700 clamp(54px,5.4vw,80px)/.95 var(--font-body);letter-spacing:-.025em;border-radius:6px}
+.big .u{font-size:.3em;font-weight:600;letter-spacing:0;color:var(--on-dark-2)}
+.big.flash,.mid.flash{animation:flash 1.5s ease-out}
+.mid{font:700 clamp(28px,2.5vw,36px)/1 var(--font-body);letter-spacing:-.015em;border-radius:6px}
+.sub{display:block;margin-top:6px;font-size:13px;color:var(--on-dark-2)}
+.formula{padding:12px 14px;border:1px dashed var(--line-2);border-radius:8px;font:500 13.5px/1.75 var(--font-mono);color:var(--on-dark-2)}
+.formula p{margin:0}
+.formula .f-title{margin-bottom:4px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.formula strong{color:var(--on-dark);font-weight:600}
+.formula .f-live{color:var(--crema);font-weight:600}
+.formula .f-note{margin-top:6px;font:400 13px/1.45 var(--font-body);color:var(--muted)}
+.nb{white-space:nowrap}
+.insights{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.insights li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--on-dark-2)}
+.insights li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--crema)}
+.insights b{color:var(--on-dark);font-weight:600}
+@media (max-width:560px){.result{grid-template-columns:minmax(0,1fr)}}
+
+/* ============================================================
+   C · ORDINI SIMULATI
+   ============================================================ */
+.counters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--line)}
+.counter{min-width:0;padding:12px 14px;background:var(--surface-2)}
+.counter-val{display:block;font:700 clamp(19px,5.2vw,30px)/1.05 var(--font-body);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.counter-val.bump{animation:bump .7s ease-out}
+@keyframes bump{0%{color:var(--crema)}100%{color:var(--on-dark)}}
+.sub-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin-bottom:8px}
+.sub-head .kpi-label{margin:0}
+.chart-box{position:relative;width:100%;height:170px}
+.chart-box canvas{display:block}
+.stream-state{font:500 11.5px/1 var(--font-mono);color:var(--muted)}
+.orders{list-style:none;margin:0;padding:0;max-height:312px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent;-webkit-mask-image:linear-gradient(to bottom,var(--mask) 80%,transparent);mask-image:linear-gradient(to bottom,var(--mask) 80%,transparent)}
+.order{display:grid;grid-template-columns:66px minmax(0,1fr) auto;align-items:center;gap:2px 12px;padding:9px 4px 9px 0;border-bottom:1px solid var(--line)}
+.order.is-new{animation:orderIn .6s ease-out}
+@keyframes orderIn{0%{opacity:0;transform:translateY(-8px);background:var(--flash)}55%{opacity:1;transform:none}100%{background:transparent}}
+.o-time{font:500 12px/1 var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.o-who{min-width:0}
+.o-who strong{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.o-who span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.o-num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.o-num strong{display:block;font-size:14px;font-weight:600}
+.o-num span{display:block;font-size:12.5px;color:var(--muted)}
+.paused-note{color:var(--amber)}
+@media (max-width:420px){.order{grid-template-columns:54px minmax(0,1fr) auto;gap:2px 8px}.counter{padding:10px 8px}}
+
+/* tabelle dati (vista tabella, CSV) */
+.data{width:100%;border-collapse:collapse;font-size:14px}
+.data th{position:sticky;top:0;z-index:1;padding:9px 12px;background:var(--surface-2);border-bottom:1px solid var(--line-2);text-align:left;font:500 11px/1.25 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.data td{padding:8px 12px;border-bottom:1px solid var(--line)}
+.data tr:last-child td{border-bottom:0}
+.data .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.table-scroll{max-height:280px;overflow:auto;border:1px solid var(--line);border-radius:8px;scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+.hour-table{max-height:170px}
+
+/* barre CSS di riserva (se Chart.js non si carica) */
+.cssbars{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.cssbars li{display:grid;grid-template-columns:minmax(64px,30%) minmax(0,1fr) auto;align-items:center;gap:10px;font-size:13px}
+.cb-l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--on-dark-2)}
+.cb-t{height:12px;border-radius:0 4px 4px 0;background:var(--line)}
+.cb-b{display:block;height:100%;border-radius:0 4px 4px 0;background:var(--c1)}
+.cb-v{font-variant-numeric:tabular-nums;font-weight:600}
+
+/* ============================================================
+   D · FOGLIO GOOGLE
+   ============================================================ */
+.steps{margin:0;padding-left:20px;font-size:14px;color:var(--on-dark-2)}
+.steps li{margin:3px 0;padding-left:2px}
+.steps b{color:var(--on-dark);font-weight:600}
+.small-note{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+.csv-form{display:flex;flex-wrap:wrap;gap:10px}
+.csv-form input{flex:1 1 260px;min-width:0;min-height:40px;padding:9px 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--bg);color:var(--on-dark);font:500 14px/1.2 var(--font-body)}
+.csv-form input::placeholder{color:var(--muted)}
+.msg{display:flex;align-items:flex-start;gap:10px;margin:0;padding:11px 13px;border-radius:8px;border:1px solid var(--line-2);background:var(--surface-2);font-size:14px;line-height:1.5;color:var(--on-dark)}
+.msg::before{content:"i";flex:none;display:inline-grid;place-items:center;width:18px;height:18px;margin-top:2px;border-radius:50%;background:var(--on-dark-2);color:var(--surface);font:800 11px/1 var(--font-body)}
+.msg[data-kind="ok"]{border-color:var(--signal-ring);background:var(--signal-soft)}
+.msg[data-kind="ok"]::before{content:"✓";background:var(--signal)}
+.msg[data-kind="error"]{border-color:var(--alert-line);background:var(--alert-soft)}
+.msg[data-kind="error"]::before{content:"!";background:var(--alert)}
+.msg-body{min-width:0;overflow-wrap:anywhere}
+.msg-body p{margin:0}
+.msg-body p + p{margin-top:6px}
+.msg code,.raw pre{font-family:var(--font-mono)}
+.msg code{font-size:13px;padding:2px 6px;border-radius:4px;border:1px solid var(--line-2);background:var(--bg);color:var(--crema)}
+.csv-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.csv-info{font:500 12px/1.4 var(--font-mono);color:var(--muted)}
+.col-pick{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--on-dark-2)}
+.col-pick select{max-width:240px;min-height:34px;padding:6px 10px;border-radius:6px;border:1px solid var(--line-2);background:var(--surface-2);color:var(--on-dark);font:500 13px/1.2 var(--font-body)}
+.empty-chart{display:grid;place-items:center;height:100%;min-height:120px;border:1px dashed var(--line-2);border-radius:8px;color:var(--muted);font-size:14px;text-align:center;padding:16px}
+details.raw{border-top:1px solid var(--line);padding-top:12px}
+details.raw summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--on-dark-2)}
+details.raw pre{margin:10px 0 0;max-height:180px;overflow:auto;padding:12px;border-radius:8px;background:var(--bg);border:1px solid var(--line);font-size:12.5px;line-height:1.6;color:var(--on-dark-2);white-space:pre}
+
+/* ============================================================
+   E · PERCHÉ CONTA
+   ============================================================ */
+.panel-why{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr);gap:22px 48px;align-items:center;background:var(--selva);border-color:var(--selva-2)}
+.panel-why .eyebrow{color:var(--on-dark-2)}
+.why-title{margin:10px 0 14px;font:600 clamp(28px,2.6vw,40px)/1.12 var(--font-display);letter-spacing:-.01em;max-width:24ch;text-wrap:balance}
+.why-text{margin:0;max-width:60ch;font-size:16px;line-height:1.6;color:var(--on-dark-2)}
+.compare{width:100%;border-collapse:collapse;font-size:14px}
+.compare th,.compare td{padding:11px 12px;border-bottom:1px solid var(--line-2);text-align:left;vertical-align:top}
+.compare thead th{font:500 11px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-2)}
+.compare tbody th{font-weight:600;white-space:nowrap}
+.compare td{color:var(--on-dark-2)}
+.compare td:last-child{color:var(--on-dark);font-weight:600}
+.compare tr:last-child th,.compare tr:last-child td{border-bottom:0}
+.compare th:first-child{padding-left:0}
+@media (min-width:960px){.panel-why{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+@media (max-width:480px){.compare th,.compare td{padding:9px 6px}.compare tbody th{white-space:normal}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;padding-top:26px;padding-bottom:28px;font:500 12px/1.5 var(--font-mono);color:var(--muted);letter-spacing:.02em}
+.foot p{margin:0}
+html:not(.is-thumb) .foot{padding-bottom:84px}
+
+/* ============================================================
+   RESPONSIVE: telefono
+   ============================================================ */
+@media (max-width:639px){
+  html:not(.is-embedded):not(.is-thumb) .topbar-in{padding-left:var(--gutter);padding-top:58px}
+  .topbar .brand{font-size:21px}
+  .clock-date{display:none}
+  .panel-head h2{font-size:18.5px}
+  .lead{font-size:15.5px}
+}
+
+/* ============================================================
+   MOVIMENTO: anteprima e riduzione movimento
+   ============================================================ */
+html.is-thumb *,html.is-thumb *::before,html.is-thumb *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ============================================================
+   STAMPA (Cmd+P): versione chiara
+   ============================================================ */
+@media print{
+  :root{
+    --bg:#FFFFFF;--surface:#FFFFFF;--surface-2:#F3F5F0;--surface-3:#DDE3DC;
+    --on-dark:#15201A;--on-dark-2:#4A5650;--muted:#7D8882;
+    --line:#DDE3DC;--line-2:#C9D1C8;--selva:#F3F5F0;--selva-2:#DDE3DC;
+    --crema:#8A6420;--signal:#0E8A3E;--amber:#8A6420;--grid-dot:transparent;--glow:transparent;
+  }
+  .panel{break-inside:avoid}
+  .controls,.csv-form,.chips,input[type="range"],.range-scale,details.raw{display:none}
+  .orders{max-height:none;-webkit-mask-image:none;mask-image:none}
+}
+</style>
+</head>
+<body>
+<a class="dc-back" href="../index.html">← Galleria</a>
+<details class="dc-hint">
+  <summary>Cosa provare</summary>
+  <ul>
+    <li>Nel riquadro A premi «Aggiorna ora» e guarda l'orario dell'ultima lettura.</li>
+    <li>Nel riquadro B cambia il prezzo dell'arabica: il costo al chilo si ricalcola subito.</li>
+    <li>Nel riquadro D incolla l'URL CSV di un tuo foglio Google e premi «Carica».</li>
+  </ul>
+</details>
+
+<div class="page">
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="lockup">
+      <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <span class="lockup-sep" aria-hidden="true"></span>
+      <span class="lockup-text">
+        <span class="lockup-eyebrow">Caffè · dal 1961</span>
+        <span class="lockup-title">Cruscotto acquisti</span>
+      </span>
+    </div>
+    <div class="top-right">
+      <div class="clock" aria-label="Data e ora attuali">
+        <span class="clock-date" id="clockDate">&nbsp;</span>
+        <span class="clock-time" id="clockTime">&nbsp;</span>
+      </div>
+      <div class="conn" id="conn" data-state="loading" role="status" aria-live="polite">
+        <span class="dot" aria-hidden="true"></span><span id="connText">Collegamento in corso…</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap intro" aria-labelledby="pageTitle">
+  <div>
+    <p class="eyebrow">Sala di controllo · Ufficio acquisti</p>
+    <h1 id="pageTitle">Questa pagina legge i dati <em>ogni volta</em> che la apri.</h1>
+  </div>
+  <p class="lead">Cambi delle valute dei nostri paesi d'origine, costo dell'arabica, ordini dei locali e il vostro foglio Google. Numeri presi adesso, alla fonte.</p>
+</section>
+
+<main class="wrap dash">
+
+  <!-- ===================== A · CAMBI ===================== -->
+  <section class="panel" id="panelA" aria-labelledby="hA">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow"><b>A</b> · Cambi in tempo reale</p>
+        <h2 id="hA">Quanto vale un euro nei paesi da cui compriamo</h2>
+      </div>
+      <span class="badge" id="ratesBadge" data-state="loading"><span class="dot" aria-hidden="true"></span><span id="ratesBadgeText">Collegamento</span></span>
+    </div>
+
+    <table class="rates" id="ratesTable" data-loading="true">
+      <caption class="sr-only">Cambio dell'euro nelle valute dei paesi d'origine del caffè Selvana</caption>
+      <thead>
+        <tr><th scope="col">Valuta</th><th scope="col">Origine del caffè</th><th scope="col">1 EUR =</th></tr>
+      </thead>
+      <tbody id="ratesBody"></tbody>
+    </table>
+
+    <div class="rates-foot">
+      <p class="notice" id="ratesNotice" role="status" aria-live="polite" hidden></p>
+      <dl class="meta">
+        <div><dt>Ultima lettura</dt><dd id="ratesReadAt">in corso…</dd></div>
+        <div><dt>Data del dato</dt><dd id="ratesSourceDate">in attesa della fonte</dd></div>
+      </dl>
+      <div class="controls">
+        <button type="button" class="btn btn-primary" id="btnRefresh">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Aggiorna ora
+        </button>
+        <label class="switch" for="autoRefresh">
+          <input type="checkbox" id="autoRefresh" role="switch" checked>
+          <span class="track" aria-hidden="true"></span>
+          <span>Aggiornamento automatico ogni 60 s</span>
+        </label>
+        <span class="next" id="nextRefresh" aria-hidden="true">prossima lettura tra 60 s</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== B · COSTO ARABICA ===================== -->
+  <section class="panel" id="panelB" aria-labelledby="hB">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow"><b>B</b> · Costo della materia prima</p>
+        <h2 id="hB">Quanto ci costa oggi un chilo di arabica</h2>
+      </div>
+      <span class="tag">si ricalcola da solo</span>
+    </div>
+
+    <div class="inputs">
+      <div class="field" id="fieldPrice">
+        <label for="arabicaPrice">Prezzo arabica <span>Dollari per libbra</span></label>
+        <div class="input-wrap">
+          <input id="arabicaPrice" type="text" inputmode="decimal" value="3,85" autocomplete="off" spellcheck="false" aria-describedby="priceErr">
+          <span class="unit">USD/lb</span>
+        </div>
+        <input type="range" id="arabicaRange" min="2" max="6" step="0.05" value="3.85" aria-label="Prezzo arabica in dollari per libbra">
+        <div class="range-scale" aria-hidden="true"><span>2,00</span><span>4,00</span><span>6,00</span></div>
+        <p class="field-err" id="priceErr" hidden>Scrivi un numero, per esempio 3,85.</p>
+      </div>
+      <div class="field" id="fieldTons">
+        <label for="q4Tons">Fabbisogno Q4 <span>Tonnellate di arabica verde</span></label>
+        <div class="input-wrap">
+          <input id="q4Tons" type="text" inputmode="decimal" value="1.050" autocomplete="off" spellcheck="false" aria-describedby="tonsErr">
+          <span class="unit">t</span>
+        </div>
+        <div class="chips">
+          <button type="button" class="chip" id="tonsMinus" aria-label="Togli 50 tonnellate">−50 t</button>
+          <button type="button" class="chip" id="tonsPlus" aria-label="Aggiungi 50 tonnellate">+50 t</button>
+        </div>
+        <p class="field-err" id="tonsErr" hidden>Scrivi le tonnellate, per esempio 1.050.</p>
+      </div>
+    </div>
+
+    <div class="result" id="calcResult" aria-live="polite">
+      <div>
+        <span class="kpi-label">Arabica verde, al cambio di oggi</span>
+        <div class="big" id="bigBox"><span id="eurKg">7,54</span><span class="u">€ al kg</span></div>
+      </div>
+      <div>
+        <span class="kpi-label">Costo del fabbisogno Q4</span>
+        <div class="mid" id="totalCost">7,92 M€</div>
+        <span class="sub" id="totalSub">per 1.050 t di arabica verde</span>
+      </div>
+    </div>
+
+    <div class="formula" aria-label="Formula del calcolo con i valori attuali">
+      <p class="f-title">La formula, con i numeri di adesso</p>
+      <p><span class="nb"><span id="fPrice">3,85</span> USD/lb</span> × <span class="nb">2,20462 lb/kg</span> ÷ <span class="nb"><span id="fRate" class="f-live">1,1252</span> USD per €</span> = <strong class="nb" id="fEurKg">7,54 €/kg</strong></p>
+      <p><span class="nb"><span id="fEurKg2">7,54</span> €/kg</span> × <span class="nb"><span id="fKg">1.050.000</span> kg</span> ≈ <strong class="nb" id="fTotal">7,92 M€</strong></p>
+      <p class="f-note" id="fRateNote">Il cambio arriva dal riquadro A.</p>
+    </div>
+
+    <ul class="insights">
+      <li id="sensLine">Ogni 10 centesimi in più per libbra pesano circa <b id="sensVal">206.000 €</b> sul fabbisogno Q4.</li>
+      <li>L'arabica è rincarata del 38% in 18 mesi: per questo l'EBITDA di gennaio–settembre è al 10,9% contro l'11,6% del budget.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== C · ORDINI ===================== -->
+  <section class="panel" id="panelC" aria-labelledby="hC">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow"><b>C</b> · Ordini Ho.Re.Ca. di oggi</p>
+        <h2 id="hC">I locali ordinano mentre guardi</h2>
+      </div>
+      <div class="head-actions">
+        <span class="tag tag-sim">flusso simulato</span>
+        <button type="button" class="btn" id="btnPause" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true" id="pauseIcon"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>
+          <span id="pauseLabel">Pausa</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="counters" aria-live="off">
+      <div class="counter"><span class="kpi-label">Ordini oggi</span><span class="counter-val" id="cntOrders">0</span></div>
+      <div class="counter"><span class="kpi-label">Kg ordinati</span><span class="counter-val" id="cntKg">0</span></div>
+      <div class="counter"><span class="kpi-label">Valore</span><span class="counter-val" id="cntEur">0 €</span></div>
+    </div>
+
+    <div>
+      <div class="sub-head">
+        <span class="kpi-label">Ordini per ora</span>
+        <button type="button" class="btn-link" id="btnTableC" aria-pressed="false" aria-controls="hourTableWrap">Vista tabella</button>
+      </div>
+      <div class="chart-box" id="hourChartBox"><canvas id="hourChart" role="img" aria-label="Grafico a barre degli ordini per ora"></canvas></div>
+      <div class="table-scroll hour-table" id="hourTableWrap" hidden></div>
+    </div>
+
+    <div>
+      <div class="sub-head">
+        <span class="kpi-label">Ultimi ordini</span>
+        <span class="stream-state" id="streamState">nuovo ordine ogni 2–4 s</span>
+      </div>
+      <ol class="orders" id="orders" aria-label="Ultimi ordini arrivati"></ol>
+    </div>
+  </section>
+
+  <!-- ===================== D · FOGLIO GOOGLE ===================== -->
+  <section class="panel" id="panelD" aria-labelledby="hD">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow"><b>D</b> · I vostri dati</p>
+        <h2 id="hD">Collega il tuo foglio Google</h2>
+      </div>
+      <span class="tag" id="csvSourceTag">dati di esempio</span>
+    </div>
+
+    <div>
+      <ol class="steps">
+        <li>Nel foglio Google: <b>File → Condividi → Pubblica sul web</b>.</li>
+        <li>Scegli il formato <b>CSV</b> e premi <b>Pubblica</b>.</li>
+        <li>Copia il link, incollalo qui sotto e premi <b>Carica</b>.</li>
+      </ol>
+      <p class="small-note">Google aggiorna il CSV pubblicato con qualche minuto di ritardo rispetto al foglio.</p>
+    </div>
+
+    <form class="csv-form" id="csvForm" novalidate>
+      <label for="csvUrl" class="sr-only">Link CSV del foglio Google pubblicato</label>
+      <input id="csvUrl" type="url" placeholder="https://docs.google.com/spreadsheets/d/e/…/pub?output=csv" autocomplete="off" spellcheck="false">
+      <button type="submit" class="btn btn-primary" id="btnCsvLoad">Carica</button>
+      <button type="button" class="btn" id="btnCsvSample">Usa dati di esempio</button>
+    </form>
+
+    <div class="msg" id="csvMsg" role="status" aria-live="polite" hidden><div class="msg-body" id="csvMsgBody"></div></div>
+
+    <div class="csv-meta">
+      <span class="csv-info" id="csvInfo">&nbsp;</span>
+      <span class="col-pick" id="colPick" hidden>
+        <label for="csvCol">Grafico su</label>
+        <select id="csvCol"></select>
+      </span>
+    </div>
+
+    <div class="chart-box" id="csvChartBox"><canvas id="csvChart" role="img" aria-label="Grafico a barre della prima colonna numerica del foglio"></canvas></div>
+
+    <div class="table-scroll" id="csvTableWrap">
+      <table class="data" id="csvTable"><caption class="sr-only">Dati letti dal foglio</caption></table>
+    </div>
+
+    <details class="raw">
+      <summary>Com'è fatto un CSV</summary>
+      <pre id="csvRaw"></pre>
+    </details>
+  </section>
+
+  <!-- ===================== E · PERCHÉ CONTA ===================== -->
+  <section class="panel panel-why" id="panelE" aria-labelledby="hE">
+    <div>
+      <p class="eyebrow">E · Perché conta</p>
+      <h2 id="hE" class="why-title">Una slide resta ferma al giorno in cui l'hai salvata.</h2>
+      <p class="why-text">Questa pagina chiede i cambi alla fonte ogni volta che la apri e ricalcola da sola il costo dell'arabica. Se domani il dollaro si muove, il numero che guardate in riunione si muove con lui. Quando il vostro foglio Google cambia, basta premere «Carica».</p>
+    </div>
+    <table class="compare">
+      <caption class="sr-only">Confronto tra una slide salvata e questa pagina</caption>
+      <thead><tr><th scope="col"><span class="sr-only">Dato</span></th><th scope="col">Slide salvata</th><th scope="col">Questa pagina</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Cambi</th><td>copiati a mano il giorno del salvataggio</td><td>letti alla fonte a ogni apertura</td></tr>
+        <tr><th scope="row">Costo arabica</th><td>rifatto in Excel e incollato</td><td>ricalcolato a ogni nuovo prezzo</td></tr>
+        <tr><th scope="row">Dati di vendita</th><td>esportati e incollati come immagine</td><td>letti dal foglio condiviso</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p>Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+  <p>Cambi: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a> (open.er-api.com) · Ordini del riquadro C simulati.</p>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ------------------------------------------------------------------
+   Impostazioni generali
+   ------------------------------------------------------------------ */
+var root = document.documentElement;
+var THUMB = root.classList.contains('is-thumb');
+var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+var ANIM = !THUMB && !REDUCED;
+var HAS_CHART = typeof window.Chart === 'function';
+
+function $(id){ return document.getElementById(id); }
+function token(name){ return getComputedStyle(root).getPropertyValue(name).trim(); }
+function el(tag, cls, text){
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined && text !== null) n.textContent = String(text);
+  return n;
+}
+function pad2(n){ return String(n).padStart(2, '0'); }
+
+/* Numeri in formato italiano (separatore migliaia sempre presente: 1.050) */
+var NF_CACHE = {};
+function fmt(n, minD, maxD){
+  if (maxD === undefined) maxD = minD;
+  if (!isFinite(n)) return 'n.d.';
+  var key = minD + '-' + maxD;
+  if (!NF_CACHE[key]) NF_CACHE[key] = new Intl.NumberFormat('en-US', {minimumFractionDigits:minD, maximumFractionDigits:maxD, useGrouping:false});
+  var s = NF_CACHE[key].format(Math.abs(n));
+  var parts = s.split('.');
+  var intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  var neg = n < 0 && Number(s) !== 0;
+  return (neg ? '−' : '') + intPart + (parts[1] ? ',' + parts[1] : '');
+}
+function hms(d){ return pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds()); }
+function hm(d){ return pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function longDate(d){ return d.toLocaleDateString('it-IT', {day:'numeric', month:'long', year:'numeric'}); }
+
+/* Lettura "tollerante" dei numeri scritti a mano o nei CSV: 3,85 · 3.85 · 1.050 · 1.234,56 · 1,234.56 */
+function parseLoose(raw, preferDecimal){
+  var s = String(raw === undefined || raw === null ? '' : raw).trim()
+    .replace(/[\s  ']/g, '').replace(/[€$£%]/g, '');
+  var neg = false;
+  if (/^\(.*\)$/.test(s)) { neg = true; s = s.slice(1, -1); }
+  if (/^[-−]/.test(s)) { neg = true; s = s.slice(1); }
+  else if (s.charAt(0) === '+') { s = s.slice(1); }
+  if (!s || !/^[\d.,]+$/.test(s) || !/\d/.test(s)) return NaN;
+  var d = s.lastIndexOf('.'), c = s.lastIndexOf(',');
+  if (d > -1 && c > -1) {
+    s = c > d ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');
+  } else if (c > -1) {
+    s = (!preferDecimal && /^[1-9]\d{0,2}(,\d{3}){2,}$/.test(s)) ? s.replace(/,/g, '') : s.replace(',', '.');
+  } else if (d > -1) {
+    if (!preferDecimal && /^[1-9]\d{0,2}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+  }
+  var n = Number(s);
+  if (!isFinite(n)) return NaN;
+  return neg ? -n : n;
+}
+
+function flash(node){
+  if (!ANIM || !node) return;
+  node.classList.remove('flash');
+  void node.offsetWidth;
+  node.classList.add('flash');
+}
+
+/* Colori e font presi dai token CSS */
+var C = {
+  c1: token('--c1'), line: token('--line'), line2: token('--line-2'), muted: token('--muted'),
+  onDark: token('--on-dark'), onDark2: token('--on-dark-2'), surface3: token('--surface-3')
+};
+var FONT = token('--font-body') || 'system-ui, sans-serif';
+
+if (HAS_CHART) {
+  Chart.defaults.font.family = FONT;
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = C.muted;
+  Chart.defaults.borderColor = C.line;
+  if (!ANIM) Chart.defaults.animation = false;
+}
+
+/* Etichetta diretta su UNA sola barra (l'ultima o la più alta) */
+function valueLabelPlugin(mode, getFormat){
+  return {
+  id: 'valueLabel',
+  afterDatasetsDraw: function(chart){
+    var data = chart.data.datasets[0] && chart.data.datasets[0].data;
+    var meta = chart.getDatasetMeta(0);
+    if (!data || !data.length || !meta || !meta.data.length) return;
+    var idx = data.length - 1;
+    if (mode === 'max') {
+      var best = -Infinity;
+      data.forEach(function(v, i){ if (v !== null && v > best) { best = v; idx = i; } });
+    }
+    var bar = meta.data[idx];
+    var v = data[idx];
+    if (!bar || v === null || v === undefined) return;
+    var ctx = chart.ctx;
+    ctx.save();
+    ctx.fillStyle = C.onDark;
+    ctx.font = '700 12px ' + FONT;
+    var txt = getFormat()(v);
+    if (chart.options.indexAxis === 'y') {
+      ctx.textAlign = v < 0 ? 'right' : 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(txt, bar.x + (v < 0 ? -6 : 6), bar.y);
+    } else {
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(txt, bar.x, bar.y - 5);
+    }
+    ctx.restore();
+  }
+  };
+}
+
+function tooltipStyle(callbacks){
+  return {
+    backgroundColor: C.surface3, borderColor: C.line2, borderWidth: 1,
+    titleColor: C.onDark2, bodyColor: C.onDark,
+    titleFont: {family: FONT, weight: '500', size: 12},
+    bodyFont: {family: FONT, weight: '700', size: 13},
+    padding: 10, displayColors: false, cornerRadius: 6,
+    callbacks: callbacks
+  };
+}
+
+/* Barre in HTML se Chart.js non è raggiungibile (es. offline): il pannello non resta mai vuoto */
+function renderCssBars(box, labels, values, fmtV){
+  box.replaceChildren();
+  box.style.height = 'auto';
+  var max = 1;
+  values.forEach(function(v){ if (isFinite(v) && Math.abs(v) > max) max = Math.abs(v); });
+  var ul = el('ul', 'cssbars');
+  labels.forEach(function(l, i){
+    var v = isFinite(values[i]) ? values[i] : 0;
+    var li = el('li');
+    var track = el('span', 'cb-t');
+    var bar = el('span', 'cb-b');
+    bar.style.width = (Math.abs(v) / max * 100).toFixed(1) + '%';
+    track.append(bar);
+    li.append(el('span', 'cb-l', l), track, el('span', 'cb-v', fmtV(v)));
+    ul.append(li);
+  });
+  box.append(ul);
+}
+
+/* ------------------------------------------------------------------
+   Orologio e stato connessione (header)
+   ------------------------------------------------------------------ */
+function tickClock(){
+  var d = new Date();
+  $('clockDate').textContent = d.toLocaleDateString('it-IT', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+  $('clockTime').textContent = hms(d);
+}
+tickClock();
+if (!THUMB) {
+  (function loop(){
+    setTimeout(function(){ tickClock(); loop(); }, 1000 - (Date.now() % 1000) + 10);
+  })();
+}
+
+var CONN_TEXT = {
+  loading: 'Collegamento in corso…',
+  live: 'Online · cambi reali',
+  stale: 'Connessione persa · ultimi cambi letti',
+  sample: 'Offline · valori di esempio'
+};
+function setConn(state){
+  $('conn').dataset.state = state;
+  $('connText').textContent = CONN_TEXT[state];
+}
+
+/* ------------------------------------------------------------------
+   A · Cambi in tempo reale
+   ------------------------------------------------------------------ */
+var API_URL = 'https://open.er-api.com/v6/latest/EUR';
+var CURRENCIES = [
+  {code:'USD', name:'Dollaro USA',          place:'Prezzo del caffè verde', detail:'quotato in dollari · usato nel riquadro B'},
+  {code:'BRL', name:'Real brasiliano',      place:'Brasile',  detail:'Sul de Minas · arabica'},
+  {code:'COP', name:'Peso colombiano',      place:'Colombia', detail:'Huila · arabica'},
+  {code:'ETB', name:'Birr etiope',          place:'Etiopia',  detail:'Sidama · arabica'},
+  {code:'HNL', name:"Lempira dell'Honduras", place:'Honduras', detail:'Copán · arabica'},
+  {code:'INR', name:'Rupia indiana',        place:'India',    detail:'Karnataka · robusta'},
+  {code:'VND', name:'Dong vietnamita',      place:'Vietnam',  detail:'Đắk Lắk · robusta'}
+];
+var SAMPLE_RATES = {USD:1.1252, BRL:5.6055, COP:3599.15, ETB:185.50, HNL:30.1355, INR:108.46, VND:29195.08};
+var SAMPLE_DATE = '7 ottobre 2026';
+var SAMPLE_NOTICE = 'Connessione non disponibile: valori di esempio del 7 ottobre 2026';
+
+var rates = Object.assign({}, SAMPLE_RATES);
+var ratesMode = 'loading';
+var lastGood = null, lastGoodAt = null, ratesBusy = false;
+
+function fmtRate(v){ return v >= 100 ? fmt(v, 2) : fmt(v, 4); }
+
+(function buildRatesTable(){
+  var tb = $('ratesBody');
+  CURRENCIES.forEach(function(c){
+    var tr = el('tr', c.code === 'USD' ? 'is-usd' : null);
+    var td1 = el('td');
+    var cur = el('div', 'cur');
+    cur.append(el('span', 'iso', c.code), el('span', 'cur-name', c.name));
+    td1.append(cur);
+    var td2 = el('td', 'orig');
+    td2.append(el('strong', null, c.place), el('span', null, c.detail));
+    var td3 = el('td');
+    var v = el('span', 'rate', '');
+    v.id = 'rate-' + c.code;
+    td3.append(v);
+    tr.append(td1, td2, td3);
+    tb.append(tr);
+  });
+})();
+
+function renderRates(doFlash){
+  CURRENCIES.forEach(function(c){
+    var cell = $('rate-' + c.code);
+    cell.textContent = fmtRate(rates[c.code]);
+    if (doFlash) flash(cell);
+  });
+  $('ratesTable').dataset.loading = ratesMode === 'loading' ? 'true' : 'false';
+}
+
+function setRatesState(mode){
+  ratesMode = mode;
+  var badge = $('ratesBadge');
+  badge.dataset.state = mode;
+  $('ratesBadgeText').textContent = {loading:'Collegamento', live:'LIVE', sample:'Esempio', stale:'Non aggiornato'}[mode];
+  setConn(mode);
+  var notice = $('ratesNotice');
+  if (mode === 'sample') {
+    notice.textContent = SAMPLE_NOTICE;
+    notice.hidden = false;
+  } else if (mode === 'stale') {
+    notice.textContent = 'Connessione non disponibile: restano i cambi letti alle ' + hm(lastGoodAt) + '.';
+    notice.hidden = false;
+  } else if (mode === 'live') {
+    notice.hidden = true;
+  }
+}
+
+function setRefreshBusy(busy){
+  var b = $('btnRefresh');
+  b.disabled = busy;
+  b.classList.toggle('is-busy', busy);
+  b.setAttribute('aria-busy', busy ? 'true' : 'false');
+}
+
+function loadRates(){
+  if (THUMB || ratesBusy) return;
+  ratesBusy = true;
+  setRefreshBusy(true);
+  var attemptAt = new Date();
+  var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+  var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 6000);
+  var opts = {cache: 'no-store'};
+  if (ctrl) opts.signal = ctrl.signal;
+
+  fetch(API_URL, opts)
+    .then(function(res){
+      if (!res.ok) throw new Error('http');
+      return res.json();
+    })
+    .then(function(data){
+      if (!data || data.result !== 'success' || !data.rates) throw new Error('payload');
+      var r = {};
+      CURRENCIES.forEach(function(c){
+        var v = Number(data.rates[c.code]);
+        if (!(v > 0)) throw new Error('missing');
+        r[c.code] = v;
+      });
+      var now = new Date();
+      rates = r; lastGood = r; lastGoodAt = now;
+      var src = data.time_last_update_utc ? new Date(data.time_last_update_utc) : null;
+      $('ratesReadAt').textContent = hms(now);
+      $('ratesSourceDate').textContent = (src && !isNaN(src.getTime())) ? longDate(src) + ', ' + hm(src) : 'non indicata dalla fonte';
+      setRatesState('live');
+    })
+    .catch(function(){
+      if (lastGood) {
+        rates = lastGood;
+        $('ratesReadAt').textContent = 'tentata alle ' + hms(attemptAt);
+        setRatesState('stale');
+      } else {
+        rates = Object.assign({}, SAMPLE_RATES);
+        $('ratesReadAt').textContent = 'tentata alle ' + hms(attemptAt);
+        $('ratesSourceDate').textContent = SAMPLE_DATE + ' (esempio)';
+        setRatesState('sample');
+      }
+    })
+    .then(function(){
+      clearTimeout(timer);
+      ratesBusy = false;
+      setRefreshBusy(false);
+      renderRates(true);
+      calc();
+    });
+}
+
+/* Aggiornamento automatico ogni 60 s, con conto alla rovescia */
+var autoTimer = null, countdown = 60;
+function updateNext(){
+  $('nextRefresh').textContent = $('autoRefresh').checked
+    ? 'prossima lettura tra ' + countdown + ' s'
+    : 'aggiornamento automatico spento';
+}
+function startAuto(){
+  stopAuto();
+  countdown = 60;
+  updateNext();
+  if (THUMB) return;
+  autoTimer = setInterval(function(){
+    countdown -= 1;
+    if (countdown <= 0) { countdown = 60; loadRates(); }
+    updateNext();
+  }, 1000);
+}
+function stopAuto(){
+  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  updateNext();
+}
+$('autoRefresh').addEventListener('change', function(){
+  if (this.checked) startAuto(); else stopAuto();
+});
+$('btnRefresh').addEventListener('click', function(){
+  countdown = 60;
+  updateNext();
+  loadRates();
+});
+window.addEventListener('online', function(){ loadRates(); });
+window.addEventListener('offline', function(){ loadRates(); });
+
+/* ------------------------------------------------------------------
+   B · Quanto ci costa oggi un chilo di arabica
+   €/kg = USD/lb × 2,20462 ÷ (EUR→USD)
+   ------------------------------------------------------------------ */
+var LB_PER_KG = 2.20462;
+var lastEurKg = null, lastTotal = null;
+var priceInput = $('arabicaPrice'), rangeInput = $('arabicaRange'), tonsInput = $('q4Tons');
+
+function setRangeFill(){
+  var min = Number(rangeInput.min), max = Number(rangeInput.max), v = Number(rangeInput.value);
+  rangeInput.style.setProperty('--p', ((v - min) / (max - min) * 100).toFixed(1) + '%');
+}
+function setFieldError(fieldId, errId, bad){
+  $(fieldId).classList.toggle('is-invalid', bad);
+  $(errId).hidden = !bad;
+  var input = fieldId === 'fieldPrice' ? priceInput : tonsInput;
+  input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+}
+
+function calc(){
+  var p = parseLoose(priceInput.value, true);
+  var t = parseLoose(tonsInput.value, false);
+  var okP = p > 0 && p < 100;
+  var okT = t > 0 && t < 1000000;
+  setFieldError('fieldPrice', 'priceErr', !okP);
+  setFieldError('fieldTons', 'tonsErr', !okT);
+  $('calcResult').classList.toggle('is-invalid', !(okP && okT));
+  if (!(okP && okT)) return;
+
+  var usd = rates.USD;
+  var eurKg = p * LB_PER_KG / usd;
+  var kg = t * 1000;
+  var total = eurKg * kg;
+
+  var eurKgTxt = fmt(eurKg, 2);
+  var totalTxt = fmt(total / 1e6, 2) + ' M€';
+  $('eurKg').textContent = eurKgTxt;
+  $('totalCost').textContent = totalTxt;
+  $('totalSub').textContent = 'per ' + fmt(t, 0, 1) + ' t di arabica verde';
+  $('fPrice').textContent = fmt(p, 2, 4);
+  $('fRate').textContent = fmt(usd, 4);
+  $('fEurKg').textContent = eurKgTxt + ' €/kg';
+  $('fEurKg2').textContent = eurKgTxt;
+  $('fKg').textContent = fmt(kg, 0, 1);
+  $('fTotal').textContent = totalTxt;
+
+  var sens = 0.10 * LB_PER_KG / usd * kg;
+  $('sensVal').textContent = fmt(sens >= 10000 ? Math.round(sens / 1000) * 1000 : Math.round(sens), 0) + ' €';
+
+  var note;
+  if (THUMB) note = 'Il cambio arriva dal riquadro A.';
+  else if (ratesMode === 'live' && lastGoodAt) note = 'Il cambio arriva dal riquadro A: lettura delle ' + hms(lastGoodAt) + '.';
+  else if (ratesMode === 'stale' && lastGoodAt) note = 'Il cambio è l\'ultimo letto nel riquadro A, alle ' + hm(lastGoodAt) + '.';
+  else if (ratesMode === 'sample') note = 'Il cambio è il valore di esempio del 7 ottobre 2026: la fonte non risponde.';
+  else note = 'Il cambio arriva dal riquadro A: per ora uso il valore di esempio, in attesa della fonte.';
+  $('fRateNote').textContent = note;
+
+  if (lastEurKg !== null && eurKgTxt !== lastEurKg) flash($('bigBox'));
+  if (lastTotal !== null && totalTxt !== lastTotal) flash($('totalCost'));
+  lastEurKg = eurKgTxt;
+  lastTotal = totalTxt;
+}
+
+priceInput.addEventListener('input', function(){
+  var p = parseLoose(priceInput.value, true);
+  if (p >= Number(rangeInput.min) && p <= Number(rangeInput.max)) { rangeInput.value = String(p); setRangeFill(); }
+  calc();
+});
+priceInput.addEventListener('blur', function(){
+  var p = parseLoose(priceInput.value, true);
+  if (p > 0 && p < 100) priceInput.value = fmt(p, 2, 4);
+});
+rangeInput.addEventListener('input', function(){
+  priceInput.value = fmt(Number(rangeInput.value), 2);
+  setRangeFill();
+  calc();
+});
+tonsInput.addEventListener('input', calc);
+tonsInput.addEventListener('blur', function(){
+  var t = parseLoose(tonsInput.value, false);
+  if (t > 0 && t < 1000000) tonsInput.value = fmt(t, 0, 1);
+});
+[$('tonsMinus'), $('tonsPlus')].forEach(function(b){
+  b.addEventListener('click', function(){
+    var t = parseLoose(tonsInput.value, false);
+    if (!(t > 0)) t = 1050;
+    t = Math.max(50, Math.min(999950, t + (b.id === 'tonsPlus' ? 50 : -50)));
+    tonsInput.value = fmt(t, 0, 1);
+    calc();
+  });
+});
+setRangeFill();
+
+/* ------------------------------------------------------------------
+   C · Ordini Ho.Re.Ca. (flusso simulato)
+   ------------------------------------------------------------------ */
+function mulberry32(a){
+  return function(){
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+var rand = mulberry32(1961);
+function pick(arr){ return arr[Math.floor(rand() * arr.length)]; }
+function pickW(items){
+  var tot = 0; items.forEach(function(i){ tot += i.w; });
+  var r = rand() * tot;
+  for (var k = 0; k < items.length; k++) { r -= items[k].w; if (r < 0) return items[k]; }
+  return items[items.length - 1];
+}
+
+var PLACES = ['Bar Portici','Caffè del Borgo','Bar Stazione','Caffè Teatro','Osteria del Ponte','Bar Alpino',
+  'Caffè della Piazza','Bar Tre Archi','Pasticceria Fontana','Bistrot San Vigilio','Bar La Rocca','Caffè Vittoria',
+  'Bar del Lago','Trattoria Al Castello','Caffè Duomo','Bar Pesa','Pasticceria Sant\'Anna','Caffè Navigli',
+  'Bar Le Mura','Caffè Garibaldi','Bar Corte Antica','Pasticceria Il Glicine','Caffè Mazzini','Bar Il Mulino'];
+var CITIES = ['Bergamo','Brescia','Milano','Lodi','Piacenza','Cremona','Como','Lecco','Monza','Varese','Pavia',
+  'Mantova','Verona','Padova','Vicenza','Treviso','Trento','Torino','Novara','Parma','Bologna','Genova'];
+var PRODUCTS = [
+  {name:'Miscela Classica',   price:19.80, w:44},
+  {name:'Gran Riserva',       price:25.60, w:28},
+  {name:'Decaffeinato Dolce', price:22.40, w:14},
+  {name:'Selvana Origini',    price:34.50, w:14}
+];
+var KGS = [{v:3,w:6},{v:5,w:12},{v:6,w:14},{v:8,w:14},{v:10,w:16},{v:12,w:12},{v:15,w:10},{v:18,w:6},{v:20,w:6},{v:24,w:4}];
+
+function makeOrder(ts){
+  var prod = pickW(PRODUCTS);
+  var kg = pickW(KGS).v;
+  return {ts: ts, place: pick(PLACES), city: pick(CITIES), product: prod.name, kg: kg, eur: Math.round(kg * prod.price * 100) / 100};
+}
+
+var totals = {n: 0, kg: 0, eur: 0};
+var buckets = [];            /* [{start: ms inizio ora, count}] */
+var MAX_LIST = 40;
+
+function hourStart(ts){ var d = new Date(ts); d.setMinutes(0, 0, 0); return d.getTime(); }
+function bucketIndex(ts){
+  var hs = hourStart(ts);
+  if (!buckets.length) buckets.push({start: hs, count: 0});
+  var last = buckets[buckets.length - 1];
+  while (last.start < hs) {
+    var d = new Date(last.start); d.setHours(d.getHours() + 1);
+    last = {start: d.getTime(), count: 0};
+    buckets.push(last);
+  }
+  for (var i = buckets.length - 1; i >= 0; i--) if (buckets[i].start === hs) return i;
+  return buckets.length - 1;
+}
+function hourLabel(b){ return pad2(new Date(b.start).getHours()) + ':00'; }
+function hourRange(b){
+  var d = new Date(b.start);
+  return pad2(d.getHours()) + ':00–' + pad2((d.getHours() + 1) % 24) + ':00';
+}
+
+function orderItem(o, isNew){
+  var li = el('li', 'order' + (isNew && ANIM ? ' is-new' : ''));
+  var who = el('span', 'o-who');
+  who.append(el('strong', null, o.place), el('span', null, o.city + ' · ' + o.product));
+  var num = el('span', 'o-num');
+  num.append(el('strong', null, fmt(o.eur, 2) + ' €'), el('span', null, fmt(o.kg, 0) + ' kg'));
+  li.append(el('span', 'o-time', hms(new Date(o.ts))), who, num);
+  return li;
+}
+
+function renderCounters(bump){
+  var vals = [
+    ['cntOrders', fmt(totals.n, 0)],
+    ['cntKg', fmt(totals.kg, 0)],
+    ['cntEur', fmt(Math.round(totals.eur), 0) + ' €']
+  ];
+  vals.forEach(function(v){
+    var node = $(v[0]);
+    if (node.textContent === v[1]) return;
+    node.textContent = v[1];
+    if (bump && ANIM) { node.classList.remove('bump'); void node.offsetWidth; node.classList.add('bump'); }
+  });
+}
+
+function registerOrder(o){
+  totals.n += 1; totals.kg += o.kg; totals.eur += o.eur;
+  buckets[bucketIndex(o.ts)].count += 1;
+}
+
+/* 25 ordini già arrivati oggi, così il pannello è pieno all'apertura */
+(function seedOrders(){
+  var now = Date.now();
+  var six = new Date(); six.setHours(6, 0, 0, 0);
+  var avail = now - six.getTime();
+  var gapMean = avail > 30 * 60000 ? Math.min(11 * 60000, avail / 27) : 11 * 60000;
+  var t = now - 20000 - Math.round(rand() * 60000);
+  var seed = [];
+  for (var i = 0; i < 25; i++) {
+    seed.push(makeOrder(t));
+    t -= Math.round(gapMean * (0.4 + rand() * 1.2));
+  }
+  seed.reverse();
+  var list = $('orders');
+  seed.forEach(function(o){ registerOrder(o); });
+  for (var k = seed.length - 1; k >= 0; k--) list.append(orderItem(seed[k], false));
+  renderCounters(false);
+})();
+
+var hourChart = null;
+function hourData(){
+  return {labels: buckets.map(hourLabel), values: buckets.map(function(b){ return b.count; })};
+}
+function buildHourTable(){
+  var wrap = $('hourTableWrap');
+  var table = el('table', 'data');
+  var cap = el('caption', 'sr-only', 'Ordini per ora');
+  var thead = el('thead'); var hr = el('tr');
+  var th1 = el('th', null, 'Ora'); th1.scope = 'col';
+  var th2 = el('th', 'num', 'Ordini'); th2.scope = 'col';
+  hr.append(th1, th2); thead.append(hr);
+  var tbody = el('tbody');
+  for (var i = buckets.length - 1; i >= 0; i--) {
+    var tr = el('tr');
+    tr.append(el('td', null, hourRange(buckets[i])), el('td', 'num', fmt(buckets[i].count, 0)));
+    tbody.append(tr);
+  }
+  table.append(cap, thead, tbody);
+  wrap.replaceChildren(table);
+}
+function renderHourChart(){
+  var d = hourData();
+  if (!HAS_CHART) {
+    renderCssBars($('hourChartBox'), d.labels, d.values, function(v){ return fmt(v, 0); });
+  } else if (!hourChart) {
+    hourChart = new Chart($('hourChart'), {
+      type: 'bar',
+      data: {labels: d.labels, datasets: [{
+        label: 'Ordini', data: d.values,
+        backgroundColor: C.c1, hoverBackgroundColor: C.c1,
+        maxBarThickness: 24, borderRadius: 4, borderSkipped: 'start'
+      }]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: ANIM ? {duration: 350} : false,
+        interaction: {mode: 'index', intersect: false},
+        layout: {padding: {top: 4}},
+        plugins: {
+          legend: {display: false},
+          tooltip: tooltipStyle({
+            title: function(items){ return 'Ore ' + hourRange(buckets[items[0].dataIndex]); },
+            label: function(c){ return fmt(c.parsed.y, 0) + ' ordini'; }
+          })
+        },
+        scales: {
+          x: {grid: {display: false}, border: {color: C.line2}, ticks: {color: C.muted}},
+          y: {beginAtZero: true, grace: '22%', border: {display: false}, grid: {color: C.line},
+              ticks: {color: C.muted, precision: 0, maxTicksLimit: 4, callback: function(v){ return fmt(v, 0); }}}
+        }
+      },
+      plugins: [valueLabelPlugin('last', function(){ return function(v){ return fmt(v, 0); }; })]
+    });
+  } else {
+    hourChart.data.labels = d.labels;
+    hourChart.data.datasets[0].data = d.values;
+    hourChart.update();
+  }
+  var hc = $('hourChart');
+  if (hc) hc.setAttribute('aria-label', 'Ordini per ora: ' + d.labels.map(function(l, i){ return l + ' ' + d.values[i]; }).join(', '));
+  if (!$('hourTableWrap').hidden) buildHourTable();
+}
+renderHourChart();
+
+$('btnTableC').addEventListener('click', function(){
+  var showTable = this.getAttribute('aria-pressed') !== 'true';
+  this.setAttribute('aria-pressed', showTable ? 'true' : 'false');
+  this.textContent = showTable ? 'Vista grafico' : 'Vista tabella';
+  $('hourChartBox').hidden = showTable;
+  $('hourTableWrap').hidden = !showTable;
+  if (showTable) buildHourTable();
+});
+
+function addLiveOrder(){
+  var o = makeOrder(Date.now());
+  registerOrder(o);
+  var list = $('orders');
+  list.prepend(orderItem(o, true));
+  while (list.children.length > MAX_LIST) list.lastElementChild.remove();
+  renderCounters(true);
+  renderHourChart();
+}
+
+var simTimer = null, simPaused = false;
+function scheduleOrder(){
+  if (THUMB || simPaused) return;
+  simTimer = setTimeout(function(){
+    addLiveOrder();
+    scheduleOrder();
+  }, 2000 + Math.random() * 2000);
+}
+$('btnPause').addEventListener('click', function(){
+  simPaused = !simPaused;
+  this.setAttribute('aria-pressed', simPaused ? 'true' : 'false');
+  $('pauseLabel').textContent = simPaused ? 'Riprendi' : 'Pausa';
+  var icon = $('pauseIcon');
+  icon.replaceChildren();
+  var ns = 'http://www.w3.org/2000/svg';
+  if (simPaused) {
+    var tri = document.createElementNS(ns, 'path');
+    tri.setAttribute('d', 'M8 5.5v13l10.5-6.5z');
+    tri.setAttribute('fill', 'currentColor');
+    icon.append(tri);
+  } else {
+    [6, 14].forEach(function(x){
+      var r = document.createElementNS(ns, 'rect');
+      r.setAttribute('x', x); r.setAttribute('y', 5); r.setAttribute('width', 4); r.setAttribute('height', 14); r.setAttribute('rx', 1);
+      r.setAttribute('fill', 'currentColor');
+      icon.append(r);
+    });
+  }
+  var st = $('streamState');
+  st.textContent = simPaused ? 'flusso in pausa' : 'nuovo ordine ogni 2–4 s';
+  st.classList.toggle('paused-note', simPaused);
+  if (simPaused) { clearTimeout(simTimer); simTimer = null; }
+  else scheduleOrder();
+});
+
+/* ------------------------------------------------------------------
+   D · Collega il tuo foglio Google (CSV pubblicato)
+   ------------------------------------------------------------------ */
+var SAMPLE_CSV =
+  'Area,"Vendite Ho.Re.Ca. Q3 2026, k€",Locali serviti\n' +
+  'Lombardia,6548,3120\n' +
+  'Veneto,2537,1240\n' +
+  'Piemonte,1912,980\n' +
+  'Emilia-Romagna,2124,1060\n' +
+  'Liguria,903,410\n' +
+  'Toscana,1446,690\n';
+
+function detectDelimiter(text){
+  var counts = {',': 0, ';': 0, '\t': 0}, q = false;
+  for (var i = 0; i < text.length; i++) {
+    var ch = text.charAt(i);
+    if (ch === '"') { q = !q; continue; }
+    if (!q && (ch === '\n' || ch === '\r')) break;
+    if (!q && Object.prototype.hasOwnProperty.call(counts, ch)) counts[ch] += 1;
+  }
+  var best = ',', max = 0;
+  Object.keys(counts).forEach(function(k){ if (counts[k] > max) { max = counts[k]; best = k; } });
+  return best;
+}
+
+/* Parser CSV: virgolette, "" come virgoletta, separatori e a capo dentro i campi */
+function parseCSV(text){
+  text = String(text).replace(/^﻿/, '');
+  var delim = detectDelimiter(text);
+  var rows = [], row = [], field = '', inQ = false, i = 0, n = text.length;
+  while (i < n) {
+    var ch = text.charAt(i);
+    if (inQ) {
+      if (ch === '"') {
+        if (text.charAt(i + 1) === '"') { field += '"'; i += 2; continue; }
+        inQ = false; i += 1; continue;
+      }
+      field += ch; i += 1; continue;
+    }
+    if (ch === '"' && field === '') { inQ = true; i += 1; continue; }
+    if (ch === delim) { row.push(field); field = ''; i += 1; continue; }
+    if (ch === '\r' || ch === '\n') {
+      row.push(field); rows.push(row); row = []; field = '';
+      if (ch === '\r' && text.charAt(i + 1) === '\n') i += 1;
+      i += 1; continue;
+    }
+    field += ch; i += 1;
+  }
+  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(function(r){ return r.some(function(c){ return c.trim() !== ''; }); });
+}
+
+function analyseTable(rows){
+  var width = 0;
+  rows.forEach(function(r){ if (r.length > width) width = r.length; });
+  var header = [];
+  for (var j = 0; j < width; j++) {
+    var h = (rows[0][j] || '').trim();
+    header.push(h || 'Colonna ' + (j + 1));
+  }
+  var data = rows.slice(1).map(function(r){
+    var out = [];
+    for (var j2 = 0; j2 < width; j2++) out.push((r[j2] || '').trim());
+    return out;
+  });
+  var numeric = [], yearLike = {};
+  header.forEach(function(h, j){
+    var tot = 0, ok = 0, years = 0;
+    data.forEach(function(r){
+      if (r[j] === '') return;
+      tot += 1;
+      var v = parseLoose(r[j], false);
+      if (!isNaN(v)) { ok += 1; if (/^\d{4}$/.test(r[j]) && v >= 1900 && v <= 2100) years += 1; }
+    });
+    if (tot > 0 && ok / tot >= 0.8) { numeric.push(j); if (years === tot) yearLike[j] = true; }
+  });
+  var labelCol = null;
+  for (var k = 0; k < width; k++) if (numeric.indexOf(k) === -1) { labelCol = k; break; }
+  return {header: header, data: data, numeric: numeric, yearLike: yearLike, labelCol: labelCol};
+}
+
+var csvState = null, csvChart = null;
+var csvFmt = function(v){ return fmt(v, 0, 2); };
+var MAX_TABLE_ROWS = 200, MAX_CHART_ROWS = 30;
+
+function cellText(t, j, raw){
+  if (t.numeric.indexOf(j) === -1 || raw === '') return raw;
+  if (t.yearLike[j]) return raw;
+  var v = parseLoose(raw, false);
+  return isNaN(v) ? raw : fmt(v, 0, 4);
+}
+
+function renderCsvTable(t){
+  var table = $('csvTable');
+  var cap = el('caption', 'sr-only', 'Dati letti dal foglio');
+  var thead = el('thead'), hr = el('tr');
+  t.header.forEach(function(h, j){
+    var th = el('th', t.numeric.indexOf(j) > -1 ? 'num' : null, h);
+    th.scope = 'col';
+    hr.append(th);
+  });
+  thead.append(hr);
+  var tbody = el('tbody');
+  t.data.slice(0, MAX_TABLE_ROWS).forEach(function(r){
+    var tr = el('tr');
+    r.forEach(function(c, j){ tr.append(el('td', t.numeric.indexOf(j) > -1 ? 'num' : null, cellText(t, j, c))); });
+    tbody.append(tr);
+  });
+  table.replaceChildren(cap, thead, tbody);
+}
+
+function renderCsvChart(){
+  var t = csvState;
+  var box = $('csvChartBox');
+  var sel = $('csvCol');
+  var col = sel.options.length ? Number(sel.value) : NaN;
+  if (!t.numeric.length || isNaN(col)) {
+    if (csvChart) { csvChart.destroy(); csvChart = null; }
+    box.style.height = 'auto';
+    box.replaceChildren(el('div', 'empty-chart', 'Nessuna colonna di numeri da disegnare: i dati sono comunque nella tabella qui sotto.'));
+    return;
+  }
+  var rows = t.data.slice(0, MAX_CHART_ROWS);
+  var labels = rows.map(function(r, i){
+    var l = t.labelCol !== null ? r[t.labelCol] : '';
+    l = l || 'Riga ' + (i + 1);
+    return l.length > 26 ? l.slice(0, 25) + '…' : l;
+  });
+  var values = rows.map(function(r){ var v = parseLoose(r[col], false); return isNaN(v) ? null : v; });
+  var name = t.header[col];
+  var fmtV = function(v){ return t.yearLike[col] ? String(v) : fmt(v, 0, 2); };
+  csvFmt = fmtV;
+
+  if (!HAS_CHART) {
+    renderCssBars(box, labels, values.map(function(v){ return v === null ? 0 : v; }), fmtV);
+    return;
+  }
+  box.style.height = Math.max(160, labels.length * 30 + 36) + 'px';
+  if (!box.querySelector('canvas')) {
+    if (csvChart) { csvChart.destroy(); csvChart = null; }
+    var cv = el('canvas'); cv.id = 'csvChart'; cv.setAttribute('role', 'img');
+    box.replaceChildren(cv);
+  }
+  var canvas = $('csvChart');
+  canvas.setAttribute('aria-label', 'Grafico a barre: ' + name + ' per ' + (t.labelCol !== null ? t.header[t.labelCol] : 'riga'));
+  if (csvChart) {
+    csvChart.data.labels = labels;
+    csvChart.data.datasets[0].data = values;
+    csvChart.data.datasets[0].label = name;
+    csvChart.update();
+    return;
+  }
+  csvChart = new Chart(canvas, {
+    type: 'bar',
+    data: {labels: labels, datasets: [{
+      label: name, data: values,
+      backgroundColor: C.c1, hoverBackgroundColor: C.c1,
+      maxBarThickness: 24, borderRadius: 4, borderSkipped: 'start'
+    }]},
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      animation: ANIM ? {duration: 450} : false,
+      layout: {padding: {right: 8}},
+      plugins: {
+        legend: {display: false},
+        tooltip: tooltipStyle({
+          title: function(items){ return items[0].label; },
+          label: function(c){ return csvFmt(c.parsed.x) + ' · ' + c.dataset.label; }
+        })
+      },
+      scales: {
+        x: {beginAtZero: true, grace: '14%', border: {display: false}, grid: {color: C.line},
+            ticks: {color: C.muted, maxTicksLimit: 5, callback: function(v){ return fmt(v, 0, 1); }}},
+        y: {grid: {display: false}, border: {color: C.line2}, ticks: {color: C.onDark2, font: {size: 12.5, weight: '500'}}}
+      }
+    },
+    plugins: [valueLabelPlugin('max', function(){ return csvFmt; })]
+  });
+}
+
+function showCsv(text, source){
+  var rows = parseCSV(text);
+  if (rows.length < 2) return 'Il foglio è vuoto oppure ha solo la riga di intestazione.';
+  var t = analyseTable(rows);
+  csvState = t;
+
+  var sel = $('csvCol');
+  sel.replaceChildren();
+  t.numeric.forEach(function(j){
+    if (j === t.labelCol) return;
+    var o = el('option', null, t.header[j]);
+    o.value = String(j);
+    sel.append(o);
+  });
+  if (sel.options.length) { sel.selectedIndex = 0; sel.value = sel.options[0].value; }
+  $('colPick').hidden = sel.options.length < 2;
+
+  renderCsvTable(t);
+  renderCsvChart();
+
+  var info = fmt(t.data.length, 0) + (t.data.length === 1 ? ' riga' : ' righe') + ' · ' + t.header.length + ' colonne';
+  if (t.data.length > MAX_TABLE_ROWS) info += ' · in tabella le prime ' + MAX_TABLE_ROWS;
+  if (t.numeric.length && t.data.length > MAX_CHART_ROWS) info += ' · nel grafico le prime ' + MAX_CHART_ROWS;
+  $('csvInfo').textContent = info;
+
+  var raw = text.length > 2000 ? text.slice(0, 2000) + '\n…' : text;
+  $('csvRaw').textContent = raw;
+
+  var tag = $('csvSourceTag');
+  tag.textContent = source === 'sample' ? 'dati di esempio' : 'il tuo foglio';
+  tag.classList.toggle('tag-mine', source !== 'sample');
+  if (!t.numeric.length) return 'nonum';
+  return null;
+}
+
+function showMsg(kind, paragraphs){
+  var box = $('csvMsg'), body = $('csvMsgBody');
+  box.dataset.kind = kind;
+  var nodes = paragraphs.map(function(parts){
+    var p = el('p');
+    (Array.isArray(parts) ? parts : [parts]).forEach(function(part){
+      if (typeof part === 'string') p.append(document.createTextNode(part));
+      else if (part && part.code) p.append(el('code', null, part.code));
+      else if (part && part.b) p.append(el('b', null, part.b));
+    });
+    return p;
+  });
+  body.replaceChildren.apply(body, nodes);
+  box.hidden = false;
+}
+function hideMsg(){ $('csvMsg').hidden = true; }
+
+function useSample(announce){
+  showCsv(SAMPLE_CSV, 'sample');
+  if (announce) showMsg('info', ['Stai vedendo i dati di esempio: vendite Ho.Re.Ca. del terzo trimestre per area.']);
+  else hideMsg();
+}
+
+/* Riconosce i link di Google Sheets e li porta, se possibile, al formato CSV */
+function normaliseSheetUrl(url){
+  var res = {url: url, note: null, editLink: false};
+  if (!/(^|\.)docs\.google\.com$/.test(url.hostname) || url.pathname.indexOf('/spreadsheets/') === -1) return res;
+  if (/\/pubhtml/.test(url.pathname)) {
+    url.pathname = url.pathname.replace(/\/pubhtml.*$/, '/pub');
+    url.searchParams.set('output', 'csv');
+    res.note = 'Il link era quello della pagina web pubblicata: l\'ho trasformato nella versione CSV.';
+  } else if (/\/pub$/.test(url.pathname)) {
+    if (url.searchParams.get('output') !== 'csv') {
+      url.searchParams.set('output', 'csv');
+      res.note = 'Ho impostato il formato CSV nel link.';
+    }
+  } else {
+    var m = url.pathname.match(/\/spreadsheets\/d\/([^/]+)/);
+    if (m && m[1] !== 'e') {
+      var gid = (url.hash.match(/gid=(\d+)/) || url.search.match(/gid=(\d+)/) || [])[1];
+      res.url = new URL('https://docs.google.com/spreadsheets/d/' + m[1] + '/export?format=csv' + (gid ? '&gid=' + gid : ''));
+      res.editLink = true;
+    }
+  }
+  return res;
+}
+
+var csvBusy = false;
+function loadCsvFromUrl(){
+  if (csvBusy) return;
+  var raw = $('csvUrl').value.trim();
+  if (!raw) {
+    showMsg('error', ['Incolla prima il link del foglio pubblicato in formato CSV, poi premi «Carica».']);
+    $('csvUrl').focus();
+    return;
+  }
+  var url;
+  try { url = new URL(raw); } catch (e) { url = null; }
+  if (!url || (url.protocol !== 'https:' && url.protocol !== 'http:')) {
+    showMsg('error', [['Questo non sembra un link. Deve iniziare con ', {code: 'https://'}, ': copialo per intero dalla finestra «Pubblica sul web».']]);
+    return;
+  }
+  var norm = normaliseSheetUrl(url);
+  var target = norm.url;
+
+  csvBusy = true;
+  var btn = $('btnCsvLoad');
+  btn.disabled = true; btn.textContent = 'Carico…';
+  showMsg('info', ['Sto leggendo il foglio…']);
+
+  var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+  var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 10000);
+  var opts = {cache: 'no-store'};
+  if (ctrl) opts.signal = ctrl.signal;
+  var failure = null;
+
+  fetch(target.toString(), opts)
+    .then(function(res){
+      if (!res.ok) { failure = {status: res.status}; throw new Error('http'); }
+      var ct = (res.headers.get('content-type') || '').toLowerCase();
+      return res.text().then(function(text){ return {text: text, ct: ct}; });
+    })
+    .then(function(r){
+      var text = r.text;
+      if (text.length > 2000000) { failure = {big: true}; throw new Error('big'); }
+      if (r.ct.indexOf('text/html') > -1 || /^\s*</.test(text)) { failure = {html: true}; throw new Error('html'); }
+      var problem = showCsv(text, 'mine');
+      if (problem && problem !== 'nonum') { failure = {empty: problem}; throw new Error('empty'); }
+      var lines = [];
+      if (norm.note) lines.push(norm.note);
+      lines.push('Foglio caricato alle ' + hms(new Date()) + ': ' + fmt(csvState.data.length, 0) + (csvState.data.length === 1 ? ' riga.' : ' righe.'));
+      if (problem === 'nonum') {
+        lines.push('Non trovo una colonna di numeri da mettere nel grafico: la tabella però è qui sotto.');
+        showMsg('info', lines);
+      } else {
+        showMsg('ok', lines);
+      }
+    })
+    .catch(function(err){
+      var aborted = err && err.name === 'AbortError';
+      var msgs;
+      if (failure && failure.status) {
+        if (failure.status === 404) msgs = ['Il link non porta a nessun foglio (errore 404). Controlla di averlo copiato per intero.'];
+        else if (failure.status === 401 || failure.status === 403) msgs = ['Il foglio non è pubblico. In Google Sheets usa File → Condividi → Pubblica sul web e scegli il formato CSV.'];
+        else msgs = ['Il server del foglio ha risposto con un errore (codice ' + failure.status + '). Riprova tra qualche istante.'];
+      } else if (failure && failure.html) {
+        msgs = ['Il link apre una pagina web, non un file CSV.', 'Nella finestra «Pubblica sul web» scegli il formato «Valori separati da virgola (.csv)» e copia il nuovo link.'];
+      } else if (failure && failure.big) {
+        msgs = ['Il file è troppo grande per questa demo (oltre 2 MB). Pubblica solo il foglio che ti serve.'];
+      } else if (failure && failure.empty) {
+        msgs = [failure.empty];
+      } else if (aborted) {
+        msgs = ['Il foglio non ha risposto entro 10 secondi. Controlla la connessione e riprova.'];
+      } else if (norm.editLink) {
+        msgs = ['Questo è il link per modificare il foglio e il browser non può leggerlo da qui.', 'Serve il link di «Pubblica sul web» in formato CSV: segui i tre passaggi qui sopra.'];
+      } else if (location.protocol === 'file:') {
+        var fileName = decodeURIComponent(location.pathname.split('/').pop() || '07_cruscotto_live.html');
+        msgs = [
+          'Il browser ha bloccato la lettura del foglio. Succede quando la pagina è aperta con doppio click (indirizzo file://).',
+          ['Apri il Terminale nella cartella di questo file e scrivi ', {code: 'python3 -m http.server 8765'}, '.'],
+          ['Poi apri nel browser ', {code: 'http://localhost:8765/' + fileName}, ' e riprova.']
+        ];
+      } else {
+        msgs = ['Non riesco a raggiungere il foglio.', 'Controlla che il link sia quello di «Pubblica sul web» in formato CSV e che la connessione funzioni.'];
+      }
+      msgs.push('I dati mostrati sotto non sono cambiati.');
+      showMsg('error', msgs);
+    })
+    .then(function(){
+      clearTimeout(timer);
+      csvBusy = false;
+      btn.disabled = false; btn.textContent = 'Carica';
+    });
+}
+
+$('csvForm').addEventListener('submit', function(e){ e.preventDefault(); loadCsvFromUrl(); });
+$('btnCsvSample').addEventListener('click', function(){ useSample(true); });
+$('csvCol').addEventListener('change', renderCsvChart);
+
+/* ------------------------------------------------------------------
+   Avvio
+   ------------------------------------------------------------------ */
+renderRates(false);
+useSample(false);
+
+if (THUMB) {
+  /* Anteprima della galleria: nessuna rete, nessun timer, aspetto "vivo" */
+  var now = new Date();
+  $('ratesReadAt').textContent = hms(now);
+  $('ratesSourceDate').textContent = SAMPLE_DATE;
+  setRatesState('live');
+  renderRates(false);
+  calc();
+  updateNext();
+} else {
+  setRatesState('loading');
+  calc();
+  startAuto();
+  loadRates();
+  scheduleOrder();
+}
+
+/* Ridisegna i grafici quando i font sono pronti */
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function(){
+    [hourChart, csvChart].forEach(function(ch){ if (ch) ch.update('none'); });
+  });
+}
+
+})();
+</script>
+</body>
+</html>

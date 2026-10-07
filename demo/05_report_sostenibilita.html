@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bilancio di Sostenibilità 2025</title>
+<meta name="description" content="Bilancio di Sostenibilità 2025 di Selvana Caffè, azienda inventata: filiera, ambiente, persone, comunità e obiettivi 2028.">
+<script>
+(function(){var h=document.documentElement;
+  if(location.hash==='#thumb'){h.classList.add('is-thumb');}
+  try{if(window.self!==window.top){h.classList.add('is-embedded');}}catch(e){h.classList.add('is-embedded');}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:   #F3F5F0;
+  --surface: #FBFCFA;
+  --ink:     #15201A;
+  --ink-2:   #4A5650;
+  --muted:   #7D8882;
+  --line:    #DDE3DC;
+  --selva:   #1D3B2F;
+  --selva-2: #2A5242;
+  --ciliegia:#C8402A;
+  --crema:   #E2B15B;
+  --on-dark: #F1F4EE;
+  --on-dark-2: rgba(241,244,238,.72);
+  --good: #0E8A3E; --bad: #C0362C;
+
+  /* derivati dal brand */
+  --on-dark-line: rgba(241,244,238,.18);
+  --tint: #E5EDE7;
+  --shadow: 0 1px 2px rgba(21,32,26,.04), 0 8px 24px rgba(21,32,26,.07);
+
+  /* grafici: palette categoriale validata + passi neutri */
+  --chart-1:#178A5A; --chart-2:#D4502F; --chart-3:#2F6FC0; --chart-4:#B8860B; --chart-5:#9B4FA8;
+  --chart-rest:#C3CCC5;
+  --chart-track:#CFE3D6;
+
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --maxw: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --nav-h: 56px;
+}
+
+/* ---------- cromatura demo (identica in ogni file) ---------- */
+.dc-back,.dc-hint{position:fixed;z-index:9000;font:500 13px/1.4 "Hanken Grotesk",system-ui,sans-serif;}
+.dc-back{top:14px;left:14px;padding:7px 12px;border-radius:999px;background:rgba(21,32,26,.82);color:#F1F4EE;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dc-back:hover{background:rgba(21,32,26,.95)}
+.dc-back:focus-visible,.dc-hint summary:focus-visible{outline:2px solid #E2B15B;outline-offset:2px}
+.dc-hint{left:14px;bottom:14px;max-width:320px;background:rgba(21,32,26,.88);color:#F1F4EE;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.dc-hint summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:600;letter-spacing:.02em}
+.dc-hint summary::-webkit-details-marker{display:none}
+.dc-hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:#E2B15B;color:#15201A;font-size:11px;font-weight:800}
+.dc-hint ul{margin:0;padding:0 16px 12px 30px}
+.dc-hint li{margin:4px 0;color:rgba(241,244,238,.86)}
+html.is-embedded .dc-back,html.is-thumb .dc-back,html.is-thumb .dc-hint{display:none}
+@media print{.dc-back,.dc-hint{display:none}}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+[hidden]{display:none!important}
+canvas{display:block;max-width:100%}
+a{color:var(--selva-2);text-underline-offset:.18em}
+:focus-visible{outline:2px solid var(--ciliegia);outline-offset:2px}
+button{font-family:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.11em;text-transform:uppercase}
+.print-only{display:none}
+
+/* logo */
+.brand{display:inline-flex;align-items:center;gap:.45em}
+.bean{width:1.25em;height:1.25em;color:var(--selva);flex:none}
+.brand-word{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:-.01em}
+
+/* ---------- testata ---------- */
+.cover{position:relative;overflow:hidden;background:var(--selva);color:var(--on-dark);--bean-cut:var(--selva)}
+.cover .bean{color:var(--crema)}
+.cover-art{position:absolute;right:-150px;top:-150px;width:min(700px,92vw);height:auto;color:var(--on-dark);opacity:.12;pointer-events:none}
+.cover-inner{position:relative;max-width:var(--maxw);margin:0 auto;padding:76px var(--gutter) 44px}
+html.is-embedded .cover-inner,html.is-thumb .cover-inner{padding-top:40px}
+.cover-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
+.cover .brand{font-size:24px;color:var(--on-dark)}
+.cover-tag{color:var(--on-dark-2);margin:0}
+.cover-body{display:grid;gap:26px;margin-top:38px;align-items:end}
+.cover-eyebrow{color:var(--crema);margin:0}
+.cover h1{font-family:var(--font-display);font-weight:700;font-size:clamp(42px,6vw,80px);line-height:1;letter-spacing:-.015em;margin:14px 0 0}
+.cover h1 .yr{font-style:italic;color:var(--crema)}
+.cover-sub{font-size:clamp(17px,1.45vw,19px);line-height:1.55;color:var(--on-dark-2);margin:0 0 22px;max-width:46ch}
+.cover-meta{margin:0;border-top:1px solid var(--on-dark-line)}
+.cover-meta div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--on-dark-line);font-size:14.5px;line-height:1.45}
+.cover-meta dt{color:var(--on-dark-2);padding-top:2px}
+.cover-meta dd{margin:0;color:var(--on-dark)}
+@media (min-width:960px){
+  .cover-body{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px}
+}
+@media (max-width:600px){.cover-art{opacity:.08}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cover h1,.cover-sub,.cover-meta{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.cover-sub{animation-delay:.12s}
+.cover-meta{animation-delay:.22s}
+
+/* ---------- navigazione sticky ---------- */
+.toc{position:sticky;top:0;z-index:60;background:var(--surface);border-bottom:1px solid var(--line)}
+.toc-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);height:var(--nav-h);display:flex;align-items:center;gap:20px}
+html:not(.is-embedded):not(.is-thumb) .toc-inner{padding-left:max(var(--gutter), calc(124px - max(0px, (100vw - var(--maxw)) / 2)))}
+.toc-brand{display:inline-flex;align-items:center;gap:12px;flex:none;color:var(--ink);text-decoration:none;--bean-cut:var(--surface)}
+.toc-brand .brand{font-size:17px}
+.toc-brand .t{font-size:13px;font-weight:600;color:var(--ink-2);padding-left:12px;border-left:1px solid var(--line)}
+@media (max-width:860px){.toc-brand{display:none}}
+.toc-scroll{position:relative;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.toc-scroll::-webkit-scrollbar{display:none}
+.toc-list{display:flex;gap:2px;list-style:none;margin:0 0 0 auto;padding:0;width:max-content}
+.toc-list a{display:flex;align-items:baseline;gap:6px;padding:7px 11px;border-radius:6px;color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap;transition:background-color .15s,color .15s}
+.toc-list a .n{font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--muted)}
+.toc-list a:hover{color:var(--ink);background:var(--paper)}
+.toc-list a[aria-current="true"]{color:var(--selva);background:var(--tint)}
+.toc-list a[aria-current="true"] .n{color:var(--ciliegia)}
+.progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
+.progress span{display:block;height:100%;background:var(--ciliegia);transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- capitoli ---------- */
+.chapter{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line);scroll-margin-top:var(--nav-h)}
+main > .chapter:first-child{border-top:0}
+.chapter-grid{display:grid;grid-template-columns:minmax(0,1fr)}
+.chapter-num{display:none}
+.chapter-body{min-width:0}
+@media (min-width:1080px){
+  .chapter-grid{grid-template-columns:96px minmax(0,1fr);column-gap:56px}
+  .chapter-num{display:block;position:sticky;top:calc(var(--nav-h) + 28px);align-self:start;font-family:var(--font-display);font-style:italic;font-weight:700;font-size:64px;line-height:.9;color:var(--selva-2);border-top:2px solid var(--selva);padding-top:14px}
+}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--selva-2);margin:0}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--ciliegia)}
+.chapter h2{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-.012em;margin:14px 0 16px;max-width:24ch;text-wrap:balance}
+.lede{font-size:clamp(17px,1.35vw,19px);color:var(--ink-2);max-width:65ch;margin:0}
+.lede strong{color:var(--ink);font-weight:600}
+.block{margin-top:clamp(40px,5vw,56px)}
+.sub-h{font-size:19px;font-weight:700;line-height:1.3;margin:0}
+.note{font-size:14px;line-height:1.55;color:var(--ink-2);margin:12px 0 0;max-width:80ch}
+
+/* ---------- 01 sintesi ---------- */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+.tile{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 20px 16px}
+.tile p{margin:0}
+.tile-k{color:var(--muted)}
+.tile .tile-v{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;margin-top:14px;color:var(--selva);font-weight:700;line-height:1;letter-spacing:-.02em}
+.tile-num{font-size:clamp(44px,4.2vw,56px)}
+.tile-unit{font-size:20px;font-weight:600;color:var(--selva-2);letter-spacing:0}
+.delta{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600}
+.tile .delta{margin-top:10px}
+.delta.good{color:var(--good)}
+.delta.bad{color:var(--bad)}
+.tile .tile-d{font-size:15px;line-height:1.45;color:var(--ink-2);margin:8px 0 16px}
+.tile-foot{margin:auto 0 0;padding-top:12px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile-foot dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tile-foot dd{margin:2px 0 0;font-size:14px;font-weight:600;color:var(--ink)}
+.quote{margin:48px 0 0;padding:28px 0 0;border-top:1px solid var(--line);max-width:780px}
+.quote blockquote{margin:0}
+.quote blockquote p{font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(26px,2.6vw,32px);line-height:1.3;margin:0;color:var(--ink)}
+.quote figcaption{margin-top:14px;font-size:14px;color:var(--ink-2)}
+.quote figcaption strong{color:var(--ink);font-weight:600}
+.asof{margin-top:20px;color:var(--muted)}
+
+/* ---------- filtri, riepiloghi, card grafici ---------- */
+.filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:36px}
+.filter-label{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:14px;font-weight:600;line-height:1;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 13px;min-height:38px;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
+.chip:hover{border-color:var(--ink-2);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--selva);border-color:var(--selva);color:var(--on-dark)}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.summary > div{padding:14px 18px;border-left:1px solid var(--line);min-width:0}
+.summary > div:first-child{border-left:0}
+.summary .k{display:block;color:var(--muted)}
+.summary .v{display:block;margin-top:4px;font-size:21px;font-weight:700;line-height:1.25;color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:clamp(16px,2.2vw,24px);margin:14px 0 0}
+.card-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px 20px;margin-bottom:18px}
+.card-head h3{font-size:17px;font-weight:700;line-height:1.35;margin:0}
+.card-head p{margin:4px 0 0;font-size:14px;color:var(--ink-2);max-width:62ch}
+.card-head .kicker{font-size:11.5px;color:var(--muted);margin:0 0 6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--ink-2)}
+.legend li{display:inline-flex;align-items:center;gap:8px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none}
+.sw-1{background:var(--chart-1)}
+.sw-rest{background:var(--chart-rest)}
+.sw-track{background:var(--chart-track)}
+.view-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;line-height:1;color:var(--selva);background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;white-space:nowrap;transition:background-color .15s,border-color .15s}
+.view-toggle:hover{border-color:var(--selva-2);background:var(--tint)}
+.view-toggle[aria-pressed="true"]{background:var(--tint);border-color:var(--selva-2)}
+.view-toggle svg{width:14px;height:14px;flex:none}
+.chart-box{position:relative;height:var(--h,320px)}
+.table-view{overflow-x:auto}
+
+/* tabelle */
+table.data{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;line-height:1.4}
+table.data th,table.data td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+table.data thead th{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom-color:var(--muted);vertical-align:bottom;white-space:nowrap}
+table.data .num{text-align:right}
+table.data tbody tr:hover{background:var(--paper)}
+table.data tr.is-sel{background:var(--tint)}
+table.data tfoot th,table.data tfoot td{font-weight:700;color:var(--ink);border-top:1px solid var(--ink);border-bottom:0}
+.cell-note{display:block;font-size:11.5px;font-weight:500;color:var(--muted)}
+.table-scroll{overflow-x:auto;margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.table-scroll table.data{min-width:760px}
+.table-scroll table.data td:first-child{min-width:220px}
+.table-scroll table.data tbody tr:last-child td{border-bottom:0}
+.th-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;margin:0;padding:4px 0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer;white-space:nowrap}
+.th-btn:hover{color:var(--ink)}
+.th-btn:focus-visible{outline:2px solid var(--ciliegia);outline-offset:3px;border-radius:3px}
+.sort-ico{display:inline-block;width:10px;text-align:center;opacity:.5}
+.sort-ico::before{content:"↕"}
+th[aria-sort] .th-btn{color:var(--ink)}
+th[aria-sort] .sort-ico{opacity:1;color:var(--ciliegia)}
+th[aria-sort="ascending"] .sort-ico::before{content:"↑"}
+th[aria-sort="descending"] .sort-ico::before{content:"↓"}
+.sup-n{display:block;font-weight:600;color:var(--ink)}
+.sup-r{display:block;font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:12.5px;font-weight:600;color:var(--ink-2);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.table-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 20px}
+.table-top p{margin:0;font-size:14px;color:var(--ink-2)}
+
+/* ---------- 03 ambiente ---------- */
+.eco-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+.eco-card{display:flex;flex-direction:column;align-items:stretch;text-align:left;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.eco-card:hover{border-color:var(--muted);box-shadow:var(--shadow)}
+.eco-card[aria-pressed="true"]{border-color:var(--selva);box-shadow:inset 0 0 0 1px var(--selva)}
+.eco-k{color:var(--muted)}
+.eco-v{display:block;margin-top:10px;font-size:34px;font-weight:700;line-height:1.05;letter-spacing:-.015em;color:var(--ink)}
+.eco-v small{font-size:14px;font-weight:600;letter-spacing:0;color:var(--ink-2);margin-left:4px}
+.eco-card .delta{margin-top:6px}
+.eco-spark{display:block;height:56px;margin:12px 0 2px}
+.eco-spark canvas{pointer-events:none}
+.spark-yrs{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+.eco-cta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;font-weight:600;color:var(--selva-2)}
+.eco-cta .on{display:none;color:var(--selva)}
+.eco-card[aria-pressed="true"] .eco-cta .off{display:none}
+.eco-card[aria-pressed="true"] .eco-cta .on{display:inline}
+.eco-detail{margin-top:16px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+
+/* ---------- 04 persone ---------- */
+.people{display:grid;gap:24px;margin-top:40px}
+.stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);align-content:start}
+.stat{padding:20px 16px 20px 0;border-bottom:1px solid var(--line);min-width:0}
+.stat:nth-child(odd){border-right:1px solid var(--line)}
+.stat:nth-child(even){padding-left:20px}
+.stat p{margin:0}
+.stat-v{font-size:clamp(38px,3.4vw,48px);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--selva)}
+.stat-v small{font-size:19px;font-weight:600;letter-spacing:0;color:var(--selva-2);margin-left:2px}
+.stat .stat-k{margin-top:10px;font-size:15.5px;font-weight:600;line-height:1.35;color:var(--ink)}
+.stat .stat-s{margin-top:2px;font-size:13.5px;color:var(--ink-2)}
+.people .card{margin-top:0}
+@media (min-width:980px){.people{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start;gap:32px}}
+
+/* ---------- 05 comunità ---------- */
+.stories{display:grid;gap:36px;margin-top:40px}
+@media (min-width:900px){.stories{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
+.story{border-top:2px solid var(--selva);padding-top:18px}
+.story p{margin:0}
+.story-place{color:var(--selva-2)}
+.story .story-num{margin-top:18px;font-size:clamp(50px,5vw,64px);font-weight:700;line-height:1;letter-spacing:-.025em;color:var(--selva)}
+.story .story-unit{margin-top:6px;font-size:15px;font-weight:600;color:var(--ink-2)}
+.story h3{font-size:19px;line-height:1.3;margin:20px 0 8px}
+.story-text{font-size:16px;line-height:1.6;color:var(--ink-2)}
+
+/* ---------- 06 obiettivi ---------- */
+.goal-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:36px 0 0;font-size:13.5px;color:var(--ink-2)}
+.goal-legend > span{display:inline-flex;align-items:center;gap:8px}
+.mk{display:inline-block;width:2px;height:14px;background:var(--ink)}
+.goals{margin-top:18px}
+.goal{padding:24px 0 26px;border-top:1px solid var(--line)}
+.goal:last-child{border-bottom:1px solid var(--line)}
+.goal-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:40px}
+.goal-title{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:19px;font-weight:700;line-height:1.3;margin:0}
+.goal-status{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+.goal-status.good{color:var(--good)}
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+.meter{position:relative;height:12px;border-radius:6px;background:var(--chart-track)}
+.meter-fill{position:absolute;left:0;top:0;bottom:0;width:var(--p);background:var(--chart-1);border-radius:6px 0 0 6px}
+.meter.full .meter-fill{border-radius:6px}
+.meter-mark{position:absolute;left:var(--p);top:-7px;bottom:-7px;width:2px;margin-left:-1px;background:var(--ink)}
+.meter-lbl{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:13.5px;font-weight:700;color:var(--ink)}
+.meter.full .meter-lbl{left:auto;right:0;transform:none}
+.meter-scale{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.meter-scale span:last-child{text-align:right}
+.next{margin-top:28px;max-width:65ch;font-size:16px;color:var(--ink-2)}
+.next strong{color:var(--ink)}
+
+/* ---------- footer ---------- */
+.site-foot{background:var(--ink);color:var(--on-dark);--bean-cut:var(--ink);padding:56px 0 104px;font-size:15px}
+.site-foot .bean{color:var(--crema)}
+.site-foot .brand{font-size:26px;color:var(--on-dark)}
+.foot-grid{display:grid;gap:32px}
+@media (min-width:860px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr}}
+.foot-pay{font-family:var(--font-display);font-weight:600;font-style:italic;font-size:28px;line-height:1.2;margin:16px 0 0;color:var(--on-dark)}
+.foot-h{color:var(--crema);margin:0 0 10px}
+.site-foot p{margin:0;color:var(--on-dark-2);line-height:1.65}
+.site-foot a{color:var(--on-dark);overflow-wrap:anywhere}
+.foot-legal{margin-top:40px;padding-top:18px;border-top:1px solid var(--on-dark-line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:13px}
+.foot-legal .disc{color:var(--on-dark)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .tiles,.eco-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px){
+  .summary{grid-template-columns:1fr 1fr}
+  .summary > div:nth-child(3){border-left:0}
+  .summary > div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:560px){
+  .tiles,.eco-grid{grid-template-columns:minmax(0,1fr)}
+  .stat:nth-child(even){padding-left:14px}
+  .stat{padding-right:10px}
+  .cover-meta div{grid-template-columns:96px minmax(0,1fr)}
+}
+
+/* ---------- anteprima galleria ---------- */
+html.is-thumb .cover-inner{padding-bottom:30px}
+html.is-thumb .cover-body{margin-top:24px}
+html.is-thumb #sintesi{padding-top:32px}
+html.is-thumb #sintesi h2{font-size:40px;margin-bottom:0}
+html.is-thumb #sintesi .lede{display:none}
+html.is-thumb .tiles{margin-top:24px}
+html.is-thumb .progress{display:none}
+html.is-thumb *,html.is-thumb *::before,html.is-thumb *::after{animation:none!important;transition:none!important}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ---------- stampa ---------- */
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{-webkit-print-color-adjust:exact;print-color-adjust:exact;animation:none!important;transition:none!important}
+  body{background:var(--surface);font-size:10.5pt;line-height:1.5;overflow:visible}
+  .toc,.progress,.view-toggle,.filter-row,.eco-cta{display:none!important}
+  .print-only{display:block}
+  .print-only:empty{display:none}
+  .wrap,.cover-inner{max-width:none;padding-left:0;padding-right:0}
+  .cover{border-radius:0}
+  .cover-inner{padding:18px 20px}
+  .cover-art{width:420px;right:-90px;top:-110px}
+  .cover-body{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px;margin-top:12px}
+  .cover h1{font-size:40px}
+  .cover-sub{font-size:10pt;margin-bottom:10px}
+  .cover-meta div{padding:5px 0;font-size:9.5pt}
+  .chapter{padding:18px 0 0;border-top:0;break-before:page}
+  #sintesi{break-before:auto;padding-top:18px}
+  .chapter-grid{grid-template-columns:minmax(0,1fr)}
+  .chapter-num{display:none!important}
+  .chapter h2{font-size:30px;max-width:none;margin:8px 0 10px}
+  .lede{font-size:11pt}
+  .eyebrow,.chapter h2,.card-head,.sub-h,.table-top,.goal-head,h3{break-after:avoid}
+  .tile,.card,.eco-card,.story,.goal,.stat,.quote,.summary,.chart-box,tr,.goal-legend{break-inside:avoid}
+  .tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+  .tile-foot dt{font-size:8.5px;letter-spacing:.05em}
+  .tile-foot dd{font-size:9.5pt}
+  .tile{padding:12px}
+  .tile-num{font-size:34px}
+  .eco-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}
+  .eco-card{padding:12px}
+  .eco-v{font-size:24px}
+  .people{grid-template-columns:minmax(0,1fr);gap:16px}
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stat,.stat:nth-child(even){padding:12px 10px;border-right:1px solid var(--line)}
+  .stories{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .story-num{font-size:40px}
+  .table-scroll{overflow:visible}
+  .table-scroll table.data,.table-scroll table.data td:first-child{min-width:0}
+  table.data{font-size:8.5pt}
+  table.data th,table.data td{padding:6px 8px}
+  .chart-box{height:auto!important}
+  canvas{max-width:100%!important;height:auto!important}
+  a{color:var(--ink);text-decoration:underline}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:var(--ink-2)}
+  .site-foot{padding:14px 0;margin-top:8px;break-inside:avoid}
+  .site-foot .wrap{padding:0 20px}
+  .foot-grid{grid-template-columns:1.3fr 1fr 1fr}
+  .goal{padding:8px 0 12px}
+  .goal-head{margin-bottom:28px}
+  .goal-legend{margin-top:16px}
+  .next{margin-top:14px;font-size:10pt}
+  .quote{margin-top:16px;padding-top:12px}
+  .quote blockquote p{font-size:20px}
+  .asof{margin-top:10px}
+  .tile .tile-d{margin:6px 0 10px;font-size:9.5pt}
+  #filiera .block{break-before:page;margin-top:0;padding-top:8px}
+  table.data tfoot{display:table-row-group}
+  table.data thead th,.th-btn{white-space:normal}
+  #tblFornitori th:first-child,#tblFornitori td:first-child{width:30%}
+  th:not([aria-sort]) .sort-ico{display:none}
+  .foot-grid{gap:16px}
+  .site-foot .brand{font-size:20px}
+  .foot-pay{font-size:20px;margin-top:8px}
+  .site-foot p{font-size:9.5pt;line-height:1.45}
+  .foot-legal{margin-top:14px;padding-top:10px}
+}
+</style>
+</head>
+<body>
+<a class="dc-back" href="../index.html">← Galleria</a>
+<details class="dc-hint">
+  <summary>Cosa provare</summary>
+  <ul>
+    <li>Filtra la filiera per origine: grafico, riepilogo e tabella cambiano insieme.</li>
+    <li>Ordina la tabella dei fornitori cliccando le intestazioni (anche con Tab e Invio).</li>
+    <li>Apri una scheda Ambiente in grande: assi, obiettivo e valori al passaggio del mouse.</li>
+    <li>Premi Cmd+P (Ctrl+P su Windows): il bilancio si stampa pulito in PDF.</li>
+  </ul>
+</details>
+
+<header class="cover" id="top">
+  <svg class="cover-art" viewBox="-300 -300 600 600" aria-hidden="true" focusable="false">
+    <defs><path id="contour" d="M0-260C150-262 262-140 255 10 248 160 130 265-10 258-160 250-262 130-255-15-248-150-140-258 0-260Z"/></defs>
+    <g fill="none" stroke="currentColor">
+      <use href="#contour" stroke-width="1.2"/>
+      <use href="#contour" transform="translate(14 8) rotate(8) scale(.86)" stroke-width="1.4"/>
+      <use href="#contour" transform="translate(26 14) rotate(16) scale(.72)" stroke-width="1.67"/>
+      <use href="#contour" transform="translate(36 18) rotate(24) scale(.58)" stroke-width="2.07"/>
+      <use href="#contour" transform="translate(44 20) rotate(32) scale(.44)" stroke-width="2.73"/>
+      <use href="#contour" transform="translate(50 20) rotate(40) scale(.30)" stroke-width="4"/>
+      <use href="#contour" transform="translate(54 18) rotate(48) scale(.16)" stroke-width="7.5"/>
+    </g>
+  </svg>
+  <div class="cover-inner">
+    <div class="cover-top">
+      <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <p class="cover-tag mono">Caffè · dal 1961</p>
+    </div>
+    <div class="cover-body">
+      <div>
+        <p class="cover-eyebrow mono">Torrefazione Selvana S.p.A.</p>
+        <h1>Bilancio di Sostenibilità <span class="yr">2025</span></h1>
+      </div>
+      <div>
+        <p class="cover-sub">Da dove arriva il nostro caffè, quanta energia serve per tostarlo, chi ci lavora e cosa restituiamo ai territori. Con i numeri del 2025 e la strada verso il 2028.</p>
+        <dl class="cover-meta">
+          <div><dt class="mono">Periodo</dt><dd>1/1–31/12/2025</dd></div>
+          <div><dt class="mono">Pubblicato</dt><dd>giugno 2026</dd></div>
+          <div><dt class="mono">A cura di</dt><dd>Anna Ghisleri, Sostenibilità &amp; Filiera</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sezioni del bilancio">
+  <div class="toc-inner">
+    <a class="toc-brand" href="#top" aria-label="Torna all'inizio del bilancio">
+      <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <span class="t">Bilancio 2025</span>
+    </a>
+    <div class="toc-scroll" id="tocScroll">
+      <ol class="toc-list">
+        <li><a href="#sintesi"><span class="n">01</span>Sintesi</a></li>
+        <li><a href="#filiera"><span class="n">02</span>Filiera</a></li>
+        <li><a href="#ambiente"><span class="n">03</span>Ambiente</a></li>
+        <li><a href="#persone"><span class="n">04</span>Persone</a></li>
+        <li><a href="#comunita"><span class="n">05</span>Comunità</a></li>
+        <li><a href="#obiettivi"><span class="n">06</span>Obiettivi 2028</a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+</nav>
+
+<main>
+
+<!-- 01 SINTESI -->
+<section class="chapter" id="sintesi" aria-labelledby="h-sintesi">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">01</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">01 · Sintesi</p>
+      <h2 id="h-sintesi">Più caffè tracciato, meno emissioni per ogni chilo tostato</h2>
+      <p class="lede">Nel 2025 abbiamo tostato <strong>14.200 tonnellate</strong> di caffè. Il 71% arriva da filiere che conosciamo fino alla cooperativa, il 58% dell'energia che usiamo è rinnovabile e ogni chilo tostato pesa 1,90 kg di CO₂e, il 22% in meno del 2021.</p>
+
+      <div class="tiles">
+        <article class="tile">
+          <p class="tile-k mono">Filiera</p>
+          <p class="tile-v"><span class="tile-num" data-count="71">71</span><span class="tile-unit">%</span></p>
+          <p class="delta good">▲ +7 punti sul 2024</p>
+          <p class="tile-d">del caffè arriva da filiere tracciate fino alla cooperativa</p>
+          <dl class="tile-foot"><div><dt>2024</dt><dd>64%</dd></div><div><dt>Obiettivo 2028</dt><dd>90%</dd></div></dl>
+        </article>
+        <article class="tile">
+          <p class="tile-k mono">Energia</p>
+          <p class="tile-v"><span class="tile-num" data-count="58">58</span><span class="tile-unit">%</span></p>
+          <p class="delta good">▲ +6 punti sul 2024</p>
+          <p class="tile-d">dell'energia consumata viene da fonti rinnovabili</p>
+          <dl class="tile-foot"><div><dt>2024</dt><dd>52%</dd></div><div><dt>Obiettivo 2028</dt><dd>80%</dd></div></dl>
+        </article>
+        <article class="tile">
+          <p class="tile-k mono">Emissioni</p>
+          <p class="tile-v"><span class="tile-num" data-count="1.90" data-from="2.44" data-dec="2">1,90</span><span class="tile-unit">kg</span></p>
+          <p class="delta good">▼ −5,9% sul 2024</p>
+          <p class="tile-d">di CO₂e per ogni kg di caffè tostato. Qui meno è meglio.</p>
+          <dl class="tile-foot"><div><dt>2024</dt><dd>2,02 kg</dd></div><div><dt>Obiettivo 2028</dt><dd>1,50 kg</dd></div></dl>
+        </article>
+        <article class="tile">
+          <p class="tile-k mono">Capsule</p>
+          <p class="tile-v"><span class="tile-num" data-count="96">96</span><span class="tile-unit">milioni</span></p>
+          <p class="delta good">▲ +14,3% sul 2024</p>
+          <p class="tile-d">di capsule compostabili prodotte nello stabilimento di Lodi</p>
+          <dl class="tile-foot"><div><dt>2024</dt><dd>84 milioni</dd></div><div><dt>Obiettivo</dt><dd>100% compostabili ✓</dd></div></dl>
+        </article>
+      </div>
+
+      <figure class="quote">
+        <blockquote><p>«Tracciare un sacco di caffè vuol dire sapere chi l'ha coltivato e quanto l'abbiamo pagato. Oggi lo sappiamo per sette sacchi su dieci.»</p></blockquote>
+        <figcaption><strong>Anna Ghisleri</strong>, responsabile Sostenibilità &amp; Filiera</figcaption>
+      </figure>
+      <p class="asof mono">Dati al 31 dicembre 2025 · confronti con il 2024 e con gli obiettivi del piano 2028</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 FILIERA -->
+<section class="chapter" id="filiera" aria-labelledby="h-filiera">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">02</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">02 · Filiera</p>
+      <h2 id="h-filiera">L'Etiopia è tracciata al 100%, il Vietnam è il prossimo cantiere</h2>
+      <p class="lede">Compriamo caffè in sei paesi. Una partita è tracciata quando conosciamo la cooperativa o la fattoria di origine e il prezzo pagato al produttore. L'arabica di Etiopia, Colombia e Honduras è tracciata almeno all'80%. La robusta di India e Vietnam resta sotto il 60%. Pesata sui volumi, la media è del <strong>71%</strong>.</p>
+
+      <div class="filter-row" role="group" aria-labelledby="flt-label">
+        <span class="filter-label mono" id="flt-label">Origine</span>
+        <div class="chips">
+          <button type="button" class="chip" id="chip-tutte" data-origin="all" aria-pressed="true">Tutte</button>
+          <button type="button" class="chip" id="chip-brasile" data-origin="Brasile" aria-pressed="false">Brasile</button>
+          <button type="button" class="chip" id="chip-colombia" data-origin="Colombia" aria-pressed="false">Colombia</button>
+          <button type="button" class="chip" id="chip-etiopia" data-origin="Etiopia" aria-pressed="false">Etiopia</button>
+          <button type="button" class="chip" id="chip-honduras" data-origin="Honduras" aria-pressed="false">Honduras</button>
+          <button type="button" class="chip" id="chip-india" data-origin="India" aria-pressed="false">India</button>
+          <button type="button" class="chip" id="chip-vietnam" data-origin="Vietnam" aria-pressed="false">Vietnam</button>
+        </div>
+      </div>
+      <p class="print-only note" id="printFilter"></p>
+
+      <div class="summary" aria-live="polite">
+        <div><span class="k mono">Origine</span><span class="v" id="sumOrig">Tutte, 6 paesi</span></div>
+        <div><span class="k mono">Acquistate</span><span class="v" id="sumTot">14.200 t</span></div>
+        <div><span class="k mono">Tracciate</span><span class="v" id="sumTr">10.101 t</span></div>
+        <div><span class="k mono">Quota tracciata</span><span class="v" id="sumPct">71%</span></div>
+      </div>
+
+      <figure class="card" id="figFiliera">
+        <figcaption class="card-head">
+          <div>
+            <h3>Tonnellate acquistate nel 2025, per origine</h3>
+            <ul class="legend">
+              <li><span class="sw sw-1" aria-hidden="true"></span>Tracciato</li>
+              <li><span class="sw sw-rest" aria-hidden="true"></span>Non tracciato</li>
+            </ul>
+          </div>
+          <button type="button" class="view-toggle" id="tgFiliera" data-toggle-view data-chart="boxFiliera" aria-controls="tvFiliera" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13v11h-13zM1.5 6h13M1.5 9.5h13M6 6v7.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="lbl">Vista tabella</span></button>
+        </figcaption>
+        <div class="chart-box" id="boxFiliera" style="--h:350px"><canvas id="chFiliera" role="img" aria-label="Grafico a barre orizzontali impilate: tonnellate 2025 per origine, parte tracciata e non tracciata. Brasile 5.100 t, 72% tracciato. Colombia 2.300 t, 85%. India 2.200 t, 57%. Vietnam 2.000 t, 45%. Honduras 1.400 t, 80%. Etiopia 1.200 t, 100%."></canvas></div>
+        <div class="table-view" id="tvFiliera" hidden>
+          <table class="data">
+            <caption class="sr-only">Tonnellate 2025 per origine, tracciate e non tracciate</caption>
+            <thead><tr><th scope="col">Origine</th><th scope="col" class="num">Totale (t)</th><th scope="col" class="num">Tracciate (t)</th><th scope="col" class="num">Non tracciate (t)</th><th scope="col" class="num">% tracciato</th></tr></thead>
+            <tbody id="tvFilBody"></tbody>
+            <tfoot><tr><th scope="row">Totale</th><td class="num">14.200</td><td class="num">10.101</td><td class="num">4.099</td><td class="num">71%<span class="cell-note">media ponderata</span></td></tr></tfoot>
+          </table>
+        </div>
+      </figure>
+
+      <div class="block">
+        <div class="table-top">
+          <h3 class="sub-h" id="h-fornitori">I dodici fornitori principali</h3>
+          <p>Clicca un'intestazione per ordinare. Il filtro per origine vale anche qui.</p>
+        </div>
+        <div class="table-scroll" role="region" aria-labelledby="h-fornitori" tabindex="0">
+          <table class="data" id="tblFornitori">
+            <caption class="sr-only">Fornitori principali 2025: tonnellate, premio sopra il prezzo di mercato, anni di relazione, certificazione. Colonne ordinabili.</caption>
+            <thead>
+              <tr>
+                <th scope="col"><button type="button" class="th-btn" id="sort-nome" data-key="n" data-type="text">Fornitore<span class="sort-ico" aria-hidden="true"></span></button></th>
+                <th scope="col"><button type="button" class="th-btn" id="sort-paese" data-key="c" data-type="text">Paese<span class="sort-ico" aria-hidden="true"></span></button></th>
+                <th scope="col" class="num" aria-sort="descending"><button type="button" class="th-btn" id="sort-tonnellate" data-key="t" data-type="num">Tonnellate<span class="sort-ico" aria-hidden="true"></span></button></th>
+                <th scope="col" class="num"><button type="button" class="th-btn" id="sort-premio" data-key="pr" data-type="num">Premio sul mercato<span class="sort-ico" aria-hidden="true"></span></button></th>
+                <th scope="col" class="num"><button type="button" class="th-btn" id="sort-anni" data-key="y" data-type="num">Anni di relazione<span class="sort-ico" aria-hidden="true"></span></button></th>
+                <th scope="col"><button type="button" class="th-btn" id="sort-cert" data-key="cert" data-type="text">Certificazione<span class="sort-ico" aria-hidden="true"></span></button></th>
+              </tr>
+            </thead>
+            <tbody id="supBody"></tbody>
+            <tfoot id="supFoot"></tfoot>
+          </table>
+        </div>
+        <p class="note" id="supShare">Questi 12 fornitori valgono 7.870 t, il 55% delle 14.200 t acquistate nel 2025.</p>
+        <p class="note">Premio: quanto paghiamo in più rispetto al prezzo di mercato di riferimento, in media sull'anno. Protocollo Selvana: il nostro disciplinare di tracciabilità, verificato ogni anno da un ente terzo.</p>
+        <p class="sr-only" id="sortStatus" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 AMBIENTE -->
+<section class="chapter" id="ambiente" aria-labelledby="h-ambiente">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">03</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">03 · Ambiente</p>
+      <h2 id="h-ambiente">Emissioni per chilo tostato giù del 22% dal 2021</h2>
+      <p class="lede">Quattro indicatori seguiti dal 2021. Il calo delle emissioni viene soprattutto dall'energia rinnovabile, nella torrefazione di Bergamo e nello stabilimento capsule di Lodi. Clicca una scheda per aprirla in grande.</p>
+
+      <div class="eco-grid" role="group" aria-label="Indicatori ambientali: scegli quale aprire in grande">
+        <button type="button" class="eco-card" id="eco-co2" data-metric="co2" aria-pressed="true" aria-controls="ecoDetail">
+          <span class="eco-k mono">Emissioni</span>
+          <span class="eco-v">1,90<small>kg CO₂e / kg</small></span>
+          <span class="delta good">▼ −22% dal 2021</span>
+          <span class="eco-spark"><canvas id="spCo2" aria-hidden="true"></canvas></span>
+          <span class="spark-yrs" aria-hidden="true"><span>2021</span><span>2025</span></span>
+          <span class="eco-cta"><span class="off">Apri in grande ↓</span><span class="on">Aperto qui sotto</span></span>
+        </button>
+        <button type="button" class="eco-card" id="eco-ren" data-metric="ren" aria-pressed="false" aria-controls="ecoDetail">
+          <span class="eco-k mono">Energia rinnovabile</span>
+          <span class="eco-v">58%<small>dei consumi</small></span>
+          <span class="delta good">▲ +27 punti dal 2021</span>
+          <span class="eco-spark"><canvas id="spRen" aria-hidden="true"></canvas></span>
+          <span class="spark-yrs" aria-hidden="true"><span>2021</span><span>2025</span></span>
+          <span class="eco-cta"><span class="off">Apri in grande ↓</span><span class="on">Aperto qui sotto</span></span>
+        </button>
+        <button type="button" class="eco-card" id="eco-waste" data-metric="waste" aria-pressed="false" aria-controls="ecoDetail">
+          <span class="eco-k mono">Rifiuti recuperati</span>
+          <span class="eco-v">93%<small>riciclo e recupero</small></span>
+          <span class="delta good">▲ +15 punti dal 2021</span>
+          <span class="eco-spark"><canvas id="spWaste" aria-hidden="true"></canvas></span>
+          <span class="spark-yrs" aria-hidden="true"><span>2021</span><span>2025</span></span>
+          <span class="eco-cta"><span class="off">Apri in grande ↓</span><span class="on">Aperto qui sotto</span></span>
+        </button>
+        <button type="button" class="eco-card" id="eco-water" data-metric="water" aria-pressed="false" aria-controls="ecoDetail">
+          <span class="eco-k mono">Acqua</span>
+          <span class="eco-v">1,30<small>litri / kg</small></span>
+          <span class="delta good">▼ −28% dal 2021</span>
+          <span class="eco-spark"><canvas id="spWater" aria-hidden="true"></canvas></span>
+          <span class="spark-yrs" aria-hidden="true"><span>2021</span><span>2025</span></span>
+          <span class="eco-cta"><span class="off">Apri in grande ↓</span><span class="on">Aperto qui sotto</span></span>
+        </button>
+      </div>
+
+      <figure class="card eco-detail" id="ecoDetail">
+        <figcaption class="card-head">
+          <div>
+            <p class="kicker mono">In grande · <span id="ecoName">Emissioni per kg tostato</span></p>
+            <h3 id="ecoTitle">Le emissioni per chilo tostato scendono da cinque anni di fila</h3>
+            <p id="ecoNote">Tostatura, energia acquistata e trasporto del caffè verde fino a Bergamo, divisi per i chili tostati. La linea tratteggiata è l'obiettivo 2028.</p>
+          </div>
+          <button type="button" class="view-toggle" id="tgEco" data-toggle-view data-chart="boxEco" aria-controls="tvEco" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13v11h-13zM1.5 6h13M1.5 9.5h13M6 6v7.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="lbl">Vista tabella</span></button>
+        </figcaption>
+        <div class="chart-box" id="boxEco" style="--h:340px"><canvas id="chEco" role="img" aria-label="Grafico a linee: emissioni per kg tostato dal 2021 al 2025, da 2,44 a 1,90 kg CO₂e. Obiettivo 2028: 1,50."></canvas></div>
+        <div class="table-view" id="tvEco" hidden>
+          <table class="data">
+            <caption class="sr-only" id="tvEcoCap">Emissioni per kg tostato, 2021–2025</caption>
+            <thead><tr><th scope="col">Anno</th><th scope="col" class="num" id="tvEcoUnit">Valore</th><th scope="col" class="num">Variazione sul 2021</th></tr></thead>
+            <tbody id="tvEcoBody"></tbody>
+            <tfoot id="tvEcoFoot"></tfoot>
+          </table>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PERSONE -->
+<section class="chapter" id="persone" aria-labelledby="h-persone">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">04</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">04 · Persone</p>
+      <h2 id="h-persone">640 persone e 31 ore di formazione a testa</h2>
+      <p class="lede">Quattro persone su dieci lavorano in produzione e logistica, tra Bergamo, Lodi e Piacenza. L'Accademia Selvana conta 74 tra formatori e tecnici che seguono i locali Ho.Re.Ca. Il turnover volontario resta basso, al 6,1%.</p>
+
+      <div class="people">
+        <div class="stats">
+          <div class="stat"><p class="stat-v">640</p><p class="stat-k">persone a fine 2025</p><p class="stat-s">Bergamo, Lodi e Piacenza</p></div>
+          <div class="stat"><p class="stat-v">44<small>%</small></p><p class="stat-k">donne</p><p class="stat-s">sul totale delle persone</p></div>
+          <div class="stat"><p class="stat-v">31<small>ore</small></p><p class="stat-k">di formazione a testa</p><p class="stat-s">19.840 ore in tutto</p></div>
+          <div class="stat"><p class="stat-v">6,1<small>%</small></p><p class="stat-k">turnover volontario</p><p class="stat-s">uscite per scelta della persona</p></div>
+        </div>
+
+        <figure class="card" id="figPersone">
+          <figcaption class="card-head">
+            <div>
+              <h3>Persone per area</h3>
+              <p>Organico al 31/12/2025, 640 persone</p>
+            </div>
+            <button type="button" class="view-toggle" id="tgPersone" data-toggle-view data-chart="boxPersone" aria-controls="tvPersone" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13v11h-13zM1.5 6h13M1.5 9.5h13M6 6v7.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span class="lbl">Vista tabella</span></button>
+          </figcaption>
+          <div class="chart-box" id="boxPersone" style="--h:300px"><canvas id="chPersone" role="img" aria-label="Grafico a barre orizzontali: persone per area. Produzione e logistica 268, commerciale e Ho.Re.Ca. 162, Accademia e tecnici 74, amministrazione 58, marketing e digitale 46, direzione 32. Totale 640."></canvas></div>
+          <div class="table-view" id="tvPersone" hidden>
+            <table class="data">
+              <caption class="sr-only">Persone per area al 31/12/2025</caption>
+              <thead><tr><th scope="col">Area</th><th scope="col" class="num">Persone</th><th scope="col" class="num">Quota</th></tr></thead>
+              <tbody id="tvPerBody"></tbody>
+              <tfoot><tr><th scope="row">Totale</th><td class="num">640</td><td class="num">100%</td></tr></tfoot>
+            </table>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 COMUNITÀ -->
+<section class="chapter" id="comunita" aria-labelledby="h-comunita">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">05</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">05 · Comunità</p>
+      <h2 id="h-comunita">Tre progetti, dai campi di Sidama ai bar di Bergamo</h2>
+      <p class="lede">Investiamo dove nasce il caffè e dove lo beviamo. Per ogni progetto scegliamo un solo numero da misurare ogni anno, così si vede se funziona.</p>
+
+      <div class="stories">
+        <article class="story">
+          <p class="story-place mono">Sidama, Etiopia</p>
+          <p class="story-num">40</p>
+          <p class="story-unit">giovani formati nel 2025</p>
+          <h3>Una scuola di caffè con la Cooperativa Sidama Bensa</h3>
+          <p class="story-text">Sei mesi tra campo e laboratorio: potatura, raccolta selettiva, fermentazione e assaggio. Metà dei posti va alle ragazze. Dodici diplomati lavorano già nelle stazioni di lavaggio della cooperativa.</p>
+        </article>
+        <article class="story">
+          <p class="story-place mono">Bergamo, Accademia Selvana</p>
+          <p class="story-num">18</p>
+          <p class="story-unit">borse di studio per baristi</p>
+          <h3>Il corso completo dell'Accademia, gratis per chi ha meno di 30 anni</h3>
+          <p class="story-text">La borsa copre tutto il percorso, dall'estrazione alla gestione del banco. I candidati arrivano dalle scuole alberghiere della provincia. Ogni borsista fa tre mesi di tirocinio in un locale cliente.</p>
+        </article>
+        <article class="story">
+          <p class="story-place mono">Bergamo, quartieri</p>
+          <p class="story-num">62 t</p>
+          <p class="story-unit">di fondi di caffè recuperati</p>
+          <h3>Dai fondi di caffè agli orti urbani</h3>
+          <p class="story-text">Ritiriamo i fondi da 120 bar clienti e dalla mensa della torrefazione. Un consorzio agricolo del territorio li trasforma in ammendante per nove orti di quartiere, curati da scuole e associazioni.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 OBIETTIVI 2028 -->
+<section class="chapter" id="obiettivi" aria-labelledby="h-obiettivi">
+  <div class="wrap chapter-grid">
+    <div class="chapter-num" aria-hidden="true">06</div>
+    <div class="chapter-body">
+      <p class="eyebrow mono">06 · Obiettivi 2028</p>
+      <h2 id="h-obiettivi">Siamo a metà strada sugli obiettivi 2028</h2>
+      <p class="lede">Ogni barra parte dal valore del 2021 e arriva all'obiettivo del 2028. Il segno nero mostra dove siamo a fine 2025. Per le emissioni la barra avanza quando il valore scende. Le capsule sono già tutte compostabili.</p>
+
+      <p class="goal-legend">
+        <span><span class="sw sw-1" aria-hidden="true"></span>Strada fatta dal 2021</span>
+        <span><span class="sw sw-track" aria-hidden="true"></span>Strada che manca</span>
+        <span><span class="mk" aria-hidden="true"></span>Fine 2025</span>
+      </p>
+
+      <div class="goals">
+        <article class="goal">
+          <div class="goal-head">
+            <h3 class="goal-title">Caffè da filiere tracciate</h3>
+            <p class="goal-status">71% nel 2025 · 50% del percorso</p>
+          </div>
+          <div class="meter" role="meter" aria-label="Caffè da filiere tracciate, avanzamento verso l'obiettivo 2028" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="71% nel 2025. Partenza 52% nel 2021, obiettivo 90% nel 2028. Fatto il 50% del percorso." style="--p:50%">
+            <span class="meter-fill"></span>
+            <span class="meter-mark"><span class="meter-lbl">2025 · 71%</span></span>
+          </div>
+          <div class="meter-scale"><span>2021 · 52%</span><span>Obiettivo 2028 · 90%</span></div>
+        </article>
+
+        <article class="goal">
+          <div class="goal-head">
+            <h3 class="goal-title">Energia da fonti rinnovabili</h3>
+            <p class="goal-status">58% nel 2025 · 55% del percorso</p>
+          </div>
+          <div class="meter" role="meter" aria-label="Energia rinnovabile, avanzamento verso l'obiettivo 2028" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" aria-valuetext="58% nel 2025. Partenza 31% nel 2021, obiettivo 80% nel 2028. Fatto il 55% del percorso." style="--p:55.1%">
+            <span class="meter-fill"></span>
+            <span class="meter-mark"><span class="meter-lbl">2025 · 58%</span></span>
+          </div>
+          <div class="meter-scale"><span>2021 · 31%</span><span>Obiettivo 2028 · 80%</span></div>
+        </article>
+
+        <article class="goal">
+          <div class="goal-head">
+            <h3 class="goal-title">Emissioni per kg tostato <span class="badge">▼ meno è meglio</span></h3>
+            <p class="goal-status">1,90 kg CO₂e nel 2025 · 57% della riduzione fatta</p>
+          </div>
+          <div class="meter" role="meter" aria-label="Emissioni per kg tostato, avanzamento verso l'obiettivo 2028" aria-valuemin="0" aria-valuemax="100" aria-valuenow="57" aria-valuetext="1,90 kg CO₂e per kg nel 2025. Partenza 2,44 nel 2021, obiettivo 1,50 nel 2028. Fatto il 57% della riduzione." style="--p:57.4%">
+            <span class="meter-fill"></span>
+            <span class="meter-mark"><span class="meter-lbl">2025 · 1,90 kg</span></span>
+          </div>
+          <div class="meter-scale"><span>2021 · 2,44 kg</span><span>Obiettivo 2028 · 1,50 kg</span></div>
+        </article>
+
+        <article class="goal">
+          <div class="goal-head">
+            <h3 class="goal-title">Capsule compostabili</h3>
+            <p class="goal-status good">✓ Obiettivo raggiunto</p>
+          </div>
+          <div class="meter full" role="meter" aria-label="Capsule compostabili, avanzamento verso l'obiettivo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100% nel 2025. Partenza 62% nel 2021, obiettivo 100%: raggiunto." style="--p:100%">
+            <span class="meter-fill"></span>
+            <span class="meter-mark"><span class="meter-lbl">2025 · 100%</span></span>
+          </div>
+          <div class="meter-scale"><span>2021 · 62%</span><span>Obiettivo · 100%</span></div>
+        </article>
+      </div>
+
+      <p class="next"><strong>Prossima tappa, il 2027.</strong> Il piano «Tre mosse» punta all'82% di filiera tracciata, grazie a contratti pluriennali con sei cooperative e alla copertura del prezzo. Per le emissioni arriva una nuova linea di tostatura a basse emissioni: 6,2 M€ di investimento.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+        <p class="foot-pay">«Tostato con pazienza, dal 1961.»</p>
+      </div>
+      <div>
+        <h2 class="foot-h mono">Contatti</h2>
+        <p>Sostenibilità &amp; Filiera<br>Anna Ghisleri<br><a href="mailto:sostenibilita@selvanacaffe.example">sostenibilita@selvanacaffe.example</a><br>+39 035 000 1961</p>
+      </div>
+      <div>
+        <h2 class="foot-h mono">Sedi</h2>
+        <p>Torrefazione Selvana S.p.A.<br>Via dei Tostatori 12, Bergamo<br>Stabilimento capsule: Lodi<br>Hub logistico: Piacenza</p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p class="disc">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+      <p>Bilancio di Sostenibilità 2025 · periodo 1/1–31/12/2025 · pubblicato giugno 2026</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ================= ambiente ================= */
+  var H = document.documentElement;
+  var THUMB = H.classList.contains('is-thumb');
+  var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var STILL = THUMB || REDUCED;
+  var CS = getComputedStyle(H);
+  function tok(n){ return CS.getPropertyValue(n).trim(); }
+  var C = {
+    green: tok('--chart-1'), rest: tok('--chart-rest'),
+    ink: tok('--ink'), ink2: tok('--ink-2'), muted: tok('--muted'), line: tok('--line'),
+    surface: tok('--surface'), onDark: tok('--on-dark'), onDark2: tok('--on-dark-2')
+  };
+  var FONT = tok('--font-body') || 'system-ui, sans-serif';
+
+  function alpha(hex, a){
+    var h = String(hex).replace('#','');
+    if (h.length === 3){ h = h.replace(/(.)/g, '$1$1'); }
+    var n = parseInt(h, 16);
+    return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+  function $(id){ return document.getElementById(id); }
+
+  /* numeri in formato italiano (con separatore delle migliaia anche a 4 cifre) */
+  var NFC = {};
+  function fmt(n, d){
+    d = d || 0;
+    if (!(d in NFC)){
+      var f = null;
+      try {
+        f = new Intl.NumberFormat('it-IT', {minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: 'always'});
+        if (f.format(1234).indexOf('1.234') !== 0){ f = null; }
+      } catch (e){ f = null; }
+      NFC[d] = f;
+    }
+    var s;
+    if (NFC[d]){ s = NFC[d].format(n); }
+    else {
+      var neg = n < 0, p = Math.abs(n).toFixed(d).split('.');
+      p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      s = (neg ? '-' : '') + p[0] + (p[1] ? ',' + p[1] : '');
+    }
+    return s.replace('-', '−');
+  }
+  function sum(arr, key){ return arr.reduce(function(a, r){ return a + r[key]; }, 0); }
+
+  /* ================= dati ================= */
+  var ORIG = [
+    {k:'Brasile',  reg:'Sul de Minas', t:5100, p:72},
+    {k:'Colombia', reg:'Huila',        t:2300, p:85},
+    {k:'Etiopia',  reg:'Sidama',       t:1200, p:100},
+    {k:'Honduras', reg:'Copán',        t:1400, p:80},
+    {k:'India',    reg:'Karnataka',    t:2200, p:57},
+    {k:'Vietnam',  reg:'Đắk Lắk',      t:2000, p:45}
+  ];
+  ORIG.forEach(function(o){ o.tr = Math.round(o.t * o.p / 100); o.nt = o.t - o.tr; });
+  var ORIG_BY_T = ORIG.slice().sort(function(a, b){ return b.t - a.t; });
+
+  var SUP = [
+    {n:'Cooperativa Vale do Sapucaí',      r:'Sul de Minas',   c:'Brasile',  t:1450, pr:9,  y:14, cert:'Protocollo Selvana'},
+    {n:'Fazenda Três Irmãs',               r:'Carmo de Minas', c:'Brasile',  t:980,  pr:12, y:8,  cert:'Biologico UE'},
+    {n:'Asociación Huila Alto',            r:'Huila',          c:'Colombia', t:820,  pr:15, y:11, cert:'Equo e solidale'},
+    {n:'Cooperativa Pitalito Sur',         r:'Huila',          c:'Colombia', t:640,  pr:13, y:6,  cert:'Protocollo Selvana'},
+    {n:'Cooperativa Sidama Bensa',         r:'Sidama',         c:'Etiopia',  t:520,  pr:22, y:9,  cert:'Bio UE + Equo'},
+    {n:'Cooperativa Daye Aroresa',         r:'Sidama',         c:'Etiopia',  t:430,  pr:19, y:5,  cert:'Equo e solidale'},
+    {n:'Cooperativa Copán Ruinas',         r:'Copán',          c:'Honduras', t:610,  pr:14, y:10, cert:'Equo e solidale'},
+    {n:'Asociación Cafetalera Santa Rita', r:'Copán',          c:'Honduras', t:380,  pr:11, y:4,  cert:'Protocollo Selvana'},
+    {n:'Kodagu Robusta Growers',           r:'Karnataka',      c:'India',    t:720,  pr:7,  y:6,  cert:'Protocollo Selvana'},
+    {n:'Hassan Hills Estate',              r:'Karnataka',      c:'India',    t:460,  pr:6,  y:3,  cert:'Protocollo Selvana'},
+    {n:'Hợp tác xã Ea Tu',                 r:'Đắk Lắk',        c:'Vietnam',  t:520,  pr:5,  y:4,  cert:'Protocollo Selvana'},
+    {n:'Hợp tác xã Krông Pắc',             r:'Đắk Lắk',        c:'Vietnam',  t:340,  pr:6,  y:2,  cert:'Biologico UE'}
+  ];
+  var TOT_T = sum(ORIG, 't');
+
+  var YEARS = ['2021','2022','2023','2024','2025'];
+  var ECO = {
+    co2: {name:'Emissioni per kg tostato', unit:'kg CO₂e', short:'kg', axis:'kg CO₂e per kg di caffè tostato', dec:2, tickDec:1,
+          data:[2.44,2.31,2.15,2.02,1.90], max:3, step:0.5, target:1.50, targetLbl:'Obiettivo 2028 · 1,50 kg',
+          title:'Le emissioni per chilo tostato scendono da cinque anni di fila',
+          note:"Tostatura, energia acquistata e trasporto del caffè verde fino a Bergamo, divisi per i chili tostati. La linea tratteggiata è l'obiettivo 2028."},
+    ren: {name:'Energia rinnovabile', unit:'%', short:'%', axis:"% dell'energia consumata", dec:0, tickDec:0,
+          data:[31,38,44,52,58], max:100, step:20, target:80, targetLbl:'Obiettivo 2028 · 80%',
+          title:'Energia rinnovabile quasi raddoppiata in cinque anni',
+          note:"Quota di energia elettrica e termica da fonti rinnovabili. Nel 2025 sono entrati in funzione i pannelli sul tetto di Lodi. La linea tratteggiata è l'obiettivo 2028."},
+    waste: {name:'Rifiuti recuperati', unit:'%', short:'%', axis:'% dei rifiuti di produzione', dec:0, tickDec:0,
+          data:[78,82,86,90,93], max:100, step:20, target:null,
+          title:'Recuperiamo il 93% dei rifiuti di produzione',
+          note:'Sacchi di juta, pellicole e scarti di tostatura avviati a riciclo o recupero, sul totale dei rifiuti prodotti.'},
+    water: {name:'Acqua per kg tostato', unit:'litri', short:'l', axis:'litri per kg di caffè tostato', dec:2, tickDec:1,
+          data:[1.8,1.7,1.6,1.45,1.3], max:2, step:0.5, target:null,
+          title:'Il 28% di acqua in meno per ogni chilo tostato',
+          note:"Litri d'acqua per chilo tostato, usati soprattutto per raffreddamento e pulizia degli impianti."}
+  };
+  function vfmt(m, v){ return m.unit === '%' ? fmt(v, m.dec) + '%' : fmt(v, m.dec) + ' ' + m.unit; }
+
+  var PEOPLE = [
+    {k:'Produzione e logistica',  k2:['Produzione','e logistica'], v:268},
+    {k:'Commerciale e Ho.Re.Ca.', k2:['Commerciale','e Ho.Re.Ca.'], v:162},
+    {k:'Accademia e tecnici',     k2:['Accademia','e tecnici'],     v:74},
+    {k:'Amministrazione',         k2:'Amministrazione',             v:58},
+    {k:'Marketing e digitale',    k2:['Marketing','e digitale'],    v:46},
+    {k:'Direzione',               k2:'Direzione',                   v:32}
+  ];
+  var PEOPLE_TOT = sum(PEOPLE, 'v');
+  function pctPeople(v){ return Math.round(v / PEOPLE_TOT * 100); }
+
+  /* ================= contatori della sintesi ================= */
+  function countUp(){
+    if (STILL || !window.requestAnimationFrame){ return; }
+    var els = [].slice.call(document.querySelectorAll('[data-count]'));
+    if (!els.length){ return; }
+    var conf = els.map(function(el){
+      return {el: el, to: parseFloat(el.getAttribute('data-count')), from: parseFloat(el.getAttribute('data-from') || '0'), d: parseInt(el.getAttribute('data-dec') || '0', 10)};
+    });
+    conf.forEach(function(c){ c.el.textContent = fmt(c.from, c.d); });
+    var t0 = null, dur = 1300;
+    function step(ts){
+      if (t0 === null){ t0 = ts; }
+      var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      conf.forEach(function(c){ c.el.textContent = fmt(k < 1 ? c.from + (c.to - c.from) * e : c.to, c.d); });
+      if (k < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ================= navigazione: sezione attiva + avanzamento ================= */
+  var navLinks = [].slice.call(document.querySelectorAll('.toc-list a'));
+  var navSecs = navLinks.map(function(a){ return $(a.getAttribute('href').slice(1)); });
+  var tocScroll = $('tocScroll');
+  var bar = $('progressBar');
+  var activeIdx = -2, ticking = false;
+
+  function onScroll(){
+    ticking = false;
+    var y = window.pageYOffset || H.scrollTop;
+    var navH = 56 + 90;
+    var idx = -1;
+    navSecs.forEach(function(s, i){
+      if (s && s.getBoundingClientRect().top <= navH){ idx = i; }
+    });
+    var max = H.scrollHeight - window.innerHeight;
+    if (max > 0 && y >= max - 2){ idx = navSecs.length - 1; }
+    if (idx !== activeIdx){
+      activeIdx = idx;
+      navLinks.forEach(function(a, i){
+        if (i === idx){ a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+      });
+      var cur = navLinks[idx];
+      if (cur && tocScroll && tocScroll.scrollWidth > tocScroll.clientWidth){
+        var l = cur.offsetLeft, w = cur.offsetWidth;
+        if (l < tocScroll.scrollLeft || l + w > tocScroll.scrollLeft + tocScroll.clientWidth){
+          var left = Math.max(0, l - 12);
+          if (tocScroll.scrollTo){ tocScroll.scrollTo({left: left, behavior: STILL ? 'auto' : 'smooth'}); }
+          else { tocScroll.scrollLeft = left; }
+        }
+      }
+    }
+    if (bar){ bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, Math.max(0, y / max)) : 0) + ')'; }
+  }
+  function requestTick(){ if (!ticking){ ticking = true; window.requestAnimationFrame(onScroll); } }
+
+  /* ================= filiera: filtro, riepilogo, tabelle ================= */
+  var selOrigin = 'all';
+  var chips = [].slice.call(document.querySelectorAll('.chip[data-origin]'));
+  function isOn(i){ return selOrigin === 'all' || ORIG_BY_T[i].k === selOrigin; }
+  function origOf(k){ for (var i = 0; i < ORIG.length; i++){ if (ORIG[i].k === k){ return ORIG[i]; } } return null; }
+
+  function updSummary(){
+    var list = selOrigin === 'all' ? ORIG : ORIG.filter(function(o){ return o.k === selOrigin; });
+    var t = sum(list, 't'), tr = sum(list, 'tr');
+    $('sumOrig').textContent = selOrigin === 'all' ? 'Tutte, 6 paesi' : list[0].k + ' · ' + list[0].reg;
+    $('sumTot').textContent = fmt(t) + ' t';
+    $('sumTr').textContent = fmt(tr) + ' t';
+    $('sumPct').textContent = fmt(Math.round(tr / t * 100)) + '%';
+    var pf = $('printFilter');
+    if (pf){ pf.textContent = selOrigin === 'all' ? '' : 'Filtro attivo su grafico e tabella: ' + selOrigin + '.'; }
+  }
+
+  function renderFilTable(){
+    var tb = $('tvFilBody'); if (!tb){ return; }
+    tb.innerHTML = ORIG_BY_T.map(function(o){
+      return '<tr' + (selOrigin === o.k ? ' class="is-sel"' : '') + '><th scope="row">' + o.k + '<span class="cell-note">' + o.reg + '</span></th>' +
+        '<td class="num">' + fmt(o.t) + '</td><td class="num">' + fmt(o.tr) + '</td><td class="num">' + fmt(o.nt) + '</td><td class="num">' + fmt(o.p) + '%</td></tr>';
+    }).join('');
+  }
+
+  var sortKey = 't', sortDir = 'desc';
+  var SORT_NAMES = {n:'fornitore', c:'paese', t:'tonnellate', pr:'premio sul mercato', y:'anni di relazione', cert:'certificazione'};
+  var sortBtns = [].slice.call(document.querySelectorAll('#tblFornitori .th-btn'));
+
+  function renderSup(){
+    var rows = SUP.filter(function(r){ return selOrigin === 'all' || r.c === selOrigin; });
+    rows.sort(function(a, b){
+      var x = a[sortKey], z = b[sortKey], r;
+      r = (typeof x === 'number') ? x - z : String(x).localeCompare(String(z), 'it', {sensitivity: 'base'});
+      if (r !== 0){ return sortDir === 'asc' ? r : -r; }
+      return a.n.localeCompare(b.n, 'it');
+    });
+    $('supBody').innerHTML = rows.map(function(r){
+      return '<tr><td><span class="sup-n">' + r.n + '</span><span class="sup-r">' + r.r + '</span></td>' +
+        '<td>' + r.c + '</td><td class="num">' + fmt(r.t) + '</td><td class="num">+' + fmt(r.pr) + '%</td>' +
+        '<td class="num">' + fmt(r.y) + '</td><td><span class="tag">' + r.cert + '</span></td></tr>';
+    }).join('');
+    var T = sum(rows, 't');
+    var P = rows.reduce(function(a, r){ return a + r.t * r.pr; }, 0) / T;
+    var Y = sum(rows, 'y') / rows.length;
+    $('supFoot').innerHTML = '<tr><th scope="row">Totale · ' + rows.length + ' fornitori</th><td></td>' +
+      '<td class="num">' + fmt(T) + '</td><td class="num">+' + fmt(P, 1) + '%<span class="cell-note">media ponderata</span></td>' +
+      '<td class="num">' + fmt(Y, 1) + '<span class="cell-note">media</span></td><td></td></tr>';
+    sortBtns.forEach(function(b){
+      var th = b.parentNode;
+      if (b.getAttribute('data-key') === sortKey){ th.setAttribute('aria-sort', sortDir === 'asc' ? 'ascending' : 'descending'); }
+      else { th.removeAttribute('aria-sort'); }
+    });
+    var share = $('supShare');
+    if (selOrigin === 'all'){
+      share.textContent = 'Questi ' + rows.length + ' fornitori valgono ' + fmt(T) + ' t, il ' + fmt(Math.round(T / TOT_T * 100)) + '% delle ' + fmt(TOT_T) + ' t acquistate nel 2025.';
+    } else {
+      var o = origOf(selOrigin);
+      share.textContent = selOrigin + ': i ' + rows.length + ' fornitori principali valgono ' + fmt(T) + ' t, il ' + fmt(Math.round(T / o.t * 100)) + '% delle ' + fmt(o.t) + ' t acquistate nel paese.';
+    }
+  }
+
+  sortBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var k = b.getAttribute('data-key'), num = b.getAttribute('data-type') === 'num';
+      if (sortKey === k){ sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+      else { sortKey = k; sortDir = num ? 'desc' : 'asc'; }
+      renderSup();
+      $('sortStatus').textContent = 'Tabella ordinata per ' + SORT_NAMES[k] + ', ' + (sortDir === 'asc' ? 'in ordine crescente' : 'in ordine decrescente') + '.';
+    });
+  });
+
+  /* ================= grafici (Chart.js) ================= */
+  var HAS_CHART = typeof window.Chart === 'function';
+  var ANIM = STILL ? false : {duration: 650};
+  var CHARTS = [];
+  var chF = null, chE = null, chP = null;
+  var ecoSel = 'co2';
+
+  function tip(extra){
+    var o = {
+      backgroundColor: C.ink, titleColor: C.onDark, bodyColor: C.onDark2, footerColor: C.onDark2,
+      titleFont: {family: FONT, weight: '700', size: 14}, bodyFont: {family: FONT, size: 12},
+      padding: {x: 12, y: 10}, cornerRadius: 6, caretSize: 5, displayColors: false, boxPadding: 4
+    };
+    for (var k in extra){ if (Object.prototype.hasOwnProperty.call(extra, k)){ o[k] = extra[k]; } }
+    return o;
+  }
+
+  function mkFiliera(){
+    var cv = $('chFiliera'); if (!cv){ return null; }
+    var endLabel = {
+      id: 'filieraEndLabel',
+      afterDatasetsDraw: function(ch){
+        if (selOrigin === 'all'){ return; }
+        var i = -1;
+        ORIG_BY_T.forEach(function(o, j){ if (o.k === selOrigin){ i = j; } });
+        if (i < 0){ return; }
+        var el = ch.getDatasetMeta(0).data[i]; if (!el){ return; }
+        var x = ch.scales.x.getPixelForValue(ORIG_BY_T[i].t), g = ch.ctx;
+        g.save(); g.fillStyle = C.ink; g.font = '700 13px ' + FONT; g.textAlign = 'left'; g.textBaseline = 'middle';
+        g.fillText(fmt(ORIG_BY_T[i].t) + ' t', x + 8, el.y); g.restore();
+      }
+    };
+    return new Chart(cv, {
+      type: 'bar',
+      data: {
+        labels: ORIG_BY_T.map(function(o){ return [o.k, o.p + '% tracciato']; }),
+        datasets: [
+          {label: 'Tracciato', data: ORIG_BY_T.map(function(o){ return o.tr; }), stack: 'f',
+           backgroundColor: function(c){ return isOn(c.dataIndex) ? C.green : alpha(C.green, 0.22); },
+           borderColor: C.surface, borderWidth: {top: 0, right: 2, bottom: 0, left: 0},
+           borderSkipped: 'start', borderRadius: 4, maxBarThickness: 24},
+          {label: 'Non tracciato', data: ORIG_BY_T.map(function(o){ return o.nt; }), stack: 'f',
+           backgroundColor: function(c){ return isOn(c.dataIndex) ? C.rest : alpha(C.rest, 0.35); },
+           borderWidth: 0, borderSkipped: 'start', borderRadius: 4, maxBarThickness: 24}
+        ]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false, animation: ANIM,
+        layout: {padding: {right: 64}},
+        interaction: {mode: 'nearest', axis: 'y', intersect: true},
+        scales: {
+          x: {stacked: true, beginAtZero: true, max: 6000, border: {display: false},
+              grid: {color: C.line, drawTicks: false},
+              ticks: {stepSize: 1000, padding: 8, callback: function(v){ return fmt(v); }},
+              title: {display: true, text: 'tonnellate, 2025', color: C.muted, font: {size: 12}}},
+          y: {stacked: true, grid: {display: false}, border: {color: C.line},
+              ticks: {padding: 10,
+                color: function(c){ return isOn(c.index) ? C.ink2 : C.muted; },
+                font: function(c){ return {family: FONT, size: 13, weight: (selOrigin !== 'all' && isOn(c.index)) ? '700' : '500'}; }}}
+        },
+        plugins: {
+          legend: {display: false},
+          tooltip: tip({displayColors: true, callbacks: {
+            title: function(items){ return fmt(items[0].raw) + ' t'; },
+            label: function(it){ return it.dataset.label + ' · ' + ORIG_BY_T[it.dataIndex].k; },
+            afterLabel: function(it){ var o = ORIG_BY_T[it.dataIndex]; var p = it.datasetIndex === 0 ? o.p : 100 - o.p; return p + '% delle ' + fmt(o.t) + ' t'; },
+            labelColor: function(it){ return {borderColor: C.surface, backgroundColor: it.datasetIndex === 0 ? C.green : C.rest, borderWidth: 0, borderRadius: 2}; }
+          }})
+        }
+      },
+      plugins: [endLabel]
+    });
+  }
+
+  function mkSpark(id, m){
+    var cv = $(id); if (!cv){ return null; }
+    var n = m.data.length;
+    var mn = Math.min.apply(null, m.data), mx = Math.max.apply(null, m.data), pad = (mx - mn) * 0.2;
+    return new Chart(cv, {
+      type: 'line',
+      data: {labels: YEARS, datasets: [{
+        data: m.data, borderColor: C.green, backgroundColor: alpha(C.green, 0.10), fill: 'start',
+        borderWidth: 2, tension: 0, borderCapStyle: 'round', borderJoinStyle: 'round',
+        pointRadius: m.data.map(function(_, i){ return i === n - 1 ? 4 : 0; }),
+        pointBackgroundColor: C.green, pointBorderColor: C.surface, pointBorderWidth: 2
+      }]},
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: ANIM, events: [],
+        layout: {padding: {top: 7, right: 7, bottom: 1, left: 1}},
+        scales: {x: {display: false}, y: {display: false, min: mn - pad, max: mx + pad}},
+        plugins: {legend: {display: false}, tooltip: {enabled: false}}
+      }
+    });
+  }
+
+  function mkEco(){
+    var cv = $('chEco'); if (!cv){ return; }
+    var m = ECO[ecoSel], n = m.data.length;
+    if (chE){ var at = CHARTS.indexOf(chE); if (at > -1){ CHARTS.splice(at, 1); } chE.destroy(); chE = null; }
+    var crosshair = {
+      id: 'ecoCrosshair',
+      beforeDatasetsDraw: function(ch){
+        var act = ch.tooltip && ch.tooltip.getActiveElements ? ch.tooltip.getActiveElements() : [];
+        if (!act.length){ return; }
+        var x = Math.round(act[0].element.x) + 0.5, a = ch.chartArea, g = ch.ctx;
+        g.save(); g.strokeStyle = C.muted; g.lineWidth = 1; g.beginPath(); g.moveTo(x, a.top); g.lineTo(x, a.bottom); g.stroke(); g.restore();
+      }
+    };
+    var marks = {
+      id: 'ecoMarks',
+      afterDatasetsDraw: function(ch){
+        var g = ch.ctx, a = ch.chartArea;
+        if (m.target !== null){
+          var ty = Math.round(ch.scales.y.getPixelForValue(m.target)) + 0.5;
+          g.save(); g.setLineDash([6, 5]); g.strokeStyle = C.ink2; g.lineWidth = 1.5;
+          g.beginPath(); g.moveTo(a.left, ty); g.lineTo(a.right, ty); g.stroke(); g.setLineDash([]);
+          g.fillStyle = C.ink2; g.font = '600 12px ' + FONT; g.textAlign = 'left'; g.textBaseline = 'bottom';
+          g.fillText(m.targetLbl, a.left + 8, ty - 5); g.restore();
+        }
+        var pt = ch.getDatasetMeta(0).data[n - 1];
+        if (pt){
+          var last = m.data[n - 1];
+          g.save(); g.fillStyle = C.ink; g.font = '700 14px ' + FONT; g.textAlign = 'left'; g.textBaseline = 'middle';
+          g.fillText(m.unit === '%' ? fmt(last, m.dec) + '%' : fmt(last, m.dec) + ' ' + m.short, pt.x + 12, pt.y);
+          g.restore();
+        }
+      }
+    };
+    chE = new Chart(cv, {
+      type: 'line',
+      data: {labels: YEARS, datasets: [{
+        label: m.name, data: m.data, borderColor: C.green, backgroundColor: alpha(C.green, 0.10), fill: 'start',
+        borderWidth: 2, tension: 0, borderCapStyle: 'round', borderJoinStyle: 'round',
+        pointRadius: m.data.map(function(_, i){ return i === n - 1 ? 5 : 0; }),
+        pointHoverRadius: 5, pointHitRadius: 14,
+        pointBackgroundColor: C.green, pointBorderColor: C.surface, pointBorderWidth: 2, pointHoverBorderWidth: 2
+      }]},
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: ANIM,
+        layout: {padding: {top: 10, right: 72}},
+        interaction: {mode: 'index', intersect: false},
+        scales: {
+          x: {grid: {display: false}, border: {color: C.line}, ticks: {color: C.ink2, padding: 8}},
+          y: {beginAtZero: true, max: m.max, border: {display: false}, grid: {color: C.line, drawTicks: false},
+              ticks: {stepSize: m.step, padding: 8, callback: function(v){ return m.unit === '%' ? fmt(v) + '%' : fmt(v, m.tickDec); }},
+              title: {display: true, text: m.axis, color: C.muted, font: {size: 12}}}
+        },
+        plugins: {
+          legend: {display: false},
+          tooltip: tip({callbacks: {
+            title: function(items){ return vfmt(m, items[0].raw); },
+            label: function(it){ return it.label + ' · ' + m.name; }
+          }})
+        }
+      },
+      plugins: [crosshair, marks]
+    });
+    CHARTS.push(chE);
+  }
+
+  function mkPeople(){
+    var cv = $('chPersone'); if (!cv){ return null; }
+    var narrow = window.innerWidth < 560;
+    var topLabel = {
+      id: 'peopleTopLabel',
+      afterDatasetsDraw: function(ch){
+        var el = ch.getDatasetMeta(0).data[0]; if (!el){ return; }
+        var g = ch.ctx;
+        g.save(); g.fillStyle = C.ink; g.font = '700 13px ' + FONT; g.textAlign = 'left'; g.textBaseline = 'middle';
+        g.fillText(fmt(PEOPLE[0].v) + ' · ' + pctPeople(PEOPLE[0].v) + '%', el.x + 8, el.y); g.restore();
+      }
+    };
+    return new Chart(cv, {
+      type: 'bar',
+      data: {
+        labels: PEOPLE.map(function(p){ return narrow ? p.k2 : p.k; }),
+        datasets: [{label: 'Persone', data: PEOPLE.map(function(p){ return p.v; }), backgroundColor: C.green,
+          borderRadius: 4, borderSkipped: 'start', maxBarThickness: 24}]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: false, animation: ANIM,
+        layout: {padding: {right: 76}},
+        interaction: {mode: 'nearest', axis: 'y', intersect: true},
+        scales: {
+          x: {beginAtZero: true, max: 300, border: {display: false}, grid: {color: C.line, drawTicks: false},
+              ticks: {stepSize: 50, padding: 8, callback: function(v){ return fmt(v); }},
+              title: {display: true, text: 'persone', color: C.muted, font: {size: 12}}},
+          y: {grid: {display: false}, border: {color: C.line}, ticks: {color: C.ink2, padding: 10, font: {family: FONT, size: 13, weight: '500'}}}
+        },
+        plugins: {
+          legend: {display: false},
+          tooltip: tip({callbacks: {
+            title: function(items){ return fmt(items[0].raw) + ' persone'; },
+            label: function(it){ return PEOPLE[it.dataIndex].k + ' · ' + pctPeople(it.raw) + '% del totale'; }
+          }})
+        }
+      },
+      plugins: [topLabel]
+    });
+  }
+
+  function renderPeopleTable(){
+    var tb = $('tvPerBody'); if (!tb){ return; }
+    tb.innerHTML = PEOPLE.map(function(p){
+      return '<tr><th scope="row">' + p.k + '</th><td class="num">' + fmt(p.v) + '</td><td class="num">' + pctPeople(p.v) + '%</td></tr>';
+    }).join('');
+  }
+
+  /* ================= ambiente: scheda aperta in grande ================= */
+  var ecoCards = [].slice.call(document.querySelectorAll('.eco-card'));
+
+  function renderEcoText(){
+    var m = ECO[ecoSel], n = m.data.length;
+    $('ecoName').textContent = m.name;
+    $('ecoTitle').textContent = m.title;
+    $('ecoNote').textContent = m.note;
+    var first = m.data[0];
+    $('tvEcoCap').textContent = m.name + ', 2021–2025';
+    $('tvEcoUnit').textContent = 'Valore (' + (m.unit === '%' ? '%' : m.unit) + ')';
+    $('tvEcoBody').innerHTML = m.data.map(function(v, i){
+      var d;
+      if (i === 0){ d = '—'; }
+      else if (m.unit === '%'){ d = (v - first >= 0 ? '+' : '') + fmt(v - first) + ' punti'; }
+      else { var p = (v - first) / first * 100; d = (p >= 0 ? '+' : '') + fmt(p, 1) + '%'; }
+      return '<tr><th scope="row">' + YEARS[i] + '</th><td class="num">' + vfmt(m, v) + '</td><td class="num">' + d + '</td></tr>';
+    }).join('');
+    $('tvEcoFoot').innerHTML = m.target !== null
+      ? '<tr><th scope="row">Obiettivo 2028</th><td class="num">' + vfmt(m, m.target) + '</td><td></td></tr>' : '';
+    var cv = $('chEco');
+    if (cv){
+      cv.setAttribute('aria-label', 'Grafico a linee: ' + m.name + ' dal 2021 al 2025, da ' + vfmt(m, first) + ' a ' + vfmt(m, m.data[n - 1]) + '.' +
+        (m.target !== null ? ' Obiettivo 2028: ' + vfmt(m, m.target) + '.' : ''));
+    }
+  }
+
+  ecoCards.forEach(function(card){
+    card.addEventListener('click', function(){
+      var k = card.getAttribute('data-metric');
+      if (!ECO[k]){ return; }
+      ecoSel = k;
+      ecoCards.forEach(function(c){ c.setAttribute('aria-pressed', String(c === card)); });
+      renderEcoText();
+      if (HAS_CHART){ mkEco(); }
+      var det = $('ecoDetail');
+      if (det){
+        var r = det.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.55 || r.bottom < 80){
+          det.scrollIntoView({behavior: STILL ? 'auto' : 'smooth', block: 'start'});
+        }
+      }
+    });
+  });
+
+  /* ================= filtro per origine ================= */
+  function applyOrigin(){
+    updSummary();
+    renderSup();
+    renderFilTable();
+    if (chF){ if (STILL){ chF.update('none'); } else { chF.update(); } }
+  }
+  chips.forEach(function(b){
+    b.addEventListener('click', function(){
+      selOrigin = b.getAttribute('data-origin');
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      applyOrigin();
+    });
+  });
+
+  /* ================= vista tabella ================= */
+  var toggles = [].slice.call(document.querySelectorAll('[data-toggle-view]'));
+  toggles.forEach(function(b){
+    var box = $(b.getAttribute('data-chart')), tv = $(b.getAttribute('aria-controls'));
+    if (!box || !tv){ return; }
+    b.addEventListener('click', function(){
+      var on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', String(on));
+      tv.hidden = !on;
+      box.hidden = on;
+      var lbl = b.querySelector('.lbl');
+      if (lbl){ lbl.textContent = on ? 'Vista grafico' : 'Vista tabella'; }
+    });
+  });
+
+  /* ================= avvio ================= */
+  renderFilTable();
+  renderSup();
+  renderPeopleTable();
+  renderEcoText();
+  updSummary();
+
+  if (HAS_CHART){
+    Chart.defaults.font.family = FONT;
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = C.muted;
+    Chart.defaults.borderColor = C.line;
+    if (STILL){ Chart.defaults.animation = false; }
+
+    chF = mkFiliera(); if (chF){ CHARTS.push(chF); }
+    [['spCo2','co2'],['spRen','ren'],['spWaste','waste'],['spWater','water']].forEach(function(s){
+      var c = mkSpark(s[0], ECO[s[1]]); if (c){ CHARTS.push(c); }
+    });
+    mkEco();
+    chP = mkPeople(); if (chP){ CHARTS.push(chP); }
+
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ CHARTS.forEach(function(c){ c.update('none'); }); });
+    }
+    window.addEventListener('beforeprint', function(){
+      CHARTS.forEach(function(c){
+        var box = c.canvas.parentNode;
+        if (box && box.clientWidth){ c.resize(Math.min(box.clientWidth, 680), box.clientHeight); }
+      });
+    });
+    window.addEventListener('afterprint', function(){ CHARTS.forEach(function(c){ c.resize(); }); });
+  } else {
+    /* senza Chart.js (offline): mostro direttamente le tabelle */
+    toggles.forEach(function(b){
+      var box = $(b.getAttribute('data-chart')), tv = $(b.getAttribute('aria-controls'));
+      if (box){ box.hidden = true; }
+      if (tv){ tv.hidden = false; }
+      b.hidden = true;
+    });
+    [].forEach.call(document.querySelectorAll('.eco-spark,.spark-yrs'), function(el){ el.hidden = true; });
+  }
+
+  countUp();
+  onScroll();
+  if (!THUMB){
+    window.addEventListener('scroll', requestTick, {passive: true});
+    window.addEventListener('resize', requestTick);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CdA Terzo Trimestre 2026</title>
+<script>
+(function(){var h=document.documentElement;
+  if(location.hash==='#thumb'){h.classList.add('is-thumb');}
+  try{if(window.self!==window.top){h.classList.add('is-embedded');}}catch(e){h.classList.add('is-embedded');}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:   #F3F5F0;
+  --surface: #FBFCFA;
+  --ink:     #15201A;
+  --ink-2:   #4A5650;
+  --muted:   #7D8882;
+  --line:    #DDE3DC;
+  --selva:   #1D3B2F;
+  --selva-2: #2A5242;
+  --ciliegia:#C8402A;
+  --crema:   #E2B15B;
+  --on-dark: #F1F4EE;
+  --on-dark-2: rgba(241,244,238,.72);
+  --good: #0E8A3E; --bad: #C0362C;
+  /* derivati dal brand */
+  --frame: #0D1310;
+  --line-strong: #BFC8C1;
+  --band: #EDF1EB;
+  --line-dark: rgba(241,244,238,.16);
+  --chrome: rgba(21,32,26,.84);
+  --shadow: rgba(21,32,26,.10);
+  /* palette grafici validata su #FBFCFA, ordine fisso */
+  --c1:#178A5A; --c2:#D4502F; --c3:#2F6FC0; --c4:#B8860B; --c5:#9B4FA8;
+  --c1-soft:#D9EBE2;
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--frame);color:var(--ink);font-family:var(--font-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow:hidden}
+button{font:inherit;color:inherit}
+p,h1,h2,h3,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--selva);outline-offset:2px}
+
+/* ---------- cromatura demo (identica in tutte le demo) ---------- */
+.dc-back,.dc-hint{position:fixed;z-index:9000;font:500 13px/1.4 "Hanken Grotesk",system-ui,sans-serif;}
+.dc-back{top:14px;left:14px;padding:7px 12px;border-radius:999px;background:rgba(21,32,26,.82);color:#F1F4EE;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dc-back:hover{background:rgba(21,32,26,.95)}
+.dc-back:focus-visible,.dc-hint summary:focus-visible{outline:2px solid #E2B15B;outline-offset:2px}
+.dc-hint{left:14px;bottom:14px;max-width:320px;background:rgba(21,32,26,.88);color:#F1F4EE;border-radius:10px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.dc-hint summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:600;letter-spacing:.02em}
+.dc-hint summary::-webkit-details-marker{display:none}
+.dc-hint summary::before{content:"?";display:inline-grid;place-items:center;width:18px;height:18px;margin-right:8px;border-radius:50%;background:#E2B15B;color:#15201A;font-size:11px;font-weight:800}
+.dc-hint ul{margin:0;padding:0 16px 12px 30px}
+.dc-hint li{margin:4px 0;color:rgba(241,244,238,.86)}
+html.is-embedded .dc-back,html.is-thumb .dc-back,html.is-thumb .dc-hint{display:none}
+@media print{.dc-back,.dc-hint{display:none}}
+.dc-hint ul{list-style:disc}
+
+/* ---------- motore deck 16:9 ---------- */
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--frame)}
+.deck{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0}
+.slide{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s;background:var(--surface);color:var(--ink)}
+.slide.active{opacity:1;visibility:visible}
+.s-dark{background:var(--selva);color:var(--on-dark);--bean-cut:var(--selva)}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes flash{from{opacity:.15;transform:translateY(5px)}to{opacity:1;transform:none}}
+.slide.active .rise{animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 80ms + 60ms)}
+.flash{animation:flash .45s cubic-bezier(.2,.7,.2,1) both}
+html.no-anim .slide.active .rise,html.is-thumb .slide.active .rise,html.no-anim .flash{animation:none}
+html.no-anim .slide,html.is-thumb .slide{transition:none}
+@media (prefers-reduced-motion: reduce){
+  .slide.active .rise,.flash{animation:none}
+  .slide{transition:none}
+}
+
+/* ---------- logo ---------- */
+.brand{display:inline-flex;align-items:center;gap:.45em}
+.bean{width:1.25em;height:1.25em;color:var(--selva);flex:none}
+.brand-word{font-family:var(--font-display);font-style:italic;font-weight:700;letter-spacing:-.01em}
+.s-dark .bean{color:var(--crema)}
+
+/* ---------- impaginazione slide chiare ---------- */
+.s-top{position:absolute;top:30px;right:64px;display:flex;align-items:center;gap:18px;font:500 16px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.s-top .brand{font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.s-top .sep{width:1px;height:18px;background:var(--line)}
+.s-num{color:var(--ink-2)}
+.tag-ris{display:inline-flex;align-items:center;gap:8px;padding:7px 11px 6px;border:1px solid var(--line);border-radius:6px;font:500 16px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.tag-ris::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ciliegia)}
+.s-dark .tag-ris{border-color:var(--line-dark);color:var(--on-dark)}
+.s-body{position:absolute;top:96px;left:80px;right:80px;bottom:84px;display:flex;flex-direction:column}
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:30px;flex:none}
+.eyebrow{font:500 16px/1.2 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--selva-2);margin-bottom:14px}
+.s-title{font-family:var(--font-display);font-weight:700;font-size:56px;line-height:1.05;letter-spacing:-.012em;color:var(--ink)}
+.lede{font-size:23px;line-height:1.4;color:var(--ink-2);margin-top:12px;max-width:1060px}
+.s-main{flex:1;min-height:0}
+.s-foot{position:absolute;left:0;right:0;bottom:30px;text-align:center;font-size:16px;line-height:1;color:var(--muted)}
+.s-dark .s-foot{color:var(--on-dark-2)}
+.mono-lbl{font:500 16px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- controlli ---------- */
+.ctrl{display:flex;align-items:center;gap:14px;flex:none}
+.ctrl-lbl{font-size:18px;color:var(--ink-2)}
+.seg{display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--paper)}
+.seg button{border:0;background:transparent;padding:11px 20px;border-radius:7px;font-weight:600;font-size:18px;line-height:1;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--selva);color:var(--on-dark)}
+.seg.sm button{padding:9px 15px;font-size:16px}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 13px;font-weight:600;font-size:16px;line-height:1;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost[aria-pressed="true"]{border-color:var(--selva);color:var(--selva)}
+.btn-ghost svg{width:16px;height:16px;flex:none}
+
+/* ---------- pannelli grafico ---------- */
+.panel{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:18px 22px 20px;display:flex;flex-direction:column;min-height:0;--h:430px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:42px;margin-bottom:12px;flex:none}
+.panel-tools{display:flex;align-items:center;gap:10px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:17px;color:var(--ink-2)}
+.key{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.key-line{display:inline-block;width:24px;height:0;border-top:2px solid var(--k)}
+.key-line.dash{border-top-style:dashed}
+.key-sw{display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--k)}
+.viz{position:relative;height:var(--h);flex:none}
+.viz canvas{display:block}
+.tbl{display:none;height:var(--h);overflow:auto;flex:none}
+.panel.show-table .viz{display:none}
+.panel.show-table .tbl{display:block}
+html.no-chart .viz{display:none}
+html.no-chart .tbl{display:block}
+html.no-chart [data-table]{display:none}
+.caption{font-size:16px;color:var(--muted);margin-top:10px}
+
+.dtable{width:100%;border-collapse:collapse;font-size:18px;font-variant-numeric:tabular-nums}
+.dtable th,.dtable td{padding:7px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.dtable thead th{font:500 16px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong);position:sticky;top:0;background:var(--surface)}
+.dtable th:first-child,.dtable td:first-child{text-align:left}
+.dtable tbody th{font-weight:500;color:var(--ink)}
+.dtable tfoot th,.dtable tfoot td{font-weight:700;border-top:1px solid var(--line-strong);border-bottom:0}
+.up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--ink-2)}
+
+/* tooltip HTML dei grafici */
+.ctip{position:absolute;left:0;top:0;z-index:5;pointer-events:none;min-width:190px;max-width:340px;background:var(--surface);border:1px solid var(--line-strong);border-radius:8px;box-shadow:0 10px 26px var(--shadow);padding:12px 14px;opacity:0;transition:opacity .12s;font-size:16px;line-height:1.35;color:var(--ink)}
+.ctip.on{opacity:1}
+.ct-t{font:500 16px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ct-r{display:flex;align-items:center;gap:9px;margin-top:6px;white-space:nowrap}
+.ct-r b{font-weight:700;font-variant-numeric:tabular-nums}
+.ct-r span{color:var(--ink-2)}
+.ct-k{width:12px;height:12px;border-radius:3px;background:var(--k);flex:none}
+.ct-k.line,.ct-k.dash{width:18px;height:0;border-radius:0;background:none;border-top:2px solid var(--k)}
+.ct-k.dash{border-top-style:dashed}
+.ct-n{margin-top:9px;padding-top:9px;border-top:1px solid var(--line);color:var(--ink-2)}
+
+/* ---------- copertina e chiusura ---------- */
+.deco{position:absolute;right:-150px;top:-90px;width:860px;height:860px;color:var(--selva-2);pointer-events:none}
+.s-dark .tag-ris.corner{position:absolute;top:34px;right:80px}
+.cover-main,.close-main{position:absolute;left:80px;top:74px;bottom:96px;width:880px;display:flex;flex-direction:column}
+.s-dark .brand.lg{font-size:40px;color:var(--on-dark)}
+.since{font:500 16px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-2);margin-top:14px}
+.cover-head,.close-head{margin-top:auto}
+.s-dark .eyebrow{color:var(--crema)}
+.cover-title{font-family:var(--font-display);font-weight:700;font-size:100px;line-height:1.02;letter-spacing:-.02em;color:var(--on-dark)}
+.cover-title em{font-style:italic;color:var(--crema)}
+.cover-sub{font-size:26px;line-height:1.4;color:var(--on-dark-2);margin-top:24px}
+.presenter{margin-top:42px;padding-top:24px;border-top:1px solid var(--line-dark);display:flex;align-items:baseline;gap:18px;font-size:25px;max-width:640px}
+.presenter .mono-lbl{color:var(--on-dark-2)}
+.presenter strong{font-weight:700;color:var(--on-dark)}
+.presenter .role{color:var(--on-dark-2)}
+.agenda{position:absolute;right:80px;bottom:96px;width:470px}
+.agenda .mono-lbl{color:var(--crema);margin-bottom:14px}
+.ag-item{display:grid;grid-template-columns:48px 1fr 20px;align-items:center;width:100%;padding:13px 0;border:0;border-top:1px solid var(--line-dark);background:transparent;color:var(--on-dark);font-size:21px;line-height:1.25;text-align:left;cursor:pointer}
+.agenda li:last-child .ag-item{border-bottom:1px solid var(--line-dark)}
+.ag-n{font:500 16px/1 var(--font-mono);color:var(--crema)}
+.ag-go{width:18px;height:18px;color:var(--crema);opacity:0;transition:opacity .2s,transform .2s}
+.ag-item:hover .ag-go,.ag-item:focus-visible .ag-go{opacity:1;transform:translateX(3px)}
+.s-dark :focus-visible{outline-color:var(--crema)}
+.close-title{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:190px;line-height:.95;letter-spacing:-.02em;color:var(--on-dark);margin-top:6px}
+.close-sub{font-size:25px;line-height:1.4;color:var(--on-dark-2);margin-top:30px}
+.payoff{font-family:var(--font-display);font-weight:600;font-style:italic;font-size:30px;color:var(--crema);margin-top:34px}
+.next-board{position:absolute;right:80px;bottom:96px;width:540px;border:1px solid var(--line-dark);border-radius:10px;padding:30px 32px 26px}
+.next-board .mono-lbl{color:var(--crema)}
+.nb-date{font-family:var(--font-display);font-size:50px;white-space:nowrap;font-weight:700;line-height:1.05;margin-top:14px;color:var(--on-dark)}
+.nb-topic{font-size:23px;color:var(--on-dark);margin-top:10px}
+.nb-list{margin-top:22px}
+.nb-list li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line-dark);font-size:19px;color:var(--on-dark-2)}
+.nb-list b{color:var(--on-dark);font-weight:700}
+
+/* ---------- slide 2: KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:6px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:28px 28px 26px;background:var(--surface);display:flex;flex-direction:column}
+.kpi .mono-lbl{color:var(--ink-2)}
+.k-val{font-weight:700;font-size:86px;line-height:1;letter-spacing:-.03em;color:var(--ink);margin-top:30px;white-space:nowrap}
+.k-unit{font-size:30px;font-weight:600;letter-spacing:0;color:var(--ink-2);margin-left:8px}
+.k-sub{font-size:18px;color:var(--muted);margin-top:12px}
+.k-delta{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:19px;color:var(--ink-2);white-space:nowrap}
+.k-delta b{font-size:24px;font-weight:700;margin-right:2px}
+.k-ref{margin-top:6px;font-size:18px;color:var(--ink-2);white-space:nowrap}
+.reading{margin-top:44px;padding-top:26px;border-top:1px solid var(--line);display:grid;grid-template-columns:250px 1fr 1fr;gap:40px;align-items:start}
+.reading li{font-size:22px;line-height:1.45;color:var(--ink-2)}
+.reading li b{color:var(--ink);font-weight:700}
+
+/* ---------- griglie ---------- */
+.grid-side{display:grid;grid-template-columns:1fr 330px;gap:36px;height:100%}
+.grid-drill{display:grid;grid-template-columns:1fr 560px;gap:30px;height:100%}
+.callouts{display:flex;flex-direction:column}
+.co{padding:22px 0;border-top:1px solid var(--line)}
+.co:first-child{border-top:0;padding-top:4px}
+.co-val{font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:10px 0 8px;color:var(--ink);white-space:nowrap}
+.co-txt{font-size:19px;line-height:1.42;color:var(--ink-2)}
+.co-val.up{color:var(--good)} .co-val.down{color:var(--bad)}
+
+/* ---------- slide 4: drill-down ---------- */
+.drill{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px 28px;display:flex;flex-direction:column;min-height:0}
+.drill-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:12px}
+.drill-name{font-size:28px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.drill-val{font-size:40px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;line-height:1}
+.drill-val small{font-size:20px;font-weight:600;color:var(--ink-2);margin-left:5px;letter-spacing:0}
+.drill-delta{font-size:18px;color:var(--ink-2);margin-top:8px}
+.drill-delta b{font-weight:700}
+.drill-list{margin-top:18px}
+.dr-row{display:grid;grid-template-columns:150px 1fr 60px 96px;align-items:center;gap:14px;height:42px;border-bottom:1px solid var(--line);font-size:18px}
+.dr-row.hd{height:34px;border-bottom:1px solid var(--line-strong)}
+.dr-row.hd span{font:500 16px/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dr-name{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dr-track{height:12px}
+.dr-bar{display:block;height:12px;width:0;border-radius:0 4px 4px 0;background:var(--c1);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+html.no-anim .dr-bar{transition:none}
+.dr-val{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.dr-d{text-align:right;font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dr-row .num-h{text-align:right}
+.drill-note{margin-top:auto;padding-top:16px;font-size:18px;line-height:1.45;color:var(--ink-2)}
+.drill-note b{color:var(--ink)}
+
+/* ---------- slide 6: simulatore ---------- */
+.sim{display:grid;grid-template-columns:500px 1fr 400px;gap:28px;flex:1;min-height:0}
+.levers{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 24px 14px;display:flex;flex-direction:column}
+.levers .panel-head{margin-bottom:2px}
+.lever{padding:11px 0 9px;border-top:1px solid var(--line)}
+.lv-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.lv-row label{font-size:19px;font-weight:600;color:var(--ink)}
+.lv-row output{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.rng{position:relative;height:28px;margin-top:6px;--fa:0;--fb:0}
+.rng input{-webkit-appearance:none;appearance:none;display:block;width:100%;height:28px;margin:0;background:transparent;cursor:pointer;position:relative;z-index:1}
+.rng input:focus-visible{outline-offset:4px}
+.rng input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(to right,var(--line-strong) 0,var(--line-strong) calc(11px + (100% - 22px) * var(--fa)),var(--selva) calc(11px + (100% - 22px) * var(--fa)),var(--selva) calc(11px + (100% - 22px) * var(--fb)),var(--line-strong) calc(11px + (100% - 22px) * var(--fb)),var(--line-strong) 100%)}
+.rng input::-moz-range-track{height:6px;border-radius:3px;background:linear-gradient(to right,var(--line-strong) 0,var(--line-strong) calc(11px + (100% - 22px) * var(--fa)),var(--selva) calc(11px + (100% - 22px) * var(--fa)),var(--selva) calc(11px + (100% - 22px) * var(--fb)),var(--line-strong) calc(11px + (100% - 22px) * var(--fb)),var(--line-strong) 100%)}
+.rng input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--surface);border:2px solid var(--selva);margin-top:-8px;box-shadow:0 1px 4px var(--shadow)}
+.rng input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--surface);border:2px solid var(--selva);box-shadow:0 1px 4px var(--shadow)}
+.rng-base{position:absolute;top:4px;left:calc(11px + (100% - 22px) * var(--d));width:2px;height:20px;margin-left:-1px;background:var(--ink-2);border-radius:1px;z-index:0}
+.lv-scale{position:relative;display:flex;justify-content:space-between;font:400 16px/1 var(--font-mono);color:var(--muted);margin-top:4px}
+.lv-scale .b{position:absolute;top:0;left:calc(11px + (100% - 22px) * var(--d));transform:translateX(-50%);color:var(--ink-2);white-space:nowrap}
+.sim-out{display:flex;flex-direction:column;min-width:0}
+.sim-big{font-size:96px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-top:16px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sim-big .k-unit{font-size:32px}
+.sim-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sim-stats span{display:block;font:500 16px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sim-stats strong{display:block;margin-top:8px;font-size:26px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sim-say{margin-top:22px;font-size:22px;line-height:1.42;color:var(--ink)}
+.sim-say b{font-weight:700}
+.sim-fx{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.sim-fx li.mono-lbl{grid-column:1 / -1;display:block;margin-bottom:4px;padding:0;border:0;color:var(--muted)}
+.sim-fx li{display:flex;justify-content:space-between;gap:10px;font-size:17px;color:var(--ink-2);padding:5px 0;border-bottom:1px solid var(--line)}
+.sim-fx li b{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.panel.sim-chart{--h:366px}
+.model{flex:none;margin-top:18px;padding:13px 18px;border:1px solid var(--line);border-radius:8px;background:var(--paper);font-size:16px;line-height:1.5;color:var(--ink-2)}
+.model b{color:var(--ink);font-weight:700}
+
+/* ---------- slide 7: PFN ---------- */
+.stat{padding:4px 0 24px}
+.stat + .stat{padding-top:24px;border-top:1px solid var(--line)}
+.stat-val{font-size:88px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-top:16px;white-space:nowrap}
+.stat-val small{font-size:30px;font-weight:600;color:var(--ink-2);margin-left:6px;letter-spacing:0}
+.stat-txt{font-size:19px;line-height:1.42;color:var(--ink-2);margin-top:12px}
+.meter{position:relative;margin-top:26px;height:12px;border-radius:6px;background:var(--c1-soft)}
+.meter-fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px 4px 4px 6px;background:var(--c1)}
+.meter-mark{position:absolute;top:-7px;width:2px;height:26px;margin-left:-1px;background:var(--ink)}
+.meter-scale{position:relative;height:22px;margin-top:10px;font:400 16px/1 var(--font-mono);color:var(--muted)}
+.meter-scale span{position:absolute;top:0;white-space:nowrap}
+
+/* ---------- slide 8: delibere ---------- */
+.votes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;min-height:0}
+.vcard{border:1px solid var(--line);border-radius:10px;padding:24px 26px;display:flex;flex-direction:column;background:var(--surface);transition:border-color .2s,box-shadow .2s}
+.vcard[data-state="fav"]{border-color:var(--selva);box-shadow:inset 0 0 0 1px var(--selva)}
+.vcard[data-state="app"]{border-color:var(--crema);box-shadow:inset 0 0 0 1px var(--crema)}
+.vc-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vc-state{font-weight:600;font-size:16px;line-height:1;padding:7px 11px;border-radius:999px;background:var(--paper);color:var(--ink-2);white-space:nowrap}
+.vcard[data-state="fav"] .vc-state{background:var(--selva);color:var(--on-dark)}
+.vcard[data-state="app"] .vc-state{background:var(--crema);color:var(--ink)}
+.vc-title{font-size:27px;font-weight:700;line-height:1.22;letter-spacing:-.01em;margin-top:20px;color:var(--ink)}
+.vc-text{font-size:18px;line-height:1.48;color:var(--ink-2);margin-top:14px}
+.vc-facts{margin-top:18px;border-top:1px solid var(--line)}
+.vc-facts div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+.vc-facts dt{color:var(--muted);white-space:nowrap}
+.vc-facts dd{color:var(--ink);font-weight:600;text-align:right}
+.vc-actions{margin-top:auto;padding-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vote{display:inline-flex;justify-content:center;align-items:center;gap:8px;height:50px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-weight:600;font-size:18px;color:var(--ink);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.vote:hover{border-color:var(--ink-2)}
+.vote svg{width:18px;height:18px}
+.vote[data-v="fav"][aria-pressed="true"]{background:var(--selva);border-color:var(--selva);color:var(--on-dark)}
+.vote[data-v="app"][aria-pressed="true"]{background:var(--crema);border-color:var(--crema);color:var(--ink)}
+.tally{flex:none;margin-top:20px;display:flex;align-items:center;gap:18px;padding:16px 22px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+.tally-txt{font-size:24px;color:var(--ink)}
+.tally-txt b{font-weight:700}
+.tally-dots{display:inline-flex;gap:6px}
+.tally-dots i{width:14px;height:14px;border-radius:50%;background:var(--line-strong)}
+.tally-dots i.fav{background:var(--selva)}
+.tally-dots i.app{background:var(--crema)}
+.tally-note{margin-left:auto;font-size:16px;color:var(--muted)}
+
+/* ---------- navigazione ---------- */
+.deck-nav{position:fixed;right:16px;bottom:14px;z-index:8000;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:var(--chrome);color:var(--on-dark);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 18px var(--shadow)}
+.deck-nav button{width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--on-dark);display:grid;place-items:center;cursor:pointer;padding:0}
+.deck-nav button:hover{background:var(--line-dark)}
+.deck-nav button:disabled{opacity:.35;cursor:default;background:transparent}
+.deck-nav button:focus-visible{outline:2px solid var(--crema);outline-offset:1px}
+.deck-nav svg{width:18px;height:18px}
+.nav-count{font:500 13px/1 var(--font-mono);letter-spacing:.06em;min-width:66px;text-align:center;font-variant-numeric:tabular-nums}
+.nav-sep{width:1px;height:20px;background:var(--line-dark);margin:0 4px}
+.deck-progress{position:fixed;left:0;right:0;top:0;height:3px;z-index:7999;pointer-events:none}
+.deck-progress i{display:block;height:100%;width:0;background:var(--crema);transition:width .35s ease}
+.rotate-hint{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);z-index:8500;width:max-content;max-width:calc(100% - 32px);padding:8px 14px;border-radius:999px;background:var(--chrome);color:var(--on-dark);font:500 13px/1.35 var(--font-body);text-align:center}
+@media (max-width:699px) and (orientation:portrait){.rotate-hint{display:block}}
+html.is-thumb .deck-nav,html.is-thumb .deck-progress,html.is-thumb .rotate-hint{display:none}
+
+/* ---------- stampa (Cmd+P) ---------- */
+@media print{
+  @page{size:1600px 900px;margin:0}
+  html,body{height:auto;overflow:visible;background:var(--surface)}
+  .deck-viewport{position:static;overflow:visible;background:none}
+  .deck{position:static;transform:none!important;width:1600px;height:auto}
+  .slide{position:relative;width:1600px;height:900px;opacity:1;visibility:visible;transition:none;break-after:page;page-break-after:always}
+  .slide .rise,.flash{animation:none!important}
+  .deck-nav,.deck-progress,.rotate-hint,.ctip{display:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<a class="dc-back" href="../index.html">← Galleria</a>
+<details class="dc-hint">
+  <summary>Cosa provare</summary>
+  <ul>
+    <li>Slide 2: cambia il confronto tra «Budget» e «2025» e guarda come cambiano i delta.</li>
+    <li>Slide 4: clicca un canale nel grafico per aprire il dettaglio accanto.</li>
+    <li>Slide 6: muovi il prezzo dell'arabica e guarda l'EBITDA di fine anno.</li>
+    <li>Frecce o pulsanti in basso a destra per cambiare slide, F per lo schermo intero.</li>
+  </ul>
+</details>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-prev" viewBox="0 0 20 20"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 20 20"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-full" viewBox="0 0 20 20"><path d="M3.5 7.5v-4h4M12.5 3.5h4v4M16.5 12.5v4h-4M7.5 16.5h-4v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-table" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 6.5h13M1.5 10h13M6 6.5v7" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="m4.5 10.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-more" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 6.5V10l2.5 1.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 16 16"><path d="M3 8a5 5 0 1 0 1.6-3.7M3 2.5v2.8h2.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="deck-viewport" id="viewport">
+<div class="deck" id="deck">
+
+<!-- ============ 1. COPERTINA ============ -->
+<section class="slide s-dark cover active" aria-label="Slide 1: copertina">
+  <svg class="deco" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" stroke-width=".07"/><ellipse cx="16" cy="16" rx="11.6" ry="15.6" stroke-width=".035"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" stroke-width=".07"/></g></svg>
+  <span class="tag-ris corner">Riservato</span>
+  <div class="cover-main">
+    <div>
+      <span class="brand lg"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <p class="since">Caffè · dal 1961</p>
+    </div>
+    <div class="cover-head">
+      <p class="eyebrow rise" style="--i:0">Consiglio di Amministrazione · 23 ottobre 2026</p>
+      <h1 class="cover-title rise" style="--i:1">Risultati al<br><em>30 settembre 2026</em></h1>
+      <p class="cover-sub rise" style="--i:2">Terzo trimestre 2026 · Torrefazione Selvana S.p.A.</p>
+      <p class="presenter rise" style="--i:3"><span class="mono-lbl">Presenta</span><strong>Marco Fenaroli</strong><span class="role">CFO</span></p>
+    </div>
+  </div>
+  <nav class="agenda rise" style="--i:3" aria-label="Ordine del giorno">
+    <p class="mono-lbl">Ordine del giorno</p>
+    <ol>
+      <li><button type="button" class="ag-item" data-go="1"><span class="ag-n">01</span>Ricavi e margine a settembre<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="2"><span class="ag-n">02</span>Andamento mese per mese<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="3"><span class="ag-n">03</span>Ricavi per canale<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="4"><span class="ag-n">04</span>Dal budget al consuntivo<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="5"><span class="ag-n">05</span>Scenario di fine anno<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="6"><span class="ag-n">06</span>Posizione finanziaria netta<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+      <li><button type="button" class="ag-item" data-go="7"><span class="ag-n">07</span>Tre delibere<svg class="ag-go" aria-hidden="true"><use href="#i-arrow"/></svg></button></li>
+    </ol>
+  </nav>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 2. KPI ============ -->
+<section class="slide" aria-label="Slide 2: ricavi sopra budget, margine sotto">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">02 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Risultati gennaio–settembre 2026</p>
+        <h2 class="s-title">Ricavi sopra budget, margine sotto</h2>
+        <p class="lede">I numeri dei primi nove mesi, a confronto con il budget o con lo stesso periodo del 2025.</p>
+      </div>
+      <div class="ctrl">
+        <span class="ctrl-lbl" id="cmp-lbl">Confronta con</span>
+        <div class="seg" role="group" aria-labelledby="cmp-lbl">
+          <button type="button" id="cmp-budget" data-cmp="budget" aria-pressed="true">Budget</button>
+          <button type="button" id="cmp-2025" data-cmp="py" aria-pressed="false">2025</button>
+        </div>
+      </div>
+    </header>
+    <div class="kpis">
+      <article class="kpi rise" style="--i:1">
+        <p class="mono-lbl">Ricavi</p>
+        <p class="k-val"><span data-count="147.9" data-dec="1">147,9</span><span class="k-unit">M€</span></p>
+        <p class="k-sub">gennaio–settembre</p>
+        <p class="k-delta" id="kd-ricavi"><b class="up">▲ +2,0%</b> sopra il budget</p>
+        <p class="k-ref" id="kr-ricavi">Budget 145,0 M€ · +2,9 M€</p>
+      </article>
+      <article class="kpi rise" style="--i:2">
+        <p class="mono-lbl">EBITDA</p>
+        <p class="k-val"><span data-count="16.1" data-dec="1">16,1</span><span class="k-unit">M€</span></p>
+        <p class="k-sub">gennaio–settembre</p>
+        <p class="k-delta" id="kd-ebitda"><b class="down">▼ −4,2%</b> sotto il budget</p>
+        <p class="k-ref" id="kr-ebitda">Budget 16,8 M€ · −0,7 M€</p>
+      </article>
+      <article class="kpi rise" style="--i:3">
+        <p class="mono-lbl">Margine EBITDA</p>
+        <p class="k-val"><span data-count="10.9" data-dec="1">10,9</span><span class="k-unit">%</span></p>
+        <p class="k-sub">EBITDA su ricavi</p>
+        <p class="k-delta" id="kd-margine"><b class="down">▼ −0,7 pp</b> sotto il budget</p>
+        <p class="k-ref" id="kr-margine">Budget 11,6%</p>
+      </article>
+      <article class="kpi rise" style="--i:4">
+        <p class="mono-lbl">Abbonati e-commerce</p>
+        <p class="k-val"><span data-count="29400" data-dec="0">29.400</span></p>
+        <p class="k-sub">attivi a fine settembre</p>
+        <p class="k-delta" id="kd-abbonati"><b class="up">▲ +8,9%</b> sopra il budget</p>
+        <p class="k-ref" id="kr-abbonati">Budget 27.000 · +2.400</p>
+      </article>
+    </div>
+    <div class="reading rise" style="--i:5">
+      <p class="mono-lbl">Lettura per il Consiglio</p>
+      <ul id="reading-1"><li><b>Ricavi +2,9 M€</b> sul budget: Ho.Re.Ca. (+1,5 M€) ed e-commerce (+1,6 M€) compensano GDO e Office.</li></ul>
+      <ul id="reading-2"><li><b>EBITDA −0,7 M€</b> sul budget: il caffè verde da solo pesa 2,4 M€. Senza questo effetto saremmo sopra budget.</li></ul>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 3. ANDAMENTO MENSILE ============ -->
+<section class="slide" aria-label="Slide 3: settembre ha recuperato il ritardo dell'estate">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">03 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Andamento mese per mese</p>
+        <h2 class="s-title">Settembre ha recuperato il ritardo dell'estate</h2>
+        <p class="lede">Ricavi 2026 a confronto con budget e 2025, in milioni di euro.</p>
+      </div>
+    </header>
+    <div class="s-main grid-side">
+      <div class="panel rise" id="panel-mesi" style="--i:1">
+        <div class="panel-head">
+          <div class="legend" aria-label="Legenda">
+            <span class="key"><i class="key-line" style="--k:var(--c1)"></i>Consuntivo 2026</span>
+            <span class="key"><i class="key-line dash" style="--k:var(--c2)"></i>Budget 2026</span>
+            <span class="key"><i class="key-line" style="--k:var(--c3)"></i>2025</span>
+          </div>
+          <div class="panel-tools">
+            <div class="seg sm" role="group" aria-label="Tipo di vista">
+              <button type="button" id="mesi-mensile" data-mode="m" aria-pressed="true">Mensile</button>
+              <button type="button" id="mesi-cumulato" data-mode="c" aria-pressed="false">Cumulato</button>
+            </div>
+            <button type="button" class="btn-ghost" id="tab-mesi" data-table="panel-mesi" aria-pressed="false"><svg aria-hidden="true"><use href="#i-table"/></svg><span class="bt-txt">Vista tabella</span></button>
+          </div>
+        </div>
+        <div class="viz"><canvas id="cv-mesi" role="img" aria-label="Grafico a linee dei ricavi mensili 2026: consuntivo, budget e 2025, da gennaio a settembre."></canvas></div>
+        <div class="tbl" id="tbl-mesi"></div>
+      </div>
+      <div class="callouts">
+        <div class="co rise" style="--i:2"><p class="mono-lbl">Luglio e agosto</p><p class="co-val down">▼ −1,3 M€</p><p class="co-txt">sotto budget: molti bar in città sono rimasti chiusi più a lungo del previsto.</p></div>
+        <div class="co rise" style="--i:3"><p class="mono-lbl">Settembre</p><p class="co-val up">▲ +1,8 M€</p><p class="co-txt">sopra budget e +18,4% sul 2025: riaperture e scorte per l'autunno.</p></div>
+        <div class="co rise" style="--i:4"><p class="mono-lbl">Gennaio–settembre</p><p class="co-val up">▲ +2,9 M€</p><p class="co-txt">sopra budget, pari a +2,0%. Sul 2025 la crescita è dell'8,6%.</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 4. CANALI + DRILL-DOWN ============ -->
+<section class="slide" aria-label="Slide 4: Ho.Re.Ca. ed e-commerce trainano">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">04 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Ricavi per canale · gennaio–settembre</p>
+        <h2 class="s-title">Ho.Re.Ca. ed e-commerce trainano</h2>
+        <p class="lede">Consuntivo e budget per canale, in milioni di euro. Clicca un canale per vedere il dettaglio.</p>
+      </div>
+    </header>
+    <div class="s-main grid-drill">
+      <div class="panel rise" id="panel-canali" style="--i:1">
+        <div class="panel-head">
+          <div class="legend" aria-label="Legenda">
+            <span class="key"><i class="key-sw" style="--k:var(--c1)"></i>Consuntivo</span>
+            <span class="key"><i class="key-sw" style="--k:var(--c2)"></i>Budget</span>
+          </div>
+          <div class="panel-tools">
+            <button type="button" class="btn-ghost" id="tab-canali" data-table="panel-canali" aria-pressed="false"><svg aria-hidden="true"><use href="#i-table"/></svg><span class="bt-txt">Vista tabella</span></button>
+          </div>
+        </div>
+        <div class="viz"><canvas id="cv-canali" tabindex="0" role="img" aria-label="Grafico a barre dei ricavi per canale, consuntivo e budget. Clicca o usa le frecce su e giù per scegliere il canale da dettagliare."></canvas></div>
+        <div class="tbl" id="tbl-canali"></div>
+      </div>
+      <aside class="drill rise" id="drill" style="--i:2" aria-live="polite">
+        <p class="mono-lbl" id="drill-by">Dettaglio · per regione</p>
+        <div class="drill-top"><h3 class="drill-name" id="drill-name">Ho.Re.Ca. Italia</h3><p class="drill-val"><span id="drill-val">61,6</span><small>M€</small></p></div>
+        <p class="drill-delta" id="drill-delta"><b class="up">▲ +1,5 M€</b> sul budget (+2,5%)</p>
+        <div class="drill-list" id="drill-list"></div>
+        <p class="drill-note" id="drill-note"></p>
+      </aside>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 5. WATERFALL ============ -->
+<section class="slide" aria-label="Slide 5: il caffè verde ci è costato 2,4 milioni di margine">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">05 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Dal budget al consuntivo · EBITDA gennaio–settembre</p>
+        <h2 class="s-title">Il caffè verde ci è costato 2,4 M€ di margine</h2>
+        <p class="lede">Le voci che spiegano la differenza tra EBITDA a budget e consuntivo, in milioni di euro.</p>
+      </div>
+    </header>
+    <div class="s-main grid-side">
+      <div class="panel rise" id="panel-wf" style="--i:1">
+        <div class="panel-head">
+          <div class="legend" aria-label="Legenda">
+            <span class="key"><i class="key-sw" style="--k:var(--good)"></i>▲ Aumenta l'EBITDA</span>
+            <span class="key"><i class="key-sw" style="--k:var(--bad)"></i>▼ Riduce l'EBITDA</span>
+            <span class="key"><i class="key-sw" style="--k:var(--selva)"></i>Totale</span>
+          </div>
+          <div class="panel-tools">
+            <button type="button" class="btn-ghost" id="tab-wf" data-table="panel-wf" aria-pressed="false"><svg aria-hidden="true"><use href="#i-table"/></svg><span class="bt-txt">Vista tabella</span></button>
+          </div>
+        </div>
+        <div class="viz"><canvas id="cv-wf" role="img" aria-label="Grafico a cascata: da EBITDA budget 16,8 a EBITDA consuntivo 16,1 milioni. Volumi più 1,1; prezzi di listino più 0,9; costo caffè verde meno 2,4; energia più 0,2; personale meno 0,3; altri costi meno 0,2."></canvas></div>
+        <div class="tbl" id="tbl-wf"></div>
+      </div>
+      <div class="callouts">
+        <div class="co rise" style="--i:2"><p class="mono-lbl">Costo caffè verde</p><p class="co-val down">▼ −2,4 M€</p><p class="co-txt">sul budget. L'arabica costa il 38% in più rispetto a 18 mesi fa.</p></div>
+        <div class="co rise" style="--i:3"><p class="mono-lbl">Senza l'effetto caffè verde</p><p class="co-val">18,5 M€</p><p class="co-txt">di EBITDA: <span class="up">▲ +1,7 M€</span> sopra il budget, con un margine del 12,5%.</p></div>
+        <div class="co rise" style="--i:4"><p class="mono-lbl">La risposta proposta</p><p class="co-val">60%</p><p class="co-txt">del fabbisogno di arabica 2027 a prezzo fisso: è la prima delibera di oggi.</p></div>
+      </div>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 6. SIMULATORE ============ -->
+<section class="slide" aria-label="Slide 6: simulatore di fine anno">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">06 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Simulatore · intero esercizio 2026</p>
+        <h2 class="s-title">Cosa succede a fine anno se…</h2>
+      </div>
+    </header>
+    <div class="sim">
+      <section class="levers rise" style="--i:1" aria-labelledby="lev-title">
+        <div class="panel-head">
+          <p class="mono-lbl" id="lev-title">Le leve</p>
+          <button type="button" class="btn-ghost" id="sim-reset"><svg aria-hidden="true"><use href="#i-reset"/></svg>Ripristina</button>
+        </div>
+        <div class="lever" style="--d:.55">
+          <div class="lv-row"><label for="sim-arabica">Prezzo arabica</label><output id="out-arabica" for="sim-arabica">4,10 USD/lb</output></div>
+          <div class="rng"><input type="range" id="sim-arabica" min="3" max="5" step="0.05" value="4.1"><i class="rng-base" aria-hidden="true"></i></div>
+          <div class="lv-scale"><span>3,00</span><span class="b">base 4,10</span><span>5,00</span></div>
+        </div>
+        <div class="lever" style="--d:.48">
+          <div class="lv-row"><label for="sim-cambio">Cambio EUR/USD</label><output id="out-cambio" for="sim-cambio">1,12</output></div>
+          <div class="rng"><input type="range" id="sim-cambio" min="1" max="1.25" step="0.01" value="1.12"><i class="rng-base" aria-hidden="true"></i></div>
+          <div class="lv-scale"><span>1,00</span><span class="b">base 1,12</span><span>1,25</span></div>
+        </div>
+        <div class="lever" style="--d:0">
+          <div class="lv-row"><label for="sim-listino">Listino Ho.Re.Ca. dal 1° novembre</label><output id="out-listino" for="sim-listino">0%</output></div>
+          <div class="rng"><input type="range" id="sim-listino" min="0" max="6" step="0.5" value="0"><i class="rng-base" aria-hidden="true"></i></div>
+          <div class="lv-scale"><span>0% · base</span><span>+6%</span></div>
+        </div>
+        <div class="lever" style="--d:.5">
+          <div class="lv-row"><label for="sim-volumi">Volumi del quarto trimestre vs budget</label><output id="out-volumi" for="sim-volumi">0%</output></div>
+          <div class="rng"><input type="range" id="sim-volumi" min="-10" max="10" step="1" value="0"><i class="rng-base" aria-hidden="true"></i></div>
+          <div class="lv-scale"><span>−10%</span><span class="b">base 0%</span><span>+10%</span></div>
+        </div>
+      </section>
+      <section class="sim-out rise" style="--i:2" aria-label="Risultato dello scenario">
+        <p class="mono-lbl">EBITDA 2026 · scenario</p>
+        <p class="sim-big"><span id="sim-ebitda">22,5</span><span class="k-unit">M€</span></p>
+        <div class="sim-stats">
+          <div><span>Margine</span><strong id="sim-margin">11,0%</strong></div>
+          <div><span>Ricavi</span><strong id="sim-rev">204,8 M€</strong></div>
+          <div><span>Vs budget</span><strong id="sim-delta" class="down">▼ −0,9 M€</strong></div>
+        </div>
+        <p class="sim-say" id="sim-say" aria-live="polite">Per tornare a budget servono <b>0,9 M€</b>: ad esempio un listino Ho.Re.Ca. <b>+3,3%</b> dal 1° novembre.</p>
+        <ul class="sim-fx" id="sim-fx">
+          <li class="mono-lbl">Effetto sull'EBITDA rispetto al forecast</li>
+          <li><span>Arabica</span><b id="fx-arabica">0,00 M€</b></li>
+          <li><span>Cambio</span><b id="fx-cambio">0,00 M€</b></li>
+          <li><span>Listino</span><b id="fx-listino">0,00 M€</b></li>
+          <li><span>Volumi</span><b id="fx-volumi">0,00 M€</b></li>
+        </ul>
+      </section>
+      <section class="panel sim-chart rise" id="panel-sim" style="--i:3">
+        <div class="panel-head">
+          <p class="mono-lbl">EBITDA 2026 · M€</p>
+          <div class="panel-tools">
+            <button type="button" class="btn-ghost" id="tab-sim" data-table="panel-sim" aria-pressed="false"><svg aria-hidden="true"><use href="#i-table"/></svg><span class="bt-txt">Vista tabella</span></button>
+          </div>
+        </div>
+        <div class="viz"><canvas id="cv-sim" role="img" aria-label="Grafico a barre: EBITDA 2026 a budget, nel forecast attuale e nello scenario simulato."></canvas></div>
+        <div class="tbl" id="tbl-sim"></div>
+        <p class="caption">La linea orizzontale indica il budget (23,4 M€).</p>
+      </section>
+    </div>
+    <p class="model rise" style="--i:4"><b>Come calcoliamo.</b> Modello lineare semplice. Base: forecast 2026 con ricavi 204,8 M€ ed EBITDA 22,5 M€ (11,0%); budget 2026 con ricavi 201,5 M€ ed EBITDA 23,4 M€ (11,6%). Effetto sull'EBITDA: arabica +0,10 USD/lb → −0,15 M€ · EUR/USD +0,01 → +0,07 M€ · listino Ho.Re.Ca. +1% → +0,28 M€ (ricavi +0,5 M€) · volumi del quarto trimestre +1% → +0,12 M€ (ricavi +0,55 M€).</p>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 7. PFN ============ -->
+<section class="slide" aria-label="Slide 7: debito in calo in sei trimestri su sette">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">07 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Posizione finanziaria netta</p>
+        <h2 class="s-title">Debito in calo in sei trimestri su sette</h2>
+        <p class="lede">PFN a fine trimestre, in milioni di euro. Un valore negativo indica debito netto.</p>
+      </div>
+    </header>
+    <div class="s-main grid-side" style="grid-template-columns:1fr 400px">
+      <div class="panel rise" id="panel-pfn" style="--i:1">
+        <div class="panel-head">
+          <p class="mono-lbl">PFN a fine trimestre · M€</p>
+          <div class="panel-tools">
+            <button type="button" class="btn-ghost" id="tab-pfn" data-table="panel-pfn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-table"/></svg><span class="bt-txt">Vista tabella</span></button>
+          </div>
+        </div>
+        <div class="viz"><canvas id="cv-pfn" role="img" aria-label="Grafico a linee della posizione finanziaria netta per trimestre, da meno 24,1 milioni a fine 2024 a meno 16,8 milioni a settembre 2026."></canvas></div>
+        <div class="tbl" id="tbl-pfn"></div>
+      </div>
+      <div class="callouts">
+        <div class="stat rise" style="--i:2">
+          <p class="mono-lbl">PFN / EBITDA ultimi 12 mesi</p>
+          <p class="stat-val">0,76<small>x</small></p>
+          <div class="meter" role="img" aria-label="0,76 volte, contro un covenant massimo di 2,5 volte">
+            <span class="meter-fill" style="width:25.33%"></span>
+            <span class="meter-mark" style="left:83.33%"></span>
+          </div>
+          <div class="meter-scale" aria-hidden="true"><span style="left:0">0x</span><span style="left:83.33%;transform:translateX(-50%)">covenant 2,5x</span></div>
+          <p class="stat-txt">Il covenant bancario fissa un massimo di 2,5x: siamo al 30% del limite. EBITDA ultimi 12 mesi 22,2 M€.</p>
+        </div>
+        <div class="stat rise" style="--i:3">
+          <p class="mono-lbl">Da dicembre 2024</p>
+          <p class="stat-val">7,3<small>M€</small></p>
+          <p class="stat-txt">di debito in meno in sette trimestri, da −24,1 a −16,8 M€.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 8. DELIBERE ============ -->
+<section class="slide" aria-label="Slide 8: tre decisioni per il Consiglio">
+  <div class="s-top"><span class="brand"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span><i class="sep"></i><span>CdA · 23 ottobre 2026</span><span class="tag-ris">Riservato</span><span class="s-num">08 / 09</span></div>
+  <div class="s-body">
+    <header class="s-head rise" style="--i:0">
+      <div>
+        <p class="eyebrow">Proposte di delibera</p>
+        <h2 class="s-title">Tre decisioni per il Consiglio</h2>
+      </div>
+    </header>
+    <div class="votes">
+      <article class="vcard rise" style="--i:1" id="vc-1" data-state="fav">
+        <div class="vc-top"><p class="mono-lbl">Delibera 1 · Filiera</p><span class="vc-state" id="vs-1">Favorevole</span></div>
+        <h3 class="vc-title">Copertura del prezzo dell'arabica per il 60% del fabbisogno 2027</h3>
+        <p class="vc-text">Fissiamo oggi il prezzo di oltre metà del caffè verde del 2027. Proteggiamo il margine se l'arabica sale ancora; rinunciamo a parte del vantaggio se scende.</p>
+        <dl class="vc-facts">
+          <div><dt>Propongono</dt><dd>Marco Fenaroli, Anna Ghisleri</dd></div>
+          <div><dt>Rischio coperto</dt><dd>arabica +38% in 18 mesi</dd></div>
+          <div><dt>Piano 2027</dt><dd>mossa 1, filiera diretta</dd></div>
+        </dl>
+        <div class="vc-actions">
+          <button type="button" class="vote" id="v1-fav" data-d="1" data-v="fav" aria-pressed="true"><svg aria-hidden="true"><use href="#i-check"/></svg>Favorevole</button>
+          <button type="button" class="vote" id="v1-app" data-d="1" data-v="app" aria-pressed="false"><svg aria-hidden="true"><use href="#i-more"/></svg>Da approfondire</button>
+        </div>
+      </article>
+      <article class="vcard rise" style="--i:2" id="vc-2" data-state="fav">
+        <div class="vc-top"><p class="mono-lbl">Delibera 2 · Impianti</p><span class="vc-state" id="vs-2">Favorevole</span></div>
+        <h3 class="vc-title">Investimento nella nuova linea di tostatura: 6,2 M€</h3>
+        <p class="vc-text">È la voce principale dei 14,8 M€ di investimenti 2027. Una linea a basse emissioni a Bergamo: più capacità e meno CO₂ per kg tostato.</p>
+        <dl class="vc-facts">
+          <div><dt>Propone</dt><dd>Luca Moretti</dd></div>
+          <div><dt>Quota degli investimenti 2027</dt><dd>42%</dd></div>
+          <div><dt>Se tutto a debito</dt><dd>PFN/EBITDA a circa 1,0x</dd></div>
+        </dl>
+        <div class="vc-actions">
+          <button type="button" class="vote" id="v2-fav" data-d="2" data-v="fav" aria-pressed="true"><svg aria-hidden="true"><use href="#i-check"/></svg>Favorevole</button>
+          <button type="button" class="vote" id="v2-app" data-d="2" data-v="app" aria-pressed="false"><svg aria-hidden="true"><use href="#i-more"/></svg>Da approfondire</button>
+        </div>
+      </article>
+      <article class="vcard rise" style="--i:3" id="vc-3" data-state="app">
+        <div class="vc-top"><p class="mono-lbl">Delibera 3 · Prezzi</p><span class="vc-state" id="vs-3">Da approfondire</span></div>
+        <h3 class="vc-title">Aumento del listino Ho.Re.Ca. del 3,5% da gennaio 2027</h3>
+        <p class="vc-text">Recupera parte del rincaro della materia prima sul canale più grande. Il rischio è perdere i locali più sensibili al prezzo.</p>
+        <dl class="vc-facts">
+          <div><dt>Propone</dt><dd>Elena Bassi</dd></div>
+          <div><dt>Ricavi Ho.Re.Ca. 2025</dt><dd>78,2 M€</dd></div>
+          <div><dt>Locali coinvolti</dt><dd>9.800 in Italia</dd></div>
+        </dl>
+        <div class="vc-actions">
+          <button type="button" class="vote" id="v3-fav" data-d="3" data-v="fav" aria-pressed="false"><svg aria-hidden="true"><use href="#i-check"/></svg>Favorevole</button>
+          <button type="button" class="vote" id="v3-app" data-d="3" data-v="app" aria-pressed="true"><svg aria-hidden="true"><use href="#i-more"/></svg>Da approfondire</button>
+        </div>
+      </article>
+    </div>
+    <div class="tally rise" style="--i:4">
+      <span class="tally-dots" id="tally-dots" aria-hidden="true"><i class="fav"></i><i class="fav"></i><i class="app"></i></span>
+      <p class="tally-txt" id="tally-txt" aria-live="polite"><b>Esito simulato:</b> 2 favorevoli, 1 da approfondire</p>
+      <p class="tally-note">Voto dimostrativo: resta su questo schermo e non viene salvato.</p>
+    </div>
+  </div>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+<!-- ============ 9. CHIUSURA ============ -->
+<section class="slide s-dark closing" aria-label="Slide 9: domande">
+  <svg class="deco" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)" fill="none" stroke="currentColor" stroke-linecap="round"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" stroke-width=".07"/><ellipse cx="16" cy="16" rx="11.6" ry="15.6" stroke-width=".035"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" stroke-width=".07"/></g></svg>
+  <span class="tag-ris corner">Riservato</span>
+  <div class="close-main">
+    <div>
+      <span class="brand lg"><svg class="bean" viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(-32 16 16)"><ellipse cx="16" cy="16" rx="9.5" ry="13.5" fill="currentColor"/><path d="M16 3.5c-3.2 4.3-2.6 8.3 0 12.5s3.2 8.2 0 12.5" fill="none" stroke="var(--bean-cut, #FBFCFA)" stroke-width="2" stroke-linecap="round"/></g></svg><span class="brand-word">Selvana</span></span>
+      <p class="since">Caffè · dal 1961</p>
+    </div>
+    <div class="close-head">
+      <p class="eyebrow rise" style="--i:0">Consiglio di Amministrazione · 23 ottobre 2026</p>
+      <h2 class="close-title rise" style="--i:1">Domande</h2>
+      <p class="close-sub rise" style="--i:2">Marco Fenaroli, CFO · Giulia Ravelli, Amministratrice Delegata</p>
+      <p class="payoff rise" style="--i:3">«Tostato con pazienza, dal 1961.»</p>
+    </div>
+  </div>
+  <aside class="next-board rise" style="--i:3">
+    <p class="mono-lbl">Prossimo Consiglio</p>
+    <p class="nb-date">18 dicembre 2026</p>
+    <p class="nb-topic">Approvazione del budget 2027</p>
+    <ul class="nb-list">
+      <li><span>Ricavi obiettivo 2027</span><b>215 M€</b></li>
+      <li><span>Margine EBITDA obiettivo</span><b>12,5%</b></li>
+      <li><span>Investimenti 2027</span><b>14,8 M€</b></li>
+      <li><span>Abbonati obiettivo</span><b>48.000</b></li>
+    </ul>
+  </aside>
+  <p class="s-foot">Selvana Caffè è un'azienda inventata. Dati di fantasia a scopo dimostrativo.</p>
+</section>
+
+</div>
+</div>
+
+<div class="deck-progress" aria-hidden="true"><i id="nav-bar"></i></div>
+<nav class="deck-nav" aria-label="Navigazione slide">
+  <button type="button" id="nav-prev" aria-label="Slide precedente"><svg aria-hidden="true"><use href="#i-prev"/></svg></button>
+  <span class="nav-count" id="nav-count" aria-live="polite">01 / 09</span>
+  <button type="button" id="nav-next" aria-label="Slide successiva"><svg aria-hidden="true"><use href="#i-next"/></svg></button>
+  <span class="nav-sep" aria-hidden="true"></span>
+  <button type="button" id="nav-fs" aria-label="Schermo intero (tasto F)"><svg aria-hidden="true"><use href="#i-full"/></svg></button>
+</nav>
+<p class="rotate-hint" role="status">Ruota il telefono in orizzontale per vedere meglio le slide</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* ================= impostazioni di base ================= */
+var root = document.documentElement;
+var THUMB = root.classList.contains('is-thumb');
+var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+var ANIM = !THUMB && !REDUCED;
+if (!ANIM) root.classList.add('no-anim');
+
+var cs = getComputedStyle(root);
+function tok(n){ return cs.getPropertyValue(n).trim(); }
+var C = {
+  ink: tok('--ink'), ink2: tok('--ink-2'), muted: tok('--muted'), line: tok('--line'),
+  lineStrong: tok('--line-strong'), band: tok('--band'), surface: tok('--surface'),
+  selva: tok('--selva'), good: tok('--good'), bad: tok('--bad'),
+  c1: tok('--c1'), c2: tok('--c2'), c3: tok('--c3')
+};
+var FONT = tok('--font-body');
+var MONO = tok('--font-mono');
+function alpha(hex, a){
+  var n = parseInt(hex.replace('#',''), 16);
+  return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+}
+
+/* ================= numeri in formato italiano ================= */
+var MINUS = '−';
+var NFC = {};
+function grp(s){ return s.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+function nf(v, d){
+  if (!NFC[d]) NFC[d] = new Intl.NumberFormat('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: false });
+  var s = NFC[d].format(v), i = s.indexOf(',');
+  /* it-IT non separa le migliaia sotto 10.000: lo facciamo noi (9.800, 29.400) */
+  return i < 0 ? grp(s) : grp(s.slice(0, i)) + s.slice(i);
+}
+function rnd(v, d){ var p = Math.pow(10, d); return Math.round((Math.abs(v) + 1e-9) * p) / p; }
+function fx(v, d){ var r = rnd(v, d); return (v < 0 && r > 0 ? MINUS : '') + nf(r, d); }
+function sx(v, d){ var r = rnd(v, d); if (r === 0) return nf(0, d); return (v > 0 ? '+' : MINUS) + nf(r, d); }
+/* delta con freccia e colore: good/bad */
+function dlt(v, d, unit, upIsGood){
+  var r = rnd(v, d);
+  if (r === 0) return '<span class="flat">= ' + nf(0, d) + unit + '</span>';
+  var up = v > 0, good = (upIsGood === false) ? !up : up;
+  return '<span class="' + (good ? 'up' : 'down') + '">' + (up ? '▲ ' : '▼ ') + sx(v, d) + unit + '</span>';
+}
+
+/* ================= dati ================= */
+var MONTHS = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set'];
+var MONTHS_FULL = ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre'];
+var ACT = [14.9, 15.4, 17.0, 16.7, 17.6, 17.4, 15.4, 12.9, 20.6];   /* somma 147,9 */
+var BUD = [14.6, 14.9, 16.6, 16.4, 17.1, 17.0, 16.0, 13.6, 18.8];   /* somma 145,0 */
+var PY  = [13.7, 14.0, 15.6, 15.5, 16.2, 16.1, 15.1, 12.6, 17.4];   /* somma 136,2 */
+function cum(a){ var out = [], s = 0; a.forEach(function(v){ s = Math.round((s + v) * 10) / 10; out.push(s); }); return out; }
+var ACT_C = cum(ACT), BUD_C = cum(BUD), PY_C = cum(PY);
+
+var CH = [
+  { name:'Ho.Re.Ca. Italia', lbl:'Ho.Re.Ca. Italia', act:61.6, bud:60.1, by:'per regione', col:'Regione',
+    parts:[['Lombardia',24.8,24.0],['Veneto',9.6,9.5],['Emilia-Romagna',8.1,7.7],['Piemonte',6.9,6.8],['Liguria',3.7,3.9],['Altre regioni',8.5,8.2]],
+    note:'<b>Lombardia</b> vale il 40% del canale e da sola porta +0,8 M€ sul budget. La Liguria cala con una stagione turistica più corta.' },
+  { name:'GDO Italia', lbl:'GDO Italia', act:35.2, bud:35.8, by:'per insegna', col:'Insegna',
+    parts:[['Mercato Fresco',11.4,11.2],['SuperPiù',8.7,9.3],['Spesa Facile',6.3,6.4],['Bottega Italia',4.2,4.1],['Altre insegne',4.6,4.8]],
+    note:'<b>SuperPiù</b> è 0,6 M€ sotto budget: da maggio ha ridotto le promozioni sul caffè in grani. Le altre insegne sono vicine al budget.' },
+  { name:'Export', lbl:'Export', act:27.4, bud:26.9, by:'per paese', col:'Paese',
+    parts:[['Germania',7.9,7.6],['Svizzera',5.1,5.0],['Francia',4.3,4.4],['Stati Uniti',3.8,3.5],['Austria',2.2,2.2],['Altri 29 paesi',4.1,4.2]],
+    note:'<b>Germania e Stati Uniti</b> portano +0,6 M€ sul budget. La Francia è l\'unico grande mercato in lieve calo.' },
+  { name:'E-commerce & abbonamenti', lbl:['E-commerce &','abbonamenti'], act:13.9, bud:12.3, by:'per tipo di vendita', col:'Vendita',
+    parts:[['Abbonamenti',8.6,7.2],['Ordini singoli',3.6,3.5],['Marketplace',1.7,1.6]],
+    note:'<b>Gli abbonamenti</b> valgono il 62% del canale e superano il budget di 1,4 M€: 29.400 abbonati a fine settembre.' },
+  { name:'Office', lbl:'Office', act:9.8, bud:9.9, by:'per cliente', col:'Cliente',
+    parts:[['Piccoli uffici',4.1,4.0],['Medie aziende',3.5,3.6],['Grandi aziende',2.2,2.3]],
+    note:'<b>Quasi in linea</b> con il budget (−0,1 M€): crescono i piccoli uffici, rallentano medie e grandi aziende.' }
+];
+
+var WF = [
+  { lbl:['EBITDA','budget'], name:'EBITDA budget', v:16.8, total:true, note:'Il budget approvato per gennaio–settembre: margine dell\'11,6% sui ricavi.' },
+  { lbl:'Volumi', name:'Volumi', v:1.1, note:'Più caffè venduto del previsto, soprattutto nell\'Ho.Re.Ca. e negli abbonamenti online.' },
+  { lbl:['Prezzi','di listino'], name:'Prezzi di listino', v:0.9, note:'L\'aumento di listino di marzo ha recuperato una parte del rincaro della materia prima.' },
+  { lbl:['Costo','caffè verde'], name:'Costo caffè verde', v:-2.4, note:'L\'arabica costa il 38% in più rispetto a 18 mesi fa: è la voce che pesa di più.' },
+  { lbl:'Energia', name:'Energia', v:0.2, note:'Gas per la tostatura più economico del previsto.' },
+  { lbl:'Personale', name:'Personale', v:-0.3, note:'Rinnovo del contratto e nuovi turni nello stabilimento capsule di Lodi.' },
+  { lbl:['Altri','costi'], name:'Altri costi', v:-0.2, note:'Più spedizioni dall\'hub di Piacenza per seguire la crescita dell\'e-commerce.' },
+  { lbl:['EBITDA','consuntivo'], name:'EBITDA consuntivo', v:16.1, total:true, note:'Margine del 10,9% sui ricavi: 0,7 M€ sotto il budget.' }
+];
+var WF_R = (function(){
+  var run = 0;
+  return WF.map(function(w){
+    if (w.total) { run = w.v; return [0, w.v]; }
+    var s = run; run = Math.round((run + w.v) * 10) / 10; return [s, run];
+  });
+})();
+
+var PFN_Q = ['T4-24','T1-25','T2-25','T3-25','T4-25','T1-26','T2-26','T3-26'];
+var PFN_FULL = ['31 dicembre 2024','31 marzo 2025','30 giugno 2025','30 settembre 2025','31 dicembre 2025','31 marzo 2026','30 giugno 2026','30 settembre 2026'];
+var PFN = [-24.1, -23.0, -21.5, -20.4, -18.2, -19.6, -17.9, -16.8];
+
+/* ================= tabelle (stessi dati dei grafici) ================= */
+function table(head, rows, foot){
+  var h = '<table class="dtable"><thead><tr>' + head.map(function(x){ return '<th scope="col">' + x + '</th>'; }).join('') + '</tr></thead><tbody>';
+  rows.forEach(function(r){ h += '<tr>' + r.map(function(c, i){ return i ? '<td>' + c + '</td>' : '<th scope="row">' + c + '</th>'; }).join('') + '</tr>'; });
+  h += '</tbody>';
+  if (foot) h += '<tfoot><tr>' + foot.map(function(c, i){ return i ? '<td>' + c + '</td>' : '<th scope="row">' + c + '</th>'; }).join('') + '</tr></tfoot>';
+  return h + '</table>';
+}
+
+/* ================= tooltip HTML condiviso ================= */
+function htmlTip(build){
+  return function(context){
+    var chart = context.chart, tip = context.tooltip, host = chart.canvas.parentNode;
+    var el = host.querySelector('.ctip');
+    if (!el) { el = document.createElement('div'); el.className = 'ctip'; el.setAttribute('aria-hidden', 'true'); host.appendChild(el); }
+    if (!tip || tip.opacity === 0 || !tip.dataPoints || !tip.dataPoints.length) { el.classList.remove('on'); return; }
+    var d = build(tip.dataPoints, chart);
+    var h = '<p class="ct-t">' + d.title + '</p>';
+    d.rows.forEach(function(r){
+      h += '<p class="ct-r"><i class="ct-k' + (r.kind ? ' ' + r.kind : '') + '" style="--k:' + r.color + '"></i><b>' + r.value + '</b><span>' + r.name + '</span></p>';
+    });
+    if (d.note) h += '<p class="ct-n">' + d.note + '</p>';
+    el.innerHTML = h;
+    el.classList.add('on');
+    var w = el.offsetWidth, hh = el.offsetHeight, W = host.clientWidth, H = host.clientHeight;
+    var x = tip.caretX + 18; if (x + w > W - 4) x = tip.caretX - 18 - w; if (x < 4) x = 4;
+    var y = tip.caretY - hh / 2; y = Math.max(4, Math.min(H - hh - 4, y));
+    el.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y) + 'px)';
+  };
+}
+function hideTips(){ document.querySelectorAll('.ctip.on').forEach(function(t){ t.classList.remove('on'); }); }
+
+/* ================= plugin di disegno ================= */
+function rrect(ctx, x, y, w, h, r){
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+}
+var crosshair = { id:'crosshair', beforeDatasetsDraw: function(chart){
+  var act = chart.getActiveElements ? chart.getActiveElements() : [];
+  if (!act.length) return;
+  var x = Math.round(act[0].element.x) + 0.5, a = chart.chartArea, ctx = chart.ctx;
+  ctx.save(); ctx.strokeStyle = C.lineStrong; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x, a.top); ctx.lineTo(x, a.bottom); ctx.stroke(); ctx.restore();
+}};
+var summer = { id:'summer', beforeDraw: function(chart){
+  var xs = chart.scales.x, a = chart.chartArea, ctx = chart.ctx; if (!xs || !a) return;
+  var step = xs.getPixelForValue(1) - xs.getPixelForValue(0);
+  var l = xs.getPixelForValue(6) - step / 2, r = xs.getPixelForValue(7) + step / 2;
+  ctx.save(); ctx.fillStyle = C.band; ctx.fillRect(l, a.top, r - l, a.bottom - a.top);
+  ctx.fillStyle = C.muted; ctx.font = '500 16px ' + MONO; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+  ctx.fillText('ESTATE', (l + r) / 2, a.top - 8); ctx.restore();
+}};
+var endLabels = { id:'endLabels', afterDatasetsDraw: function(chart){
+  var ctx = chart.ctx, items = [], G = 24;
+  chart.data.datasets.forEach(function(ds, i){
+    if (!chart.isDatasetVisible(i)) return;
+    var meta = chart.getDatasetMeta(i), p = meta.data[meta.data.length - 1];
+    if (p) items.push({ x:p.x, y:p.y, ly:p.y, v:ds.data[ds.data.length - 1], name:ds.short });
+  });
+  items.sort(function(a, b){ return a.y - b.y; });
+  for (var i = 1; i < items.length; i++) if (items[i].ly < items[i - 1].ly + G) items[i].ly = items[i - 1].ly + G;
+  var lim = chart.chartArea.bottom;
+  for (var j = items.length - 1; j >= 0; j--) { if (items[j].ly > lim) items[j].ly = lim; lim = items[j].ly - G; }
+  ctx.save(); ctx.textBaseline = 'middle';
+  items.forEach(function(it){
+    var x0 = it.x + 8, x1 = it.x + 20;
+    if (Math.abs(it.ly - it.y) > 1) { ctx.strokeStyle = C.lineStrong; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x0, it.y); ctx.lineTo(x1, it.ly); ctx.stroke(); }
+    var vs = fx(it.v, 1);
+    ctx.font = '700 16px ' + FONT; ctx.fillStyle = C.ink; ctx.fillText(vs, x1 + 4, it.ly);
+    var w = ctx.measureText(vs).width;
+    ctx.font = '500 16px ' + FONT; ctx.fillStyle = C.ink2; ctx.fillText(it.name, x1 + 4 + w + 7, it.ly);
+  });
+  ctx.restore();
+}};
+
+/* ================= deck: scala, navigazione ================= */
+var deck = document.getElementById('deck');
+var slides = Array.prototype.slice.call(deck.querySelectorAll('.slide'));
+var N = slides.length, cur = 0, scale = 1;
+var charts = {};
+function dpr(){ return Math.min(3, Math.max(1, (window.devicePixelRatio || 1) * scale)); }
+function fit(){
+  var s = Math.min(innerWidth / 1600, innerHeight / 900);
+  scale = s;
+  deck.style.transform = 'translate(' + (-800 * s) + 'px,' + (-450 * s) + 'px) scale(' + s + ')';
+}
+var fitRaf = 0;
+addEventListener('resize', function(){
+  fit();
+  cancelAnimationFrame(fitRaf);
+  fitRaf = requestAnimationFrame(function(){
+    Object.keys(charts).forEach(function(k){ try { charts[k].options.devicePixelRatio = dpr(); charts[k].resize(); } catch (e) {} });
+  });
+});
+fit();
+
+var navCount = document.getElementById('nav-count'), navBar = document.getElementById('nav-bar');
+var navPrev = document.getElementById('nav-prev'), navNext = document.getElementById('nav-next');
+function pad(n){ return (n < 10 ? '0' : '') + n; }
+function go(n, force){
+  n = Math.max(0, Math.min(N - 1, n));
+  if (n === cur && !force) return;
+  hideTips();
+  slides[cur].classList.remove('active'); slides[cur].setAttribute('aria-hidden', 'true');
+  cur = n;
+  slides[cur].classList.add('active'); slides[cur].removeAttribute('aria-hidden');
+  navCount.textContent = pad(cur + 1) + ' / ' + pad(N);
+  navBar.style.width = (N > 1 ? (cur / (N - 1)) * 100 : 100) + '%';
+  navPrev.disabled = cur === 0; navNext.disabled = cur === N - 1;
+  if (!THUMB) { try { history.replaceState(null, '', '#s' + (cur + 1)); } catch (e) {} }
+  onEnter(cur);
+}
+slides.forEach(function(s, i){ if (i) s.setAttribute('aria-hidden', 'true'); });
+navPrev.addEventListener('click', function(){ go(cur - 1); });
+navNext.addEventListener('click', function(){ go(cur + 1); });
+
+function toggleFs(){
+  try {
+    var d = document, el = d.documentElement;
+    if (!d.fullscreenElement && !d.webkitFullscreenElement) {
+      var p = el.requestFullscreen ? el.requestFullscreen() : (el.webkitRequestFullscreen ? el.webkitRequestFullscreen() : null);
+      if (p && p.catch) p.catch(function(){});
+    } else {
+      var q = d.exitFullscreen ? d.exitFullscreen() : (d.webkitExitFullscreen ? d.webkitExitFullscreen() : null);
+      if (q && q.catch) q.catch(function(){});
+    }
+  } catch (e) {}
+}
+document.getElementById('nav-fs').addEventListener('click', toggleFs);
+
+addEventListener('keydown', function(e){
+  var t = e.target;
+  if (t && t.closest && (t.closest('input,select,textarea,button') || t.isContentEditable)) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  switch (e.key) {
+    case 'ArrowRight': case 'PageDown': go(cur + 1); break;
+    case 'ArrowLeft': case 'PageUp': go(cur - 1); break;
+    case ' ': case 'Spacebar': go(e.shiftKey ? cur - 1 : cur + 1); break;
+    case 'Home': go(0); break;
+    case 'End': go(N - 1); break;
+    case 'f': case 'F': toggleFs(); break;
+    default: return;
+  }
+  e.preventDefault();
+});
+
+/* swipe su touch (non parte da cursori e pulsanti) */
+var tx = null, ty = null, vp = document.getElementById('viewport');
+vp.addEventListener('touchstart', function(e){
+  if (e.touches.length !== 1 || e.target.closest('input,button,select,textarea')) { tx = null; return; }
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+}, { passive:true });
+vp.addEventListener('touchend', function(e){
+  if (tx === null) return;
+  var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; tx = null;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) go(dx < 0 ? cur + 1 : cur - 1);
+}, { passive:true });
+
+/* dopo un click col mouse il focus lascia il pulsante, così le frecce tornano a cambiare slide */
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('button');
+  if (b && e.detail > 0 && !b.closest('.dc-hint')) b.blur();
+});
+
+/* ordine del giorno in copertina */
+document.querySelectorAll('[data-go]').forEach(function(b){
+  b.addEventListener('click', function(){ go(parseInt(b.getAttribute('data-go'), 10)); });
+});
+
+/* vista tabella / grafico */
+document.querySelectorAll('[data-table]').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var p = document.getElementById(btn.getAttribute('data-table'));
+    var on = !p.classList.contains('show-table');
+    hideTips();
+    p.classList.toggle('show-table', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.querySelector('.bt-txt').textContent = on ? 'Vista grafico' : 'Vista tabella';
+  });
+});
+
+/* ================= slide 2: KPI e confronto ================= */
+var K = {
+  ricavi:   { act:147.9, budget:145.0, py:136.2, d:1, unit:' M€', kind:'pct', refPy:'Gen–set 2025' },
+  ebitda:   { act:16.1,  budget:16.8,  py:15.2,  d:1, unit:' M€', kind:'pct', refPy:'Gen–set 2025' },
+  margine:  { act:16.1 / 147.9 * 100, budget:16.8 / 145.0 * 100, py:15.2 / 136.2 * 100, d:1, unit:'%', kind:'pp', refPy:'Gen–set 2025' },
+  abbonati: { act:29400, budget:27000, py:17900, d:0, unit:'', kind:'pct', refPy:'Settembre 2025' }
+};
+var READ = {
+  budget: ['<b>Ricavi +2,9 M€</b> sul budget: Ho.Re.Ca. (+1,5 M€) ed e-commerce (+1,6 M€) compensano GDO e Office.',
+           '<b>EBITDA −0,7 M€</b> sul budget: il caffè verde da solo pesa 2,4 M€. Senza questo effetto saremmo sopra budget.'],
+  py:     ['<b>Ricavi +11,7 M€</b> sul 2025 (+8,6%). Gli abbonati e-commerce crescono di 11.500 in dodici mesi.',
+           '<b>EBITDA +0,9 M€</b> sul 2025, ma il margine scende di 0,3 punti: il listino non ha coperto tutto il rincaro dell\'arabica.']
+};
+function setCompare(mode, init){
+  document.querySelectorAll('[data-cmp]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-cmp') === mode ? 'true' : 'false'); });
+  Object.keys(K).forEach(function(k){
+    var m = K[k], ref = m[mode], dd = document.getElementById('kd-' + k), rr = document.getElementById('kr-' + k);
+    var word = mode === 'budget' ? null : 'rispetto al 2025';
+    var html;
+    if (m.kind === 'pp') {
+      var dp = m.act - ref;
+      if (!word) word = dp >= 0 ? 'sopra il budget' : 'sotto il budget';
+      html = dlt(dp, 1, ' pp') + ' ' + word;
+      rr.textContent = (mode === 'budget' ? 'Budget ' : m.refPy + ': ') + fx(ref, 1) + '%';
+    } else {
+      var pc = (m.act / ref - 1) * 100;
+      if (!word) word = pc >= 0 ? 'sopra il budget' : 'sotto il budget';
+      html = dlt(pc, 1, '%') + ' ' + word;
+      rr.textContent = (mode === 'budget' ? 'Budget ' : m.refPy + ': ') + fx(ref, m.d) + m.unit + ' · ' + sx(m.act - ref, m.d) + m.unit;
+    }
+    dd.innerHTML = html.replace(/^<span class="(up|down|flat)">(.*?)<\/span>/, '<b class="$1">$2</b>');
+    if (ANIM && !init) { [dd, rr].forEach(function(el){ el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }); }
+  });
+  document.querySelector('#reading-1 li').innerHTML = READ[mode][0];
+  document.querySelector('#reading-2 li').innerHTML = READ[mode][1];
+}
+document.querySelectorAll('[data-cmp]').forEach(function(b){ b.addEventListener('click', function(){ setCompare(b.getAttribute('data-cmp')); }); });
+setCompare('budget', true);
+
+var countGen = 0;
+function countUp(){
+  var gen = ++countGen;
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var target = parseFloat(el.getAttribute('data-count')), d = parseInt(el.getAttribute('data-dec'), 10) || 0;
+    if (!ANIM) { el.textContent = fx(target, d); return; }
+    var t0 = performance.now(), dur = 1100;
+    (function step(now){
+      if (gen !== countGen) return;
+      var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fx(target * e, d);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  });
+}
+
+/* ================= slide 4: drill-down ================= */
+var SEL = 0;
+function renderDrill(){
+  var c = CH[SEL], max = 0;
+  c.parts.forEach(function(p){ if (p[1] > max) max = p[1]; });
+  document.getElementById('drill-by').textContent = 'Dettaglio · ' + c.by;
+  document.getElementById('drill-name').textContent = c.name;
+  document.getElementById('drill-val').textContent = fx(c.act, 1);
+  var dAbs = c.act - c.bud, dPct = (c.act / c.bud - 1) * 100;
+  document.getElementById('drill-delta').innerHTML = dlt(dAbs, 1, ' M€').replace(/^<span class="(up|down|flat)">(.*?)<\/span>/, '<b class="$1">$2</b>') + ' sul budget (' + sx(dPct, 1) + '%)';
+  var h = '<div class="dr-row hd"><span>' + c.col + '</span><span></span><span class="num-h">M€</span><span class="num-h">vs budget</span></div>';
+  c.parts.forEach(function(p){
+    h += '<div class="dr-row"><span class="dr-name">' + p[0] + '</span><span class="dr-track"><span class="dr-bar" data-w="' + (p[1] / max * 100).toFixed(1) + '"></span></span><span class="dr-val">' + fx(p[1], 1) + '</span><span class="dr-d">' + dlt(p[1] - p[2], 1, '') + '</span></div>';
+  });
+  var list = document.getElementById('drill-list');
+  list.innerHTML = h;
+  document.getElementById('drill-note').innerHTML = c.note;
+  var bars = list.querySelectorAll('.dr-bar');
+  function grow(){ bars.forEach(function(b){ b.style.width = b.getAttribute('data-w') + '%'; }); }
+  if (ANIM) requestAnimationFrame(function(){ requestAnimationFrame(grow); }); else grow();
+}
+function selectChannel(i){
+  SEL = Math.max(0, Math.min(CH.length - 1, i));
+  renderDrill();
+  if (charts.canali) charts.canali.update('none');
+}
+renderDrill();
+
+/* ================= slide 6: simulatore ================= */
+var SIM = { rev:204.8, ebitda:22.5, budRev:201.5, budEbitda:23.4 };
+var LEV = {
+  arabica: { def:4.10, min:3,  max:5,    fmt:function(v){ return nf(v, 2) + ' USD/lb'; }, eff:function(v){ return -0.15 * (v - 4.10) / 0.10; }, rev:function(){ return 0; } },
+  cambio:  { def:1.12, min:1,  max:1.25, fmt:function(v){ return nf(v, 2); },             eff:function(v){ return 0.07 * (v - 1.12) / 0.01; },  rev:function(){ return 0; } },
+  listino: { def:0,    min:0,  max:6,    fmt:function(v){ return v === 0 ? '0%' : '+' + nf(v, v % 1 ? 1 : 0) + '%'; }, eff:function(v){ return 0.28 * v; }, rev:function(v){ return 0.5 * v; } },
+  volumi:  { def:0,    min:-10, max:10,  fmt:function(v){ return v === 0 ? '0%' : (v > 0 ? '+' : MINUS) + nf(Math.abs(v), 0) + '%'; }, eff:function(v){ return 0.12 * v; }, rev:function(v){ return 0.55 * v; } }
+};
+var simState = { E:SIM.ebitda, R:SIM.rev };
+function fxCell(v){
+  var r = rnd(v, 2);
+  if (r === 0) return '<span class="flat">0,00 M€</span>';
+  return '<span class="' + (v > 0 ? 'up' : 'down') + '">' + (v > 0 ? '▲ ' : '▼ ') + sx(v, 2) + ' M€</span>';
+}
+function simUpdate(){
+  var E = SIM.ebitda, R = SIM.rev, vals = {};
+  Object.keys(LEV).forEach(function(k){
+    var L = LEV[k], inp = document.getElementById('sim-' + k), v = parseFloat(inp.value);
+    vals[k] = v;
+    var e = L.eff(v); E += e; R += L.rev(v);
+    document.getElementById('out-' + k).textContent = L.fmt(v);
+    document.getElementById('fx-' + k).innerHTML = fxCell(e);
+    var span = L.max - L.min, a = (Math.min(L.def, v) - L.min) / span, b = (Math.max(L.def, v) - L.min) / span;
+    var rng = inp.parentNode; rng.style.setProperty('--fa', a.toFixed(4)); rng.style.setProperty('--fb', b.toFixed(4));
+  });
+  simState.E = E; simState.R = R;
+  var m = E / R * 100, gap = SIM.budEbitda - E;
+  document.getElementById('sim-ebitda').textContent = fx(E, 1);
+  document.getElementById('sim-margin').textContent = fx(m, 1) + '%';
+  document.getElementById('sim-rev').textContent = fx(R, 1) + ' M€';
+  var dEl = document.getElementById('sim-delta'), dv = E - SIM.budEbitda, r1 = rnd(dv, 1);
+  dEl.className = r1 === 0 ? 'flat' : (dv > 0 ? 'up' : 'down');
+  dEl.textContent = r1 === 0 ? 'in linea' : (dv > 0 ? '▲ ' : '▼ ') + sx(dv, 1) + ' M€';
+  var say;
+  if (gap >= 0.05) {
+    var need = Math.ceil((vals.listino + gap / 0.28) * 10 - 1e-6) / 10;
+    var needTxt = '+' + nf(need, need % 1 ? 1 : 0) + '%';
+    if (need > 6) {
+      say = 'Per tornare a budget servono <b>' + fx(gap, 1) + ' M€</b>: con il solo listino servirebbe <b>' + needTxt + '</b>, oltre il 6% simulabile. Bisogna agire anche su volumi e costi.';
+    } else if (vals.listino > 0) {
+      say = 'Per tornare a budget servono ancora <b>' + fx(gap, 1) + ' M€</b>: ad esempio un listino Ho.Re.Ca. <b>' + needTxt + '</b> invece di ' + LEV.listino.fmt(vals.listino) + '.';
+    } else {
+      say = 'Per tornare a budget servono <b>' + fx(gap, 1) + ' M€</b>: ad esempio un listino Ho.Re.Ca. <b>' + needTxt + '</b> dal 1° novembre.';
+    }
+  } else if (gap > -0.05) {
+    say = 'Lo scenario porta l\'EBITDA <b>in linea con il budget</b> di 23,4 M€.';
+  } else {
+    say = 'Lo scenario supera il budget di <b>' + fx(-gap, 1) + ' M€</b>, con un margine del ' + fx(m, 1) + '%.';
+  }
+  document.getElementById('sim-say').innerHTML = say;
+  document.getElementById('tbl-sim').innerHTML = table(['Versione', 'Ricavi M€', 'EBITDA M€', 'Margine'], [
+    ['Budget', fx(SIM.budRev, 1), fx(SIM.budEbitda, 1), fx(SIM.budEbitda / SIM.budRev * 100, 1) + '%'],
+    ['Forecast', fx(SIM.rev, 1), fx(SIM.ebitda, 1), fx(SIM.ebitda / SIM.rev * 100, 1) + '%'],
+    ['Scenario', fx(R, 1), fx(E, 1), fx(m, 1) + '%']
+  ]);
+  if (charts.sim) { charts.sim.data.datasets[0].data[2] = Math.round(E * 100) / 100; charts.sim.update(); }
+}
+Object.keys(LEV).forEach(function(k){ document.getElementById('sim-' + k).addEventListener('input', simUpdate); });
+document.getElementById('sim-reset').addEventListener('click', function(){
+  Object.keys(LEV).forEach(function(k){ document.getElementById('sim-' + k).value = LEV[k].def; });
+  simUpdate();
+});
+simUpdate();
+
+/* ================= slide 8: delibere ================= */
+var votes = { 1:'fav', 2:'fav', 3:'app' };
+var STATE_TXT = { fav:'Favorevole', app:'Da approfondire', '':'In attesa di voto' };
+function renderVotes(){
+  var f = 0, a = 0, n = 0, dots = '';
+  [1, 2, 3].forEach(function(i){
+    var v = votes[i] || '';
+    document.getElementById('vc-' + i).setAttribute('data-state', v);
+    document.getElementById('vs-' + i).textContent = STATE_TXT[v];
+    document.getElementById('v' + i + '-fav').setAttribute('aria-pressed', v === 'fav' ? 'true' : 'false');
+    document.getElementById('v' + i + '-app').setAttribute('aria-pressed', v === 'app' ? 'true' : 'false');
+    if (v === 'fav') f++; else if (v === 'app') a++; else n++;
+  });
+  for (var i = 0; i < f; i++) dots += '<i class="fav"></i>';
+  for (i = 0; i < a; i++) dots += '<i class="app"></i>';
+  for (i = 0; i < n; i++) dots += '<i></i>';
+  document.getElementById('tally-dots').innerHTML = dots;
+  var txt = (f === 1 ? '1 favorevole' : f + ' favorevoli') + ', ' + a + ' da approfondire';
+  if (n) txt += ', ' + n + ' senza voto';
+  document.getElementById('tally-txt').innerHTML = '<b>Esito simulato:</b> ' + txt;
+}
+document.querySelectorAll('.vote').forEach(function(b){
+  b.addEventListener('click', function(){
+    var d = b.getAttribute('data-d'), v = b.getAttribute('data-v');
+    votes[d] = votes[d] === v ? '' : v;
+    renderVotes();
+  });
+});
+renderVotes();
+
+/* ================= tabelle statiche ================= */
+function renderMesiTable(mode){
+  var A = mode === 'c' ? ACT_C : ACT, B = mode === 'c' ? BUD_C : BUD, P = mode === 'c' ? PY_C : PY;
+  var rows = MONTHS_FULL.map(function(m, i){
+    return [m, fx(A[i], 1), fx(B[i], 1), fx(P[i], 1), dlt(A[i] - B[i], 1, ''), dlt(A[i] - P[i], 1, '')];
+  });
+  var foot = mode === 'c' ? null : ['Gennaio–settembre', fx(147.9, 1), fx(145.0, 1), fx(136.2, 1), dlt(2.9, 1, ''), dlt(11.7, 1, '')];
+  document.getElementById('tbl-mesi').innerHTML = table(['Mese', 'Consuntivo', 'Budget', '2025', 'Vs budget', 'Vs 2025'], rows, foot);
+}
+renderMesiTable('m');
+document.getElementById('tbl-canali').innerHTML = table(['Canale', 'Consuntivo M€', 'Budget M€', 'Differenza', 'Diff. %'],
+  CH.map(function(c){ return [c.name, fx(c.act, 1), fx(c.bud, 1), dlt(c.act - c.bud, 1, ''), dlt((c.act / c.bud - 1) * 100, 1, '%')]; }),
+  ['Totale', fx(147.9, 1), fx(145.0, 1), dlt(2.9, 1, ''), dlt((147.9 / 145.0 - 1) * 100, 1, '%')]);
+document.getElementById('tbl-wf').innerHTML = table(['Voce', 'Effetto M€', 'Progressivo M€'],
+  WF.map(function(w, i){ return [w.name, w.total ? fx(w.v, 1) : dlt(w.v, 1, ''), fx(WF_R[i][1], 1)]; }));
+document.getElementById('tbl-pfn').innerHTML = table(['Trimestre', 'PFN M€', 'Variazione M€'],
+  PFN.map(function(v, i){ return [PFN_Q[i] + ' · ' + PFN_FULL[i], fx(v, 1), i ? dlt(v - PFN[i - 1], 1, '') : '–']; }));
+
+/* vista mensile / cumulata (funziona anche senza grafico: aggiorna la tabella) */
+var mesiMode = 'm';
+function setMesi(mode){
+  mesiMode = mode;
+  document.querySelectorAll('[data-mode]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-mode') === mode ? 'true' : 'false'); });
+  renderMesiTable(mode);
+  var ch = charts.mesi; if (!ch) return;
+  var c = mode === 'c';
+  ch.data.datasets[0].data = c ? ACT_C : ACT;
+  ch.data.datasets[1].data = c ? BUD_C : BUD;
+  ch.data.datasets[2].data = c ? PY_C : PY;
+  ch.options.scales.y.min = c ? 0 : 10;
+  ch.options.scales.y.max = c ? 160 : 22;
+  ch.options.scales.y.ticks.stepSize = c ? 40 : 2;
+  hideTips();
+  ch.update();
+}
+document.querySelectorAll('[data-mode]').forEach(function(b){ b.addEventListener('click', function(){ setMesi(b.getAttribute('data-mode')); }); });
+
+/* ================= grafici ================= */
+var HAS_CHART = typeof window.Chart !== 'undefined';
+if (!HAS_CHART) root.classList.add('no-chart');
+
+if (HAS_CHART) {
+  Chart.defaults.font.family = FONT;
+  Chart.defaults.font.size = 16;
+  Chart.defaults.color = C.muted;
+  Chart.defaults.borderColor = C.line;
+  Chart.defaults.plugins.legend.display = false;
+  if (!ANIM) { Chart.defaults.animation = false; }
+  else { Chart.defaults.animation.duration = 750; Chart.defaults.animation.easing = 'easeOutCubic'; }
+
+  function gridY(){ return { color: C.line, lineWidth: 1, drawTicks: false }; }
+  function baseX(tick){ return { grid: { display: false }, border: { color: C.muted }, ticks: Object.assign({ color: C.ink2, padding: 10, maxRotation: 0, autoSkip: false }, tick || {}) }; }
+
+  /* --- slide 3: linee mensili --- */
+  var lastIdx = MONTHS.length - 1;
+  function lineDs(label, short, data, color, dash){
+    return { label: label, short: short, data: data, borderColor: color, backgroundColor: color, borderWidth: 2, borderDash: dash || [],
+      pointRadius: function(ctx){ return ctx.dataIndex === lastIdx ? 4 : 0; }, pointHoverRadius: 5,
+      pointBackgroundColor: color, pointBorderColor: C.surface, pointBorderWidth: 2, pointHoverBorderWidth: 2, pointHitRadius: 12,
+      tension: 0, borderCapStyle: 'round', borderJoinStyle: 'round' };
+  }
+  charts.mesi = new Chart(document.getElementById('cv-mesi'), {
+    type: 'line',
+    data: { labels: MONTHS, datasets: [
+      lineDs('Consuntivo 2026', 'Consuntivo', ACT, C.c1),
+      lineDs('Budget 2026', 'Budget', BUD, C.c2, [6, 5]),
+      lineDs('2025', '2025', PY, C.c3)
+    ]},
+    options: {
+      maintainAspectRatio: false, devicePixelRatio: dpr(),
+      interaction: { mode: 'index', intersect: false },
+      layout: { padding: { top: 30, right: 172, left: 4 } },
+      plugins: { tooltip: { enabled: false, external: htmlTip(function(pts){
+        var i = pts[0].dataIndex, c = mesiMode === 'c';
+        var A = c ? ACT_C : ACT, B = c ? BUD_C : BUD, P = c ? PY_C : PY;
+        return {
+          title: (c && i > 0) ? 'Gennaio–' + MONTHS_FULL[i].toLowerCase() + ' 2026' : MONTHS_FULL[i] + ' 2026',
+          rows: [
+            { color: C.c1, kind: 'line', value: fx(A[i], 1) + ' M€', name: 'Consuntivo 2026' },
+            { color: C.c2, kind: 'dash', value: fx(B[i], 1) + ' M€', name: 'Budget 2026' },
+            { color: C.c3, kind: 'line', value: fx(P[i], 1) + ' M€', name: '2025' }
+          ],
+          note: 'Vs budget ' + dlt(A[i] - B[i], 1, ' M€') + ' · vs 2025 ' + dlt(A[i] - P[i], 1, ' M€')
+        };
+      }) } },
+      scales: {
+        x: baseX({ color: C.muted }),
+        y: { min: 10, max: 22, grid: gridY(), border: { display: false }, ticks: { stepSize: 2, padding: 10, callback: function(v){ return fx(v, 0); } } }
+      }
+    },
+    plugins: [summer, crosshair, endLabels]
+  });
+
+  /* --- slide 4: barre per canale --- */
+  var selBand = { id: 'selBand', beforeDraw: function(chart){
+    var ys = chart.scales.y; if (!ys) return;
+    var step = (ys.bottom - ys.top) / CH.length, c = ys.getPixelForValue(SEL), ctx = chart.ctx;
+    ctx.save(); ctx.fillStyle = C.band; rrect(ctx, 0, c - step / 2 + 4, chart.width, step - 8, 8); ctx.fill(); ctx.restore();
+  }};
+  var barTips = { id: 'barTips', afterDatasetsDraw: function(chart){
+    var meta = chart.getDatasetMeta(0), ctx = chart.ctx;
+    ctx.save(); ctx.font = '700 16px ' + FONT; ctx.fillStyle = C.ink; ctx.textBaseline = 'middle';
+    meta.data.forEach(function(b, i){ ctx.fillText(fx(CH[i].act, 1), b.x + 8, b.y); });
+    ctx.restore();
+  }};
+  var barOpts = { maxBarThickness: 24, borderRadius: 4, borderSkipped: 'start', categoryPercentage: 0.62, barPercentage: 0.86 };
+  charts.canali = new Chart(document.getElementById('cv-canali'), {
+    type: 'bar',
+    data: { labels: CH.map(function(c){ return c.lbl; }), datasets: [
+      Object.assign({ label: 'Consuntivo', data: CH.map(function(c){ return c.act; }), backgroundColor: C.c1 }, barOpts),
+      Object.assign({ label: 'Budget', data: CH.map(function(c){ return c.bud; }), backgroundColor: C.c2 }, barOpts)
+    ]},
+    options: {
+      indexAxis: 'y', maintainAspectRatio: false, devicePixelRatio: dpr(),
+      layout: { padding: { right: 64, left: 6 } },
+      interaction: { mode: 'nearest', axis: 'y', intersect: false },
+      plugins: { tooltip: { enabled: false, external: htmlTip(function(pts){
+        var p = pts[0], c = CH[p.dataIndex], isAct = p.datasetIndex === 0;
+        return {
+          title: c.name,
+          rows: [{ color: isAct ? C.c1 : C.c2, value: fx(isAct ? c.act : c.bud, 1) + ' M€', name: isAct ? 'Consuntivo gen–set' : 'Budget gen–set' }],
+          note: isAct ? 'Vs budget ' + dlt(c.act - c.bud, 1, ' M€') + ' (' + sx((c.act / c.bud - 1) * 100, 1) + '%). Clicca per il dettaglio.' : 'Clicca per il dettaglio del canale.'
+        };
+      }) } },
+      scales: {
+        x: { min: 0, max: 70, grid: gridY(), border: { display: false }, ticks: { stepSize: 10, padding: 8 } },
+        y: { grid: { display: false }, border: { color: C.muted }, ticks: {
+          padding: 12, autoSkip: false,
+          color: function(ctx){ return ctx.index === SEL ? C.ink : C.ink2; },
+          font: function(ctx){ return { size: 17, weight: ctx.index === SEL ? '700' : '500' }; }
+        } }
+      },
+      onClick: function(evt, els, chart){
+        var v = chart.scales.y.getValueForPixel(evt.y);
+        if (v === undefined || v === null || isNaN(v)) return;
+        selectChannel(Math.round(v));
+      },
+      onHover: function(evt, els, chart){
+        var a = chart.chartArea, inside = evt.y >= a.top && evt.y <= a.bottom;
+        chart.canvas.style.cursor = inside ? 'pointer' : 'default';
+      }
+    },
+    plugins: [selBand, barTips]
+  });
+  document.getElementById('cv-canali').addEventListener('keydown', function(e){
+    if (e.key === 'ArrowDown') { selectChannel(SEL + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowUp') { selectChannel(SEL - 1); e.preventDefault(); }
+  });
+
+  /* --- slide 5: cascata --- */
+  var wfDraw = { id: 'wfDraw', afterDatasetsDraw: function(chart){
+    var meta = chart.getDatasetMeta(0), ctx = chart.ctx;
+    ctx.save();
+    ctx.strokeStyle = C.lineStrong; ctx.lineWidth = 1;
+    for (var i = 0; i < meta.data.length - 1; i++) {
+      var a = meta.data[i], b = meta.data[i + 1], w = WF[i];
+      var endPx = (w.total || w.v >= 0) ? Math.min(a.y, a.base) : Math.max(a.y, a.base);
+      var y = Math.round(endPx) + 0.5;
+      ctx.beginPath(); ctx.moveTo(a.x + a.width / 2 + 3, y); ctx.lineTo(b.x - b.width / 2 - 3, y); ctx.stroke();
+    }
+    ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillStyle = C.ink;
+    meta.data.forEach(function(bar, i){
+      var w = WF[i], top = Math.min(bar.y, bar.base);
+      ctx.font = (w.total ? '700 ' : '600 ') + '17px ' + FONT;
+      ctx.fillText(w.total ? fx(w.v, 1) : sx(w.v, 1), bar.x, top - 8);
+    });
+    ctx.restore();
+  }};
+  charts.wf = new Chart(document.getElementById('cv-wf'), {
+    type: 'bar',
+    data: { labels: WF.map(function(w){ return w.lbl; }), datasets: [{
+      label: 'EBITDA', data: WF_R,
+      backgroundColor: function(ctx){ var w = WF[ctx.dataIndex]; return !w ? C.selva : (w.total ? C.selva : (w.v >= 0 ? C.good : C.bad)); },
+      borderSkipped: function(ctx){ var w = WF[ctx.dataIndex]; return (w && !w.total && w.v < 0) ? 'top' : 'bottom'; },
+      borderRadius: 4, maxBarThickness: 24, categoryPercentage: 0.7, barPercentage: 0.9
+    }]},
+    options: {
+      maintainAspectRatio: false, devicePixelRatio: dpr(),
+      layout: { padding: { top: 34, right: 8 } },
+      interaction: { mode: 'nearest', axis: 'x', intersect: false },
+      plugins: { tooltip: { enabled: false, external: htmlTip(function(pts){
+        var i = pts[0].dataIndex, w = WF[i];
+        return {
+          title: w.name,
+          rows: [{ color: w.total ? C.selva : (w.v >= 0 ? C.good : C.bad), value: (w.total ? fx(w.v, 1) : (w.v >= 0 ? '▲ ' : '▼ ') + sx(w.v, 1)) + ' M€', name: w.total ? 'EBITDA gen–set' : 'effetto sull\'EBITDA' }],
+          note: w.note
+        };
+      }) } },
+      scales: {
+        x: baseX(),
+        y: { min: 0, max: 20, grid: gridY(), border: { display: false }, ticks: { stepSize: 5, padding: 10, callback: function(v){ return fx(v, 0); } } }
+      }
+    },
+    plugins: [wfDraw]
+  });
+
+  /* --- slide 6: budget / forecast / scenario --- */
+  var budLine = { id: 'budLine', beforeDatasetsDraw: function(chart){
+    var ys = chart.scales.y, a = chart.chartArea, ctx = chart.ctx, y = Math.round(ys.getPixelForValue(SIM.budEbitda)) + 0.5;
+    ctx.save(); ctx.strokeStyle = C.ink2; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.left, y); ctx.lineTo(a.right, y); ctx.stroke(); ctx.restore();
+  }};
+  var simLabels = { id: 'simLabels', afterDatasetsDraw: function(chart){
+    var meta = chart.getDatasetMeta(0), ctx = chart.ctx, data = chart.data.datasets[0].data;
+    ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillStyle = C.ink; ctx.font = '700 18px ' + FONT;
+    ctx.strokeStyle = C.surface; ctx.lineWidth = 6; ctx.lineJoin = 'round';
+    meta.data.forEach(function(b, i){ var t = fx(data[i], 1), y = Math.min(b.y, b.base) - 8; ctx.strokeText(t, b.x, y); ctx.fillText(t, b.x, y); });
+    ctx.restore();
+  }};
+  charts.sim = new Chart(document.getElementById('cv-sim'), {
+    type: 'bar',
+    data: { labels: ['Budget', 'Forecast', 'Scenario'], datasets: [{
+      label: 'EBITDA 2026', data: [SIM.budEbitda, SIM.ebitda, Math.round(simState.E * 100) / 100],
+      backgroundColor: [C.c2, C.c1, C.c3], borderRadius: 4, borderSkipped: 'start', maxBarThickness: 24
+    }]},
+    options: {
+      maintainAspectRatio: false, devicePixelRatio: dpr(),
+      animation: ANIM ? { duration: 280, easing: 'easeOutCubic' } : false,
+      layout: { padding: { top: 34 } },
+      interaction: { mode: 'nearest', axis: 'x', intersect: false },
+      plugins: { tooltip: { enabled: false, external: htmlTip(function(pts){
+        var i = pts[0].dataIndex;
+        var R = [SIM.budRev, SIM.rev, simState.R][i], E = [SIM.budEbitda, SIM.ebitda, simState.E][i];
+        var names = ['Budget 2026', 'Forecast attuale', 'Scenario simulato'], cols = [C.c2, C.c1, C.c3];
+        return { title: names[i], rows: [{ color: cols[i], value: fx(E, 1) + ' M€', name: 'EBITDA' }],
+          note: 'Ricavi ' + fx(R, 1) + ' M€ · margine ' + fx(E / R * 100, 1) + '%' };
+      }) } },
+      scales: {
+        x: baseX({ font: { size: 17, weight: '600' } }),
+        y: { min: 0, max: 30, grid: gridY(), border: { display: false }, ticks: { stepSize: 5, padding: 10 } }
+      }
+    },
+    plugins: [budLine, simLabels]
+  });
+
+  /* --- slide 7: PFN --- */
+  var KEY_PTS = [0, 5, 7];
+  var pfnLabels = { id: 'pfnLabels', afterDatasetsDraw: function(chart){
+    var meta = chart.getDatasetMeta(0), ctx = chart.ctx, p0 = meta.data[0], p5 = meta.data[5], p7 = meta.data[7];
+    if (!p0 || !p5 || !p7) return;
+    ctx.save(); ctx.fillStyle = C.ink; ctx.font = '700 17px ' + FONT;
+    ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillText(fx(PFN[0], 1), p0.x + 10, p0.y + 12);
+    ctx.textBaseline = 'middle'; ctx.fillText(fx(PFN[7], 1) + ' M€', p7.x + 14, p7.y);
+    ctx.font = '500 16px ' + FONT; ctx.fillStyle = C.ink2; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText('Scorte di arabica', p5.x, p5.y + 16); ctx.fillText('comprate in anticipo', p5.x, p5.y + 36);
+    ctx.restore();
+  }};
+  charts.pfn = new Chart(document.getElementById('cv-pfn'), {
+    type: 'line',
+    data: { labels: PFN_Q, datasets: [{
+      label: 'PFN', data: PFN, borderColor: C.c1, backgroundColor: alpha(C.c1, 0.10), fill: 'origin', borderWidth: 2,
+      pointRadius: function(ctx){ return KEY_PTS.indexOf(ctx.dataIndex) >= 0 ? 4 : 0; }, pointHoverRadius: 5,
+      pointBackgroundColor: C.c1, pointBorderColor: C.surface, pointBorderWidth: 2, pointHoverBorderWidth: 2, pointHitRadius: 14,
+      tension: 0, borderCapStyle: 'round', borderJoinStyle: 'round'
+    }]},
+    options: {
+      maintainAspectRatio: false, devicePixelRatio: dpr(),
+      interaction: { mode: 'index', intersect: false },
+      layout: { padding: { top: 16, right: 110, left: 4 } },
+      plugins: { tooltip: { enabled: false, external: htmlTip(function(pts){
+        var i = pts[0].dataIndex, v = PFN[i], note;
+        if (i === 0) note = 'Punto di partenza: fine 2024.';
+        else { var dd = v - PFN[i - 1]; note = dd > 0 ? 'Debito in calo di ' + fx(dd, 1) + ' M€ sul trimestre prima.' : 'Debito in aumento di ' + fx(-dd, 1) + ' M€ sul trimestre prima.'; }
+        return { title: PFN_Q[i] + ' · ' + PFN_FULL[i], rows: [{ color: C.c1, kind: 'line', value: fx(v, 1) + ' M€', name: 'Posizione finanziaria netta' }], note: note };
+      }) } },
+      scales: {
+        x: baseX({ color: C.muted }),
+        y: { min: -30, max: 0, grid: gridY(), border: { display: false }, ticks: { stepSize: 5, padding: 10, callback: function(v){ return fx(v, 0); } } }
+      }
+    },
+    plugins: [crosshair, pfnLabels]
+  });
+
+  /* testo dei grafici con i font giusti appena caricati */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function(){ Object.keys(charts).forEach(function(k){ try { charts[k].update('none'); } catch (e) {} }); });
+  }
+}
+
+/* ================= ingresso in una slide ================= */
+var SLIDE_CHART = { 2: 'mesi', 3: 'canali', 4: 'wf', 5: 'sim', 6: 'pfn' };
+function onEnter(i){
+  if (i === 1) countUp();
+  var k = SLIDE_CHART[i];
+  if (ANIM && k && charts[k]) { charts[k].reset(); charts[k].update(); }
+}
+
+/* avvio: copertina, oppure la slide indicata nell'indirizzo (#s4) */
+var start = 0;
+if (!THUMB) { var m = /^#s(\d+)$/.exec(location.hash); if (m) start = Math.max(0, Math.min(N - 1, parseInt(m[1], 10) - 1)); }
+go(start, true);
+})();
+</script>
+</body>
+</html>
